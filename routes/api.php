@@ -46,7 +46,7 @@ Route::post('countries/{country}/army/requests/{request}/decline', [RequestContr
 
 Route::get('governments/{government}', [GovernmentController::class, 'show']);
 
-Route::get('users/{user}/factories', [UserController::class, 'factories']);
+Route::get('users/{user}/factories', [UserController::class, 'factories'])->middleware('api');
 Route::get('users/{user}', [UserController::class, 'show']);
 Route::patch('users/{user}', [UserController::class, 'update']);
 
