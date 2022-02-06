@@ -11,6 +11,7 @@ class BusinessController extends Controller
 {
     public function show(Business $business): Business
     {
+
         return $business;
     }
 
