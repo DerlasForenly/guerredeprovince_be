@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 
 class BusinessController extends Controller
 {
-    public function show(Business $factory): Business
+    public function show(Business $business): Business
     {
-        return $factory;
+        return $business;
     }
 
     public function store(Request $request)
