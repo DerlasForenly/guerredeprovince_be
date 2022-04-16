@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Business;
 
+use App\Http\Controllers\Controller;
 use App\Models\Business;
 use App\Models\Employee;
 use App\Models\GamePrice;
 use Illuminate\Http\Request;
+use function auth;
+use function response;
 
 class BusinessController extends Controller
 {

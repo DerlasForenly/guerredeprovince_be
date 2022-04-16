@@ -1,16 +1,16 @@
 <?php
 
-use App\Http\Controllers\ActionController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BusinessController;
-use App\Http\Controllers\GamePriceController;
-use App\Http\Controllers\GovernmentController;
-use App\Http\Controllers\PartyController;
-use App\Http\Controllers\RequestController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\WarController;
+use App\Http\Controllers\Action\ActionController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Business\BusinessController;
+use App\Http\Controllers\Country\CountryController;
+use App\Http\Controllers\GamePrice\GamePriceController;
+use App\Http\Controllers\Government\GovernmentController;
+use App\Http\Controllers\Party\PartyController;
+use App\Http\Controllers\Request\RequestController;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\War\WarController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CountryController;
 
 /*
 |--------------------------------------------------------------------------

@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Request;
 
+use App\Http\Controllers\Controller;
 use App\Models\Army;
 use App\Models\Country;
 use App\Models\PoliticalParty;
 use App\Models\PoliticalPartyStaff;
-use App\Models\RequestType;
 use App\Models\Request as RequestModel;
-use Illuminate\Support\Facades\App;
+use App\Models\RequestType;
+use function auth;
+use function response;
 
 class RequestController extends Controller
 {

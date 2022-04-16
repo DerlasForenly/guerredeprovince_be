@@ -1,14 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Action;
 
+use App\Http\Controllers\Controller;
 use App\Models\Action;
 use App\Models\ActionType;
 use App\Models\Damage;
 use App\Models\War;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+use function auth;
+use function response;
 
 class ActionController extends Controller
 {
@@ -16,7 +20,7 @@ class ActionController extends Controller
         $this->middleware('jwt.verify');
     }
 
-    public function work(Request $request): \Illuminate\Http\JsonResponse
+    public function work(Request $request): JsonResponse
     {
         $user = auth()->userOrFail();
 
@@ -44,7 +48,7 @@ class ActionController extends Controller
         ], 201);
     }
 
-    public function salary(Request $request): \Illuminate\Http\JsonResponse
+    public function salary(Request $request): JsonResponse
     {
         $user = auth()->userOrFail();
 

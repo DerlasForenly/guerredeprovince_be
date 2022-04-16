@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Party;
 
+use App\Http\Controllers\Controller;
 use App\Models\GamePrice;
 use App\Models\PoliticalParty;
 use App\Models\PoliticalPartyStaff;
-use App\Models\Position;
 use App\Models\PositionType;
 use App\Models\RequestType;
-use Database\Seeders\PoliticalPartyStaffSeeder;
 use Illuminate\Http\Request;
+use function auth;
+use function response;
 
 class PartyController extends Controller
 {

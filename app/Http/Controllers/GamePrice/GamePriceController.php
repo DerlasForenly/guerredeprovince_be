@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\GamePrice;
 
+use App\Http\Controllers\Controller;
 use App\Models\GamePrice;
-use Illuminate\Http\Request;
 
 class GamePriceController extends Controller
 {
