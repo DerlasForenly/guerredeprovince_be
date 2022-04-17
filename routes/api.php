@@ -33,22 +33,38 @@ Route::group([
     Route::get('/me', [AuthController::class, 'me']);
 });
 
-Route::post('actions/work', [ActionController::class, 'work']);
-Route::post('actions/salary', [ActionController::class, 'salary']);
+Route::group([
+    'prefix' => 'actions'
+], function ($router) {
+    Route::post('work', [ActionController::class, 'work']);
+    Route::post('salary', [ActionController::class, 'salary']);
+});
 
-Route::get('countries/', [CountryController::class, 'index']);
-Route::get('countries/{country}', [CountryController::class, 'show']);
-Route::get('countries/{country}/wars', [CountryController::class, 'wars']);
-Route::get('countries/{country}/regions', [CountryController::class, 'regions']);
-Route::post('countries/{country}/army/join', [RequestController::class, 'joinArmy']);
-Route::post('countries/{country}/army/requests/{request}/accept', [RequestController::class, 'acceptArmy']);
-Route::post('countries/{country}/army/requests/{request}/decline', [RequestController::class, 'declineArmy']);
+Route::group([
+    'prefix' => 'countries'
+], function ($router) {
+    Route::get('/', [CountryController::class, 'index']);
+    Route::get('{country}', [CountryController::class, 'show']);
+    Route::get('{country}/wars', [CountryController::class, 'wars']);
+    Route::get('{country}/regions', [CountryController::class, 'regions']);
+    Route::post('{country}/army/join', [RequestController::class, 'joinArmy']);
+    Route::post('{country}/army/requests/{request}/accept', [RequestController::class, 'acceptArmy']);
+    Route::post('{country}/army/requests/{request}/decline', [RequestController::class, 'declineArmy']);
+});
 
-Route::get('governments/{government}', [GovernmentController::class, 'show']);
+Route::group([
+    'prefix' => 'governments'
+], function ($router) {
+    Route::get('{government}', [GovernmentController::class, 'show']);
+});
 
-Route::get('users/{user}/factories', [UserController::class, 'factories'])->middleware('api');
-Route::get('users/{user}', [UserController::class, 'show']);
-Route::patch('users/{user}', [UserController::class, 'update']);
+Route::group([
+    'prefix' => 'users'
+], function ($router) {
+    Route::get('{user}/factories', [UserController::class, 'factories'])->middleware('api');
+    Route::get('{user}', [UserController::class, 'show']);
+    Route::patch('{user}', [UserController::class, 'update']);
+});
 
 Route::get('businesses/{business}', [BusinessController::class, 'show']);
 Route::post('businesses/drop-job', [BusinessController::class, 'dropJob']);

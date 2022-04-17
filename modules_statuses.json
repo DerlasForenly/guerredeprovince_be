@@ -1,0 +1,9 @@
+{
+    "User": true,
+    "Country": true,
+    "War": true,
+    "Business": true,
+    "Auth": true,
+    "Government": true,
+    "Party": true
+}

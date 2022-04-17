@@ -1,0 +1,13 @@
+{
+    "name": "War",
+    "alias": "war",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\War\\Providers\\WarServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
