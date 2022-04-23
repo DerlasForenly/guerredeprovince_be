@@ -2,78 +2,83 @@
 
 namespace Modules\Business\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Business\Models\Business;
+use Modules\Business\Models\Employee;
+use Modules\GamePrice\Models\GamePrice;
 
 class BusinessController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
-    public function index()
+    public function show(Business $business): Business
     {
-        return view('business::index');
+        return $business;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
+    public function store(Request $request): JsonResponse
     {
-        return view('business::create');
+        $user = auth()->userOrFail();
+        $price_resources = GamePrice::where('name', 'Create factory')->first()->resources;
+
+        if ($user->isEnough($price_resources)) {
+            $user->deduct($price_resources);
+
+            $factory = Business::create([
+                'name' => $request['name'],
+                'description' => $request['description'],
+                'user_id' => $user->id,
+                'region_id' => $request['region_id'],
+                'resource_id' => $request['resource_id'],
+            ]);
+
+            return response()->json([
+                'message' => 'OK',
+                'factory' => $factory
+            ], 201);
+        }
+
+        return response()->json([
+            'message' => 'Not enough resources',
+        ], 418);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
+    public function getJob(Request $request, Business $business): JsonResponse
     {
-        //
+        $user = auth()->userOrFail();
+
+        if ($user->job != null) {
+            return response()->json([
+                'message' => 'You have a job already',
+                'job' => $user->job
+            ], 418);
+        }
+
+        $employee = Employee::create([
+            'user_id' => $user->id,
+            'business_id' => $business->id,
+        ]);
+
+        return response()->json([
+            'message' => 'OK',
+            'employee' => $employee
+        ], 201);
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
+    public function dropJob(): JsonResponse
     {
-        return view('business::show');
-    }
+        $user = auth()->userOrFail();
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('business::edit');
-    }
+        if (!$user->employed) {
+            return response()->json([
+                'message' => 'You do not have any job',
+            ], 418);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        $user->employed->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
+        return response()->json([
+            'message' => 'OK',
+        ], 200);
     }
 }

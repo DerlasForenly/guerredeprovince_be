@@ -1,0 +1,13 @@
+{
+    "name": "GamePrice",
+    "alias": "gameprice",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\GamePrice\\Providers\\GamePriceServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

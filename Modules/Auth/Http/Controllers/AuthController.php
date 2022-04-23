@@ -1,79 +1,124 @@
 <?php
 
 namespace Modules\Auth\Http\Controllers;
-
-use Illuminate\Contracts\Support\Renderable;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Validator;
+use Modules\User\Models\User;
+use function auth;
+use function response;
+
 
 class AuthController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     * @return Renderable
+     * Create a new AuthController instance.
+     *
+     * @return void
      */
-    public function index()
-    {
-        return view('auth::index');
+    public function __construct() {
+        $this->middleware('jwt.verify', ['except' => ['login', 'register']]);
     }
 
     /**
-     * Show the form for creating a new resource.
-     * @return Renderable
+     * Get a JWT via given credentials.
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function create()
+    public function login(Request $request): \Illuminate\Http\JsonResponse
     {
-        return view('auth::create');
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|string|min:6',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        if (! $token = auth()->attempt($validator->validated())) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        return $this->createNewToken($token);
     }
 
     /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
+     * Register a User.
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function register(Request $request): \Illuminate\Http\JsonResponse
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|between:2,100',
+            'email' => 'required|string|email|max:100|unique:users',
+            'password' => 'required|string|confirmed|min:6',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $user = User::create(array_merge(
+            $validator->validated(),
+            ['password' => bcrypt($request->password)]
+        ));
+
+        return response()->json([
+            'message' => 'User successfully registered',
+            'user' => $user
+        ], 201);
+    }
+
+
+    /**
+     * Log the user out (Invalidate the token).
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout(): \Illuminate\Http\JsonResponse
+    {
+        auth()->logout();
+
+        return response()->json(['message' => 'User successfully signed out']);
     }
 
     /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
+     * Refresh a token.
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function refresh(): \Illuminate\Http\JsonResponse
     {
-        return view('auth::show');
+        return $this->createNewToken(auth()->refresh());
     }
 
     /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
+     * Get the authenticated User.
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function edit($id)
+    public function me(): \Illuminate\Http\JsonResponse
     {
-        return view('auth::edit');
+        return response()->json(auth()->user());
     }
 
     /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
+     * Get the token array structure.
+     *
+     * @param string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    protected function createNewToken(string $token): \Illuminate\Http\JsonResponse
     {
-        //
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'user' => auth()->user()
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

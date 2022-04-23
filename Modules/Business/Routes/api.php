@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Modules\Business\Http\Controllers\BusinessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/business', function (Request $request) {
-    return $request->user();
-});
+Route::get('businesses/{business}', [BusinessController::class, 'show']);
+Route::post('businesses/drop-job', [BusinessController::class, 'dropJob']);
+Route::post('businesses/{business}/get-job', [BusinessController::class, 'getJob']);
+Route::post('businesses', [BusinessController::class, 'store']);
+Route::patch('businesses/{business}', [BusinessController::class, 'update']);

@@ -1,17 +1,5 @@
 <?php
 
-use App\Http\Controllers\Action\ActionController;
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Business\BusinessController;
-use App\Http\Controllers\Country\CountryController;
-use App\Http\Controllers\GamePrice\GamePriceController;
-use App\Http\Controllers\Government\GovernmentController;
-use App\Http\Controllers\Party\PartyController;
-use App\Http\Controllers\Request\RequestController;
-use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\War\WarController;
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,89 +10,4 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::group([
-    'prefix' => 'auth'
-], function ($router) {
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/me', [AuthController::class, 'me']);
-});
-
-Route::group([
-    'prefix' => 'actions'
-], function ($router) {
-    Route::post('work', [ActionController::class, 'work']);
-    Route::post('salary', [ActionController::class, 'salary']);
-});
-
-Route::group([
-    'prefix' => 'countries'
-], function ($router) {
-    Route::get('/', [CountryController::class, 'index']);
-    Route::get('{country}', [CountryController::class, 'show']);
-    Route::get('{country}/wars', [CountryController::class, 'wars']);
-    Route::get('{country}/regions', [CountryController::class, 'regions']);
-    Route::post('{country}/army/join', [RequestController::class, 'joinArmy']);
-    Route::post('{country}/army/requests/{request}/accept', [RequestController::class, 'acceptArmy']);
-    Route::post('{country}/army/requests/{request}/decline', [RequestController::class, 'declineArmy']);
-});
-
-Route::group([
-    'prefix' => 'governments'
-], function ($router) {
-    Route::get('{government}', [GovernmentController::class, 'show']);
-});
-
-Route::group([
-    'prefix' => 'users'
-], function ($router) {
-    Route::get('{user}/factories', [UserController::class, 'factories'])->middleware('api');
-    Route::get('{user}', [UserController::class, 'show']);
-    Route::patch('{user}', [UserController::class, 'update']);
-});
-
-Route::get('businesses/{business}', [BusinessController::class, 'show']);
-Route::post('businesses/drop-job', [BusinessController::class, 'dropJob']);
-Route::post('businesses/{business}/get-job', [BusinessController::class, 'getJob']);
-Route::post('businesses', [BusinessController::class, 'store']);
-Route::patch('businesses/{business}', [BusinessController::class, 'update']);
-
-Route::group([
-    'prefix' => 'requests'
-], function ($router) {
-    Route::post('{request}/decline', [RequestController::class, 'decline']);
-    Route::get('citizenship', [RequestController::class, 'citizenshipStore']); // Country leader or Migration minister
-    Route::post('citizenship', [RequestController::class, 'citizenshipStore']); // Country leader or Migration minister
-    Route::get('registration', [RequestController::class, 'registrationIndex']); // Region leader or Country leader or Migration minister
-    Route::post('registration', [RequestController::class, 'registrationStore']); // Region leader or Country leader or Migration minister
-    Route::get('party', [RequestController::class, 'partyIndex']); // Party leader
-});
-
-Route::group([
-    'prefix' => 'wars'
-], function ($router) {
-    Route::post('take-damage', [WarController::class, 'takeDamage']);
-    Route::get('{war}', [WarController::class, 'show']);
-    Route::get('/', [WarController::class, 'index']);
-    Route::get('{war}/countries', [WarController::class, 'countriesInWar']);
-    Route::post('', [WarController::class, 'store']);
-    Route::delete('{war}', [WarController::class, 'remove']);
-    Route::post('{war}/fight', [ActionController::class, 'fight']);
-});
-
-Route::group([
-    'prefix' => 'parties'
-], function ($router) {
-    Route::get('/', [PartyController::class, 'index']);
-    Route::get('{party}', [PartyController::class, 'show']);
-    Route::post('/', [PartyController::class, 'store']);
-    Route::post('{party}/join', [RequestController::class, 'joinParty']);
-    Route::get('{party}/requests', [PartyController::class, 'getJoinRequest']);
-    Route::post('{party}/requests/{request}/accept', [RequestController::class, 'acceptParty']);
-});
-
-Route::get('game-prices/', [GamePriceController::class, 'index']);
 

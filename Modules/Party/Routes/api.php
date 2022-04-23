@@ -1,6 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Modules\Party\Http\Controllers\PartyController;
+use Modules\Request\Http\Controllers\RequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/party', function (Request $request) {
-    return $request->user();
+Route::group([
+    'prefix' => 'parties'
+], function ($router) {
+    Route::get('/', [PartyController::class, 'index']);
+    Route::get('{party}', [PartyController::class, 'show']);
+    Route::post('/', [PartyController::class, 'store']);
+    Route::post('{party}/join', [RequestController::class, 'joinParty']);
+    Route::get('{party}/requests', [PartyController::class, 'getJoinRequest']);
+    Route::post('{party}/requests/{request}/accept', [RequestController::class, 'acceptParty']);
 });

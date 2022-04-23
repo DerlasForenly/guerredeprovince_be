@@ -1,6 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Modules\Action\Http\Controllers\ActionController;
+use Modules\War\Http\Controllers\WarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/war', function (Request $request) {
-    return $request->user();
+Route::group([
+    'prefix' => 'wars'
+], function ($router) {
+    Route::post('take-damage', [WarController::class, 'takeDamage']);
+    Route::get('{war}', [WarController::class, 'show']);
+    Route::get('/', [WarController::class, 'index']);
+    Route::get('{war}/countries', [WarController::class, 'countriesInWar']);
+    Route::post('', [WarController::class, 'store']);
+    Route::delete('{war}', [WarController::class, 'remove']);
+    Route::post('{war}/fight', [ActionController::class, 'fight']);
 });

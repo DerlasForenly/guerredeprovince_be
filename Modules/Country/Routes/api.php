@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/country', function (Request $request) {
-    return $request->user();
+Route::group([
+    'prefix' => 'countries'
+], function ($router) {
+    Route::get('/', [CountryController::class, 'index']);
+    Route::get('{country}', [CountryController::class, 'show']);
+    Route::get('{country}/wars', [CountryController::class, 'wars']);
+    Route::get('{country}/regions', [CountryController::class, 'regions']);
+    Route::post('{country}/army/join', [RequestController::class, 'joinArmy']);
+    Route::post('{country}/army/requests/{request}/accept', [RequestController::class, 'acceptArmy']);
+    Route::post('{country}/army/requests/{request}/decline', [RequestController::class, 'declineArmy']);
 });

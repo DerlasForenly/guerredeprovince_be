@@ -2,14 +2,9 @@
 
 namespace Tests\Unit;
 
-use App\Http\Middleware\JwtMiddleware;
 use App\Http\Middleware\TitlecaseMiddleware;
-use Exception;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\TestCase;
-use Tymon\JWTAuth\Exceptions\TokenExpiredException;
-use Tymon\JWTAuth\Exceptions\TokenInvalidException;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class TitlecaseMiddlewareTest extends TestCase
 {

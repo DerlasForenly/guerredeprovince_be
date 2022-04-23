@@ -5,5 +5,20 @@
     "Business": true,
     "Auth": true,
     "Government": true,
-    "Party": true
+    "Party": true,
+    "Region": true,
+    "Status": true,
+    "Request": true,
+    "Position": true,
+    "Nation": true,
+    "Language": true,
+    "Corporation": true,
+    "Army": true,
+    "Settings": true,
+    "Action": true,
+    "GamePrice": true,
+    "Resource": true,
+    "Newspaper": true,
+    "Chat": true,
+    "Donation": true
 }

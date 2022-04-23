@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Modules\Government\Http\Controllers\GovernmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/government', function (Request $request) {
-    return $request->user();
+Route::group([
+    'prefix' => 'governments'
+], function ($router) {
+    Route::get('{government}', [GovernmentController::class, 'show']);
 });

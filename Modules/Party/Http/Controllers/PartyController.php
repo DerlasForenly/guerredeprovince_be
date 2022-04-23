@@ -2,78 +2,114 @@
 
 namespace Modules\Party\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Modules\GamePrice\Models\GamePrice;
+use Modules\Party\Models\PoliticalParty;
+use Modules\Party\Models\PoliticalPartyStaff;
+use Modules\Request\Models\Request as RequestModel;
+use Modules\Request\Models\RequestType;
+use Modules\User\Models\PositionType;
+use function auth;
+use function response;
 
 class PartyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
-    public function index()
-    {
-        return view('party::index');
+    public function __construct() {
+        $this->middleware('jwt.verify');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
+    public function show(PoliticalParty $party): PoliticalParty
     {
-        return view('party::create');
+        return $party;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
     public function store(Request $request)
     {
-        //
+        $user = auth()->userOrFail();
+
+        if ($user->political_party->count()) {
+            return response()->json([
+                'message' => 'You are in political party already',
+                'party' => $user->political_party
+            ], 418);
+        };
+
+        $price_resources = GamePrice::where('name', 'Create political party')->first()->resources;
+
+        if ($user->isEnough($price_resources)) {
+            $user->deduct($price_resources);
+
+            $party = PoliticalParty::create([
+                'name' => $request['name'],
+                'description' => $request['description'],
+                'tag' => $request['tag'],
+                'country_id' => $request['country_id'],
+            ]);
+
+            $party = PoliticalPartyStaff::create([
+                'user_id' => $user->id,
+                'political_party_id' => $party->id,
+                'position_id' => PositionType::where('name', '=', 'leader')->first()->id,
+            ]);
+
+            return response()->json([
+                'message' => 'OK',
+                'party' => $party
+            ], 201);
+        }
+
+        return response()->json([
+            'message' => 'Not enough resources',
+        ], 418);
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
+    public function staff(PoliticalParty $party)
     {
-        return view('party::show');
+        return $party->political_party_staff;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
+    public function sendJoinRequest(PoliticalParty $party)
     {
-        return view('party::edit');
+        $user = auth()->userOrFail();
+
+        if ($user->party !== null) {
+            return response()->json([
+                'message' => 'You have political party already',
+                'party' => $user->party
+            ], 418);
+        }
+
+        $staff = $party->political_party_staff->where('position_id', 1)->first();
+
+        $request = RequestModel::where('sender_id', $user->id)
+            ->where('getter_id', $staff->user_id)
+            ->where('request_type_id', RequestType::where('name', 'Join party')->first()->id)->first();
+
+        if ($request) {
+            return response()->json([
+                'message' => 'You send request already',
+                'request' => $request,
+            ], 418);
+        }
+
+        $request = RequestModel::create([
+            'sender_id' => $user->id,
+            'getter_id' => $staff->user_id,
+            'request_type_id' => RequestType::where('name', 'Join party')->first()->id,
+        ]);
+
+        return response()->json([
+            'message' => 'OK',
+            'request' => $request,
+        ], 201);
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
+    public function getRequests(PoliticalParty $party)
     {
-        //
-    }
+        $staff = $party->political_party_staff->where('position_id', 1)->first();
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
+        return RequestModel::where('getter_id', $staff->user_id)
+            ->where('request_type_id', RequestType::where('name', 'Join party')->first()->id);
     }
 }

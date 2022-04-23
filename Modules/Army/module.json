@@ -1,0 +1,13 @@
+{
+    "name": "Army",
+    "alias": "army",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Army\\Providers\\ArmyServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

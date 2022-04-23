@@ -2,14 +2,12 @@
 
 namespace App\Events;
 
-use App\Models\Action;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Modules\Action\Models\Action;
 
 class ActionProcessed
 {
@@ -18,9 +16,9 @@ class ActionProcessed
     /**
      * Экземпляр заказа.
      *
-     * @var \App\Models\Action
+     * @var Action
      */
-    public $action;
+    public Action $action;
 
     /**
      * Create a new event instance.
@@ -35,9 +33,9 @@ class ActionProcessed
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return \Illuminate\Broadcasting\Channel|array
+     * @return Channel|array
      */
-    public function broadcastOn()
+    public function broadcastOn(): Channel|PrivateChannel|array
     {
         return new PrivateChannel('channel-name');
     }
