@@ -1,9 +1,9 @@
 <?php
 namespace Modules\Auth\Http\Middleware;
 
-
 use Closure;
 use Exception;
+use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -14,22 +14,20 @@ class JwtMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param Request $request
+     * @param Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next): mixed
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();
+        } catch (TokenInvalidException $e) {
+            return response()->json(['status' => 'Token is Invalid'], 403);
+        } catch (TokenExpiredException $e) {
+            return response()->json(['status' => 'Token is Expired'], 401);
         } catch (Exception $e) {
-            if ($e instanceof TokenInvalidException){
-                return response()->json(['status' => 'Token is Invalid'], 403);
-            } else if ($e instanceof TokenExpiredException){
-                return response()->json(['status' => 'Token is Expired'], 401);
-            } else {
-                return response()->json(['status' => 'Authorization Token not found'], 404);
-            }
+            return response()->json(['status' => 'Authorization Token not found'], 404);
         }
         return $next($request);
     }

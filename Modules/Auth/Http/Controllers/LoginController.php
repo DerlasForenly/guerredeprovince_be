@@ -3,38 +3,24 @@
 namespace Modules\Auth\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\JsonResponse;
+use Modules\Auth\Actions\LoginAction;
+use Modules\Auth\Http\Requests\LoginRequest;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
     /**
-     * Where to redirect users after login.
+     * Get a JWT via given credentials.
      *
-     * @var string
+     * @param LoginRequest $request
+     * @param LoginAction $action
+     * @return JsonResponse
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function __invoke(
+        LoginRequest $request,
+        LoginAction $action
+    ): JsonResponse
     {
-        $this->middleware('guest')->except('logout');
+        return $action->handle($request->only(['email', 'password']));
     }
 }

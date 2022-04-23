@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Auth\Http\Controllers\AuthController;
+use Modules\Auth\Http\Controllers\LoginController;
+use Modules\Auth\Http\Controllers\LogoutController;
+use Modules\Auth\Http\Controllers\MeController;
+use Modules\Auth\Http\Controllers\RefreshController;
+use Modules\Auth\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +19,41 @@ use Modules\Auth\Http\Controllers\AuthController;
 */
 
 Route::group([
-    'prefix' => 'auth'
-], function ($router) {
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/me', [AuthController::class, 'me']);
+    'prefix' => 'auth',
+    'name' => 'auth.',
+], function () {
+    Route::group([
+        'middleware' => ['jwt.verify'],
+    ], function () {
+
+        /**
+         * Refresh
+         */
+        Route::post('/refresh', RefreshController::class)
+            ->name('refresh');
+
+        /**
+         * Me
+         */
+        Route::get('/me', MeController::class)
+            ->name('me');
+
+        /**
+         * Logout
+         */
+        Route::post('/logout', LogoutController::class)
+            ->name('sign-out');
+    });
+
+    /**
+     * Login
+     */
+    Route::post('/login', LoginController::class)
+        ->name('sign-in');
+
+    /**
+     * Register
+     */
+    Route::post('/register', RegisterController::class)
+        ->name('sign-up');
 });
