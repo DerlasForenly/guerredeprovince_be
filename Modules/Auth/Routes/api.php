@@ -20,8 +20,20 @@ use Modules\Auth\Http\Controllers\RegisterController;
 
 Route::group([
     'prefix' => 'auth',
-    'name' => 'auth.',
 ], function () {
+
+    /**
+     * Register
+     */
+    Route::post('/register', RegisterController::class)
+        ->name('sign-up');
+
+    /**
+     * Login
+     */
+    Route::post('/login', LoginController::class)
+        ->name('sign-in');
+
     Route::group([
         'middleware' => ['jwt.verify'],
     ], function () {
@@ -44,16 +56,4 @@ Route::group([
         Route::post('/logout', LogoutController::class)
             ->name('sign-out');
     });
-
-    /**
-     * Login
-     */
-    Route::post('/login', LoginController::class)
-        ->name('sign-in');
-
-    /**
-     * Register
-     */
-    Route::post('/register', RegisterController::class)
-        ->name('sign-up');
 });
