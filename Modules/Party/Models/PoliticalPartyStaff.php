@@ -4,7 +4,7 @@ namespace Modules\Party\Models;
 
 use App\Models\Traits\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Modules\User\Models\Position;
+use Modules\Position\Models\Position;
 use Modules\User\Models\User;
 
 class PoliticalPartyStaff extends Model

@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Modules\GamePrice\Models\GamePrice;
 use Modules\Party\Models\PoliticalParty;
 use Modules\Party\Models\PoliticalPartyStaff;
+use Modules\Position\Models\PositionType;
 use Modules\Request\Models\Request as RequestModel;
 use Modules\Request\Models\RequestType;
-use Modules\User\Models\PositionType;
 use function auth;
 use function response;
 

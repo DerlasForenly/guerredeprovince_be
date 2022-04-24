@@ -10,4 +10,7 @@ use Modules\Business\Database\factories\SalaryTypeFactory;
 class SalaryType extends Model
 {
     use HasFactory;
+
+    public const MONEY    = 'money';
+    public const RESOURCE = 'resource';
 }

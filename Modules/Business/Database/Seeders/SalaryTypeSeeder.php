@@ -15,10 +15,10 @@ class SalaryTypeSeeder extends Seeder
     public function run()
     {
         SalaryType::factory()
-            ->name('money')
+            ->name(SalaryType::MONEY)
             ->create();
         SalaryType::factory()
-            ->name('resource')
+            ->name(SalaryType::RESOURCE)
             ->create();
     }
 }

@@ -1,0 +1,13 @@
+{
+    "name": "Friend",
+    "alias": "friend",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Friend\\Providers\\FriendServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
