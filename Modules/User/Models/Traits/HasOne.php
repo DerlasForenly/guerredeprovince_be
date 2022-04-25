@@ -19,12 +19,12 @@ trait HasOne
         return $this->hasOne(Army::class);
     }
 
-    public function action()
+    public function action(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Action::class);
     }
 
-    public function employee()
+    public function employee(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Employee::class);
     }

@@ -14,14 +14,10 @@ class ActionTypeSeeder extends Seeder
      */
     public function run()
     {
-        ActionType::factory()
-            ->name('work')
-            ->create();
-        ActionType::factory()
-            ->name('fight')
-            ->create();
-        ActionType::factory()
-            ->name('move')
-            ->create();
+        foreach (ActionType::ACTION_TYPES as $actionType) {
+            ActionType::factory()
+                ->name($actionType)
+                ->create();
+        }
     }
 }

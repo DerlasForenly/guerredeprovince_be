@@ -2,9 +2,11 @@
 
 namespace Modules\Business\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Providers\BaseModuleProvider;
+use Modules\Business\Models\Business;
+use Modules\Business\Policies\BusinessPolicy;
 
-class BusinessServiceProvider extends ServiceProvider
+class BusinessServiceProvider extends BaseModuleProvider
 {
     /**
      * @var string $moduleName
@@ -17,39 +19,21 @@ class BusinessServiceProvider extends ServiceProvider
     protected string $moduleNameLower = 'business';
 
     /**
+     * @var array|string[]
+     */
+    protected $policies = [
+        Business::class => BusinessPolicy::class
+    ];
+
+    /**
      * Boot the application events.
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        $this->registerConfig();
-        $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
-    }
-
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register(): void
-    {
-        $this->app->register(RouteServiceProvider::class);
-    }
-
-    /**
-     * Register config.
-     *
-     * @return void
-     */
-    protected function registerConfig(): void
-    {
-        $this->publishes([
-            module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
-        ], 'config');
-        $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
-        );
+        parent::boot();
+        $this->registerPolicies();
     }
 
     /**
@@ -60,16 +44,5 @@ class BusinessServiceProvider extends ServiceProvider
     public function provides(): array
     {
         return [];
-    }
-
-    private function getPublishableViewPaths(): array
-    {
-        $paths = [];
-        foreach (\Config::get('view.paths') as $path) {
-            if (is_dir($path . '/modules/' . $this->moduleNameLower)) {
-                $paths[] = $path . '/modules/' . $this->moduleNameLower;
-            }
-        }
-        return $paths;
     }
 }

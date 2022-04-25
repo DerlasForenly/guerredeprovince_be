@@ -3,6 +3,7 @@
 namespace Modules\User\Models\Traits;
 
 use Modules\Business\Models\Business;
+use Modules\Business\Models\Employee;
 use Modules\Request\Models\Request;
 use Modules\User\Models\UserTreasury;
 
@@ -18,7 +19,7 @@ trait HasMany
         return $this->hasMany(Business::class);
     }
 
-    public function requests()
+    public function requests(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Request::class, 'sender_id');
     }

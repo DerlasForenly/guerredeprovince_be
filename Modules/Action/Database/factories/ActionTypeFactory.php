@@ -2,11 +2,17 @@
 
 namespace Modules\Action\Database\factories;
 
+use Database\Factories\Traits\HasName;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\Action\Models\ActionType;
 
 class ActionTypeFactory extends Factory
 {
+    use HasName;
+
+    /**
+     * @var string
+     */
     protected $model = ActionType::class;
 
     /**
@@ -19,14 +25,5 @@ class ActionTypeFactory extends Factory
         return [
             //
         ];
-    }
-
-    public function name($name): ActionTypeFactory
-    {
-        return $this->state(function (array $attributes) use ($name) {
-            return [
-                'name' => $name,
-            ];
-        });
     }
 }

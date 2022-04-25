@@ -1,29 +1,32 @@
 <?php
 
-namespace Modules\Achievement\Database\factories;
+namespace Modules\Resource\Database\factories;
 
 use Database\Factories\Traits\HasName;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Modules\Achievement\Models\Achievement;
+use Modules\Resource\Models\Resource;
 
-class AchievementFactory extends Factory
+class ResourceFactoryFactory extends Factory
 {
     use HasName;
 
     /**
+     * The name of the factory's corresponding model.
+     *
      * @var string
      */
-    protected $model = Achievement::class;
+    protected $model = Resource::class;
 
     /**
      * Define the model's default state.
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             //
         ];
     }
 }
+

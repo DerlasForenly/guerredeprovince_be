@@ -19,8 +19,8 @@
     "GamePrice": true,
     "Resource": true,
     "Newspaper": true,
-    "Chat": false,
+    "Chat": true,
     "Donation": true,
-    "Achievement": false,
-    "Friend": false
+    "Achievement": true,
+    "Friend": true
 }

@@ -14,11 +14,13 @@ class CreateActionsTable extends Migration
     public function up()
     {
         Schema::create('actions', function (Blueprint $table) {
-            $table->integer('time'); // in min
             $table->id('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+
             $table->unsignedBigInteger('action_type_id');
             $table->foreign('action_type_id')->references('id')->on('action_types');
+
+            $table->integer('time'); // in min
 
             $table->timestamps();
         });

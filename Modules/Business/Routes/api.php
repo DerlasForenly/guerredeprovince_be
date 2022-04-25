@@ -1,11 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Business\Http\Controllers\BusinessController;
 use Modules\Business\Http\Controllers\DestroyController;
+use Modules\Business\Http\Controllers\DropJobController;
+use Modules\Business\Http\Controllers\GetJobController;
+use Modules\Business\Http\Controllers\GetSalaryController;
 use Modules\Business\Http\Controllers\ShowController;
 use Modules\Business\Http\Controllers\StoreController;
 use Modules\Business\Http\Controllers\UpdateController;
+use Modules\Business\Http\Controllers\WorkController;
+use Modules\Business\Http\Middleware\BusyMiddleware;
+use Modules\Business\Http\Middleware\EmployedMiddleware;
+use Modules\Business\Http\Middleware\HiredMiddleware;
+use Modules\Business\Http\Middleware\MinWorkTimeMiddleware;
+use Modules\Business\Http\Middleware\NotBusyMiddleware;
+use Modules\Business\Http\Middleware\UnemployedMiddleware;
+use Modules\Business\Models\Business;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,37 +30,55 @@ use Modules\Business\Http\Controllers\UpdateController;
 
 Route::group([
     'prefix' => 'businesses',
+    'middleware' => ['jwt.verify'],
 ], function () {
-
-    /**
-     * Show
-     */
-    Route::get('businesses/{business}', ShowController::class);
 
     /**
      * Drop job
      */
-    Route::post('businesses/drop-job', [BusinessController::class, 'dropJob']);
+    Route::post('/drop-job', DropJobController::class)
+        ->middleware(EmployedMiddleware::class);
 
     /**
      * Get job
      */
-    Route::post('businesses/{business}/get-job', [BusinessController::class, 'getJob']);
+    Route::post('/{business}/get-job', GetJobController::class)
+        ->middleware(UnemployedMiddleware::class);
+
+    /**
+     * Show
+     */
+    Route::get('/{business}', ShowController::class);
 
     /**
      * Store
      */
-    Route::post('businesses', StoreController::class);
+    Route::post('/', StoreController::class);
 
     /**
      * Update
      */
-    Route::patch('businesses/{business}', UpdateController::class);
+    Route::patch('/{business}', UpdateController::class);
 
     /**
      * Destroy
      */
-    Route::delete('businesses/{business}', DestroyController::class);
+    Route::delete('/{business}', DestroyController::class);
+
+    /**
+     * Work
+     */
+    Route::post('/work', WorkController::class)
+        ->middleware(NotBusyMiddleware::class)
+        ->middleware(EmployedMiddleware::class);
+
+    /**
+     * Get salary for work
+     */
+    Route::post('/get-salary', GetSalaryController::class)
+        ->middleware(BusyMiddleware::class)
+        ->middleware(MinWorkTimeMiddleware::class)
+        ->middleware(EmployedMiddleware::class);
 });
 
 
