@@ -17,11 +17,22 @@ class CreateDamagesTable extends Migration
             $table->id();
 
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
             $table->unsignedBigInteger('war_id');
-            $table->foreign('war_id')->references('id')->on('wars');
+            $table->foreign('war_id')
+                ->references('id')
+                ->on('wars')
+                ->onDelete('cascade');
+
             $table->unsignedBigInteger('region_id');
-            $table->foreign('region_id')->references('id')->on('regions');
+            $table->foreign('region_id')
+                ->references('id')
+                ->on('regions')
+                ->onDelete('cascade');
 
             $table->unsignedBigInteger('damage');
 

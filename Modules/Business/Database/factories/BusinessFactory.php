@@ -2,6 +2,8 @@
 
 namespace Modules\Business\Database\factories;
 
+use Database\Factories\Traits\HasName;
+use Database\Factories\Traits\HasUser;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Modules\Business\Models\Business;
@@ -11,6 +13,9 @@ use Modules\User\Models\User;
 
 class BusinessFactory extends Factory
 {
+    use HasName,
+        HasUser;
+
     protected $model = Business::class;
 
     public function definition(): array
@@ -21,15 +26,6 @@ class BusinessFactory extends Factory
             'user_id' => rand(1, User::all()->count()),
             'region_id' => rand(1, Region::all()->count()),
         ];
-    }
-
-    public function user($id): BusinessFactory
-    {
-        return $this->state(function (array $attributes) use ($id) {
-            return [
-                'user_id' => $id,
-            ];
-        });
     }
 
     public function corporation($id): BusinessFactory

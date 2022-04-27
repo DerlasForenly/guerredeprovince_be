@@ -15,11 +15,23 @@ class CreateCountryStaffTable extends Migration
     {
         Schema::create('country_staff', function (Blueprint $table) {
             $table->id('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
             $table->unsignedBigInteger('country_id');
-            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('country_id')
+                ->references('id')
+                ->on('countries')
+                ->onDelete('cascade');
+
             $table->unsignedBigInteger('position_id');
-            $table->foreign('position_id')->references('id')->on('positions');
+            $table->foreign('position_id')
+                ->references('id')
+                ->on('positions')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

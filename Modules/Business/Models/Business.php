@@ -3,14 +3,14 @@
 namespace Modules\Business\Models;
 
 use App\Models\Traits\HasFactory;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Modules\Business\Database\factories\BusinessFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Corporation\Models\Corporation;
 use Modules\Region\Models\Region;
 use Modules\Resource\Models\Resource;
+use Modules\Treasury\Models\BusinessTreasury;
 use Modules\User\Models\User;
 
 class Business extends Model
@@ -24,6 +24,10 @@ class Business extends Model
         'resource_id',
         'user_id',
         'region_id',
+        'salary_type_id',
+        'exp',
+        'salary',
+        'corporation_id',
     ];
 
     public function corporation(): BelongsTo
@@ -49,5 +53,10 @@ class Business extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function treasuries(): HasMany
+    {
+        return $this->HasMany(BusinessTreasury::class);
     }
 }

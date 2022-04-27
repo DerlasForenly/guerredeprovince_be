@@ -17,15 +17,37 @@ class CreateRequestsTable extends Migration
             $table->id();
 
             $table->unsignedBigInteger('sender_id');
-            $table->foreign('sender_id')->references('id')->on('users');
-            $table->unsignedBigInteger('political_party_id')->nullable();
-            $table->foreign('political_party_id')->references('id')->on('political_parties');
-            $table->unsignedBigInteger('country_id')->nullable();
-            $table->foreign('country_id')->references('id')->on('countries');
-            $table->unsignedBigInteger('region_id')->nullable();
-            $table->foreign('region_id')->references('id')->on('regions');
+            $table->foreign('sender_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('political_party_id')
+                ->nullable();
+            $table->foreign('political_party_id')
+                ->references('id')
+                ->on('political_parties')
+                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('country_id')
+                ->nullable();
+            $table->foreign('country_id')
+                ->references('id')
+                ->on('countries')
+                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('region_id')
+                ->nullable();
+            $table->foreign('region_id')
+                ->references('id')
+                ->on('regions')
+                ->onDelete('cascade');
+
             $table->unsignedBigInteger('request_type_id');
-            $table->foreign('request_type_id')->references('id')->on('request_types');
+            $table->foreign('request_type_id')
+                ->references('id')
+                ->on('request_types')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });

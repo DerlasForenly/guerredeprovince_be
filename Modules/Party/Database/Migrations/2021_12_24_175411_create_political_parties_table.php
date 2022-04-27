@@ -15,15 +15,30 @@ class CreatePoliticalPartiesTable extends Migration
     {
         Schema::create('political_parties', function (Blueprint $table) {
             $table->id();
+
             $table->string('name');
-            $table->string('description')->nullable();
+            $table->string('description')
+                ->nullable();
             $table->string('tag');
-            $table->string('emblem')->nullable();
+            $table->string('emblem')
+                ->nullable();
+
             $table->unsignedBigInteger('country_id');
-            $table->foreign('country_id')->references('id')->on('countries');
-            $table->unsignedBigInteger('region_id')->nullable();
-            $table->foreign('region_id')->references('id')->on('regions');
-            $table->boolean('in_government')->default(false);
+            $table->foreign('country_id')
+                ->references('id')
+                ->on('countries')
+                ->onDelete('cascade');;
+
+            $table->unsignedBigInteger('region_id')
+                ->nullable();
+            $table->foreign('region_id')
+                ->references('id')
+                ->on('regions')
+                ->onDelete('cascade');
+
+            $table->boolean('in_government')
+                ->default(false);
+
             $table->timestamps();
         });
     }

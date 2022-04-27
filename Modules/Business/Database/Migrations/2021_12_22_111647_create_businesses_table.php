@@ -17,25 +17,46 @@ class CreateBusinessesTable extends Migration
             $table->id();
 
             $table->string('name');
+            $table->string('description')
+                ->nullable();
+            $table->string('emblem')
+                ->nullable();
+            $table->unsignedBigInteger('exp')
+                ->default(0);
+            $table->unsignedBigInteger('salary')
+                ->default(90);
 
-            $table->unsignedBigInteger('exp')->default(0);
-            $table->unsignedBigInteger('money_amount')->default(0);
-            $table->unsignedBigInteger('resource_amount')->default(0);
-            $table->unsignedBigInteger('salary_type_id')->default(2);
-            $table->foreign('salary_type_id')->references('id')->on('salary_types');
-            $table->unsignedBigInteger('salary')->default(90);
+            $table->unsignedBigInteger('salary_type_id')
+                ->default(2);
+            $table->foreign('salary_type_id')
+                ->references('id')
+                ->on('salary_types');
 
-            $table->string('description')->nullable();
-            $table->string('emblem')->nullable();
+            $table->unsignedBigInteger('corporation_id')
+                ->nullable();
+            $table->foreign('corporation_id')
+                ->references('id')
+                ->on('corporations')
+                ->onDelete('cascade');
 
-            $table->unsignedBigInteger('corporation_id')->nullable();
-            $table->foreign('corporation_id')->references('id')->on('corporations');
             $table->unsignedBigInteger('resource_id');
-            $table->foreign('resource_id')->references('id')->on('resources');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('resource_id')
+                ->references('id')
+                ->on('resources')
+                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('user_id')
+                ->nullable();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
             $table->unsignedBigInteger('region_id');
-            $table->foreign('region_id')->references('id')->on('regions');
+            $table->foreign('region_id')
+                ->references('id')
+                ->on('regions')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -15,13 +15,26 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('business_id');
-            $table->foreign('business_id')->references('id')->on('businesses');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
 
-            $table->unsignedBigInteger('salary')->nullable();
-            $table->unsignedBigInteger('salary_type_id')->nullable();
-            $table->foreign('salary_type_id')->references('id')->on('salary_types');
+            $table->unsignedBigInteger('business_id');
+            $table->foreign('business_id')
+                ->references('id')
+                ->on('businesses')
+                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('salary')
+                ->nullable();
+
+            $table->unsignedBigInteger('salary_type_id')
+                ->nullable();
+            $table->foreign('salary_type_id')
+                ->references('id')
+                ->on('salary_types')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -15,16 +15,31 @@ class CreateCountriesTable extends Migration
     {
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
+
             $table->string('name', 50);
-            $table->string('description', 1000)->nullable();
-            $table->string('emblem')->nullable();
-            $table->integer('parliament_size')->default(0);
+            $table->string('description', 600)
+                ->nullable();
+            $table->string('emblem')
+                ->nullable();
+            $table->integer('parliament_size')
+                ->default(0);
+            $table->boolean('closed_borders')
+                ->default(FALSE);
+            $table->boolean('mandatory_visa')
+                ->default(FALSE);
+
             $table->unsignedBigInteger('government_type_id');
-            $table->foreign('government_type_id')->references('id')->on('government_types');
+            $table->foreign('government_type_id')
+                ->references('id')
+                ->on('government_types')
+                ->onDelete('cascade');
+
             $table->unsignedBigInteger('nation_id');
-            $table->foreign('nation_id')->references('id')->on('nations');
-            $table->boolean('closed_borders')->default(FALSE);
-            $table->boolean('mandatory_visa')->default(FALSE);
+            $table->foreign('nation_id')
+                ->references('id')
+                ->on('nations')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

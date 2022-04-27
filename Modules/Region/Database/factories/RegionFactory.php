@@ -2,6 +2,7 @@
 
 namespace Modules\Region\Database\factories;
 
+use Database\Factories\Traits\HasName;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Modules\Country\Models\Country;
@@ -9,6 +10,11 @@ use Modules\Region\Models\Region;
 
 class RegionFactory extends Factory
 {
+    use HasName;
+
+    /**
+     * @var string
+     */
     protected $model = Region::class;
 
     /**
@@ -19,9 +25,9 @@ class RegionFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Region_' . Str::random(10),
-            'description' => 'It is a test region',
-            'country_id' => rand(2, Country::all()->count()),
+            'name'           => 'Region_' . Str::random(10),
+            'description'    => 'It is a test region',
+            'country_id'     => rand(2, Country::all()->count()),
             'region_type_id' => 1
         ];
     }
@@ -31,15 +37,6 @@ class RegionFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'country_id' => null,
-            ];
-        });
-    }
-
-    public function name($name): RegionFactory
-    {
-        return $this->state(function (array $attributes) use ($name) {
-            return [
-                'name' => $name,
             ];
         });
     }

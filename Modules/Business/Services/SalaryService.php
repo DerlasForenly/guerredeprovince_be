@@ -2,98 +2,147 @@
 
 namespace Modules\Business\Services;
 
+use Carbon\Carbon;
+use Modules\Business\Models\Business;
+use Modules\Business\Models\SalaryType;
 use Modules\Resource\Models\Resource;
+use Modules\Resource\Services\TransactionService;
+use Modules\Treasury\Models\Treasury\Treasury;
+use Modules\User\Models\User;
 
 class SalaryService
 {
-    public function deduct($p_res): bool
+    /**
+     * @var Business
+     */
+    private Business $business;
+
+    /**
+     * @var Treasury|null
+     */
+    private ?Treasury $businessTreasury;
+
+    /**
+     * User treasury for specified resource
+     *
+     * @var Treasury|null
+     */
+    private ?Treasury $userTreasury;
+
+    /**
+     * Work time, has minimum and maximum
+     *
+     * @var int
+     */
+    private int $time;
+
+    /**
+     * @param User $user
+     */
+    public function __construct(private User $user)
     {
-        foreach ($this->resources()->get() as &$r) {
-            foreach ($p_res as &$pr) {
-                if ($r->resource_id == $pr->resource_id) {
-                    $r->quantity -= $pr->quantity;
-                    $r->save();
-                }
-            }
-        }
+        $this->business = $this->user->employee->business;
+        $this->time = $this->getWorkTime();
 
-        return true;
+        switch ($this->business->salary_type_id) {
+            case SalaryType::RESOURCE:
+                $this->setTreasuries($this->business->resource_id);
+                break;
+            case SalaryType::MONEY:
+                $this->setTreasuries(Resource::MONEY_ID);
+                break;
+        }
     }
 
-    public static function deductResources(array $ur, array $pr) {
-        if ($pr === [] || $ur === []) {
-            return false;
-        }
-
-        foreach ($ur as &$r) {
-            foreach ($pr as $r2) {
-                if ($r['resource_id'] === $r2['resource_id']) {
-                    if ($r['quantity'] >= $r2['quantity']) {
-                        $r['quantity'] -= $r2['quantity'];
-                    } else {
-                        return false;
-                    }
-                }
-            }
-        }
-
-        return $ur;
-    }
-
-    public static function isEnoughResources($ur, $pr) {
-        foreach ($ur as &$r) {
-            foreach ($pr as &$r2) {
-                if ($r->resource_id == $r2->resource_id && $r->quantity < $r2->quantity) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
-
-    public function isEnough($p_res): bool
+    /**
+     * @return int
+     */
+    private function getWorkTime(): int
     {
-        $u_resources = $this->resources()->get();
-
-        foreach ($u_resources as &$r) {
-            foreach ($p_res as &$pr) {
-                if ($r->resource_id == $pr->resource_id && $r->quantity < $pr->quantity) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
+        $diff = Carbon::now()->diffInMinutes($this->user->action->created_at);
+        return min($diff, $this->user->action->time);
     }
 
-    public function countSalary(int $time)
+    /**
+     * @return array
+     */
+    public function sendCompensation(): array
     {
-        if ($this->salary_type === 1) {
-            return $time * $this->salary;
-        } else if ($this->salary_type === 2) {
-            return $time;
+        return [
+            'time'      => $this->time,
+            'exp'       => $this->sendExp(),
+            'resources' => $this->sendSalary(),
+        ];
+    }
+
+    /**
+     * @return int
+     */
+    private function sendExp(): int
+    {
+        return $this->countExp($this->time);
+    }
+
+    /**
+     * @return int
+     */
+    private function sendSalary(): int
+    {
+        switch ($this->business->salary_type_id) {
+            case SalaryType::RESOURCE:
+                $resources = $this->countResources($this->time);
+                TransactionService::send($this->businessTreasury, $this->userTreasury, $resources);
+                return $resources;
+            case SalaryType::MONEY:
+                $resources = $this->countMoney($this->time);
+                TransactionService::send($this->businessTreasury, $this->userTreasury, $resources);
+                return $resources;
+            default:
+                return 0;
         }
     }
 
-    public function accrueSalary(int $time)
+    /**
+     * @param int $time
+     * @return int
+     */
+    private function countResources(int $time): int
     {
-        $salary = $this->countSalary($time);
-        $resources = $this->resources();
+        return $time * 15;
+    }
 
-        if ($this->salaty_type === 1) {
-            $resource = $resources->where('resource_id', Resource::where('name', 'money')->first()->id)->first();
-            $resource->update([
-                'quantity' => $resource->quantity + $salary
-            ]);
-        } else if ($this->salary_type === 2) {
-            $resource_id = $this->employee->business->resource_id;
-            $resource = $resources->where('resource_id', $resource_id)->first();
-            $resource->update([
-                'quantity' => $resource->quantity + $salary
-            ]);
-        }
+    /**
+     * @param int $time
+     * @return int
+     */
+    private function countMoney(int $time): int
+    {
+        return $time * 150;
+    }
 
-        return $salary;
+    /**
+     * @param int $time
+     * @return int
+     */
+    private function countExp(int $time): int
+    {
+        return $time * 5;
+    }
+
+    /**
+     * @param int $id
+     * @return void
+     */
+    private function setTreasuries(int $id): void
+    {
+        $this->businessTreasury = $this->business
+            ->treasuries()
+            ->where('resource_id', $id)
+            ->first();
+
+        $this->userTreasury = $this->user
+            ->treasuries()
+            ->where('resource_id', $id)
+            ->first();
     }
 }

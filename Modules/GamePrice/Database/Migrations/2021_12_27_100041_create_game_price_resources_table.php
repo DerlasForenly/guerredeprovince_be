@@ -17,9 +17,17 @@ class CreateGamePriceResourcesTable extends Migration
             $table->id();
 
             $table->unsignedBigInteger('game_price_id');
-            $table->foreign('game_price_id')->references('id')->on('game_prices');
+            $table->foreign('game_price_id')
+                ->references('id')
+                ->on('game_prices')
+                ->onDelete('cascade');
+
             $table->unsignedBigInteger('resource_id');
-            $table->foreign('resource_id')->references('id')->on('resources');
+            $table->foreign('resource_id')
+                ->references('id')
+                ->on('resources')
+                ->onDelete('cascade');
+
             $table->unsignedBigInteger('quantity');
 
             $table->timestamps();

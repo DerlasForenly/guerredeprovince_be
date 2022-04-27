@@ -17,11 +17,23 @@ class CreatePoliticalPartyStaffTable extends Migration
             $table->id();
 
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
             $table->unsignedBigInteger('political_party_id');
-            $table->foreign('political_party_id')->references('id')->on('political_parties');
-            $table->unsignedBigInteger('position_id')->default(2);
-            $table->foreign('position_id')->references('id')->on('positions');
+            $table->foreign('political_party_id')
+                ->references('id')
+                ->on('political_parties')
+                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('position_id')
+                ->default(2);
+            $table->foreign('position_id')
+                ->references('id')
+                ->on('positions')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });

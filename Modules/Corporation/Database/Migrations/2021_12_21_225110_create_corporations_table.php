@@ -16,10 +16,14 @@ class CreateCorporationsTable extends Migration
         Schema::create('corporations', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name', 50)->unique();
-            $table->string('emblem')->nullable();
-            $table->string('description', 1000)->nullable();
-            $table->string('tag')->unique();
+            $table->string('name', 35)
+                ->unique();
+            $table->string('emblem')
+                ->nullable();
+            $table->string('description', 600)
+                ->nullable();
+            $table->string('tag')
+                ->unique();
 
             $table->timestamps();
         });

@@ -15,12 +15,19 @@ class CreateRegionGovernmentsTable extends Migration
     {
         Schema::create('region_governments', function (Blueprint $table) {
             $table->id('region_id');
-            $table->foreign('region_id')->references('id')->on('regions');
+            $table->foreign('region_id')
+                ->references('id')
+                ->on('regions')
+                ->onDelete('cascade');
 
             $table->unsignedBigInteger('leader_id');
-            $table->foreign('leader_id')->references('id')->on('users');
+            $table->foreign('leader_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
 
-            $table->string('type')->default('Autonomy');
+            $table->string('type')
+                ->default('Autonomy');
 
             $table->timestamps();
         });

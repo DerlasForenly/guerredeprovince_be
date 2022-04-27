@@ -6,6 +6,7 @@ use Modules\Action\Models\Action;
 use Modules\Army\Models\Army;
 use Modules\Business\Models\Employee;
 use Modules\Country\Models\CountryStaff;
+use Modules\Treasury\Models\UserTreasury;
 
 trait HasOne
 {

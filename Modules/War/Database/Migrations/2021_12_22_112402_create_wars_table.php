@@ -16,10 +16,14 @@ class CreateWarsTable extends Migration
         Schema::create('wars', function (Blueprint $table) {
             $table->id();
 
-            $table->string('type')->default('Ground');
+            $table->string('type')
+                ->default('Ground');
 
             $table->unsignedBigInteger('status_id');
-            $table->foreign('status_id')->references('id')->on('statuses');
+            $table->foreign('status_id')
+                ->references('id')
+                ->on('statuses')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });

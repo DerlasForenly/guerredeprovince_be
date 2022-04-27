@@ -16,7 +16,8 @@ class CreateWarSidesTable extends Migration
         Schema::create('war_sides', function (Blueprint $table) {
             $table->id();
 
-            $table->string('side')->unique();
+            $table->string('side')
+                ->unique();
 
             $table->timestamps();
         });

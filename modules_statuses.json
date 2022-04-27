@@ -22,5 +22,6 @@
     "Chat": true,
     "Donation": true,
     "Achievement": true,
-    "Friend": true
+    "Friend": true,
+    "Treasury": true
 }

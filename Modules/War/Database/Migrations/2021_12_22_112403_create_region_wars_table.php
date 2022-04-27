@@ -17,11 +17,22 @@ class CreateRegionWarsTable extends Migration
             $table->id();
 
             $table->unsignedBigInteger('region_id');
-            $table->foreign('region_id')->references('id')->on('regions');
+            $table->foreign('region_id')
+                ->references('id')
+                ->on('regions')
+                ->onDelete('cascade');
+
             $table->unsignedBigInteger('war_id');
-            $table->foreign('war_id')->references('id')->on('wars');
+            $table->foreign('war_id')
+                ->references('id')
+                ->on('wars')
+                ->onDelete('cascade');
+
             $table->unsignedBigInteger('side_id');
-            $table->foreign('side_id')->references('id')->on('war_sides');
+            $table->foreign('side_id')
+                ->references('id')
+                ->on('war_sides')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -65,12 +65,12 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'avatar' => 'string',
-        'banned' => 'boolean',
-        'inactive' => 'boolean',
-        'premium' => 'boolean',
-        'exp' => 'integer',
-        'energy' => 'integer',
-        'nation_id' => 'integer',
+        'avatar'            => 'string',
+        'banned'            => 'boolean',
+        'inactive'          => 'boolean',
+        'premium'           => 'boolean',
+        'exp'               => 'integer',
+        'energy'            => 'integer',
+        'nation_id'         => 'integer',
     ];
 }

@@ -4,6 +4,7 @@ namespace Modules\Region\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Modules\Region\Models\RegionType;
 
 class RegionTypeSeeder extends Seeder
 {
@@ -14,12 +15,10 @@ class RegionTypeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('region_types')->insert([
-            'type' => 'Region',
-        ]);
-
-        DB::table('region_types')->insert([
-            'type' => 'Autonomy',
-        ]);
+        foreach (RegionType::REGION_TYPES as $regionType) {
+            RegionType::factory()
+                ->name($regionType)
+                ->create();
+        }
     }
 }
