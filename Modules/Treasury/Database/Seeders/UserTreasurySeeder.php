@@ -16,7 +16,7 @@ class UserTreasurySeeder extends Seeder
      */
     public function run()
     {
-        $users = User::all();
+        $users     = User::all();
         $resources = Resource::all();
 
         foreach ($users as $user) {

@@ -1,6 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Modules\Treasury\Http\Controllers\BusinessTreasuryController;
+use Modules\Treasury\Http\Controllers\CountryTreasuryController;
+use Modules\Treasury\Http\Controllers\RegionTreasuryController;
+use Modules\Treasury\Http\Controllers\UserTreasuryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +17,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/treasury', function (Request $request) {
-    return $request->user();
-});
+Route::get('/users/{user}/treasury', UserTreasuryController::class);
+Route::get('/businesses/{business}/treasury', BusinessTreasuryController::class);
+Route::get('/regions/{region}/treasury', RegionTreasuryController::class);
+Route::get('/countries/{country}/treasury', CountryTreasuryController::class);
+

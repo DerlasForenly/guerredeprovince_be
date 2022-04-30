@@ -9,6 +9,14 @@ use Modules\Resource\Models\Resource;
 abstract class Treasury extends Model
 {
     /**
+     * @var string[]
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
+    /**
      * @return BelongsTo
      */
     public function resource(): BelongsTo

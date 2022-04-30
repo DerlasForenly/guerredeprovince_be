@@ -26,6 +26,7 @@ use Modules\Resource\Database\Seeders\ResourceSeeder;
 use Modules\Settings\Database\Seeders\LanguageSeeder;
 use Modules\Status\Database\Seeders\StatusSeeder;
 use Modules\Treasury\Database\Seeders\BusinessTreasurySeeder;
+use Modules\Treasury\Database\Seeders\UserTreasurySeeder;
 use Modules\User\Database\Seeders\UserSeeder;
 use Modules\War\Database\Seeders\DamageSeeder;
 use Modules\War\Database\Seeders\RegionWarSeeder;
@@ -63,6 +64,8 @@ class DatabaseSeeder extends Seeder
             RegionWarSeeder::class,
             DamageSeeder::class,
             BusinessSeeder::class,
+            BusinessTreasurySeeder::class,
+            UserTreasurySeeder::class,
             EmployeeSeeder::class,
             PoliticalPartySeeder::class,
             PoliticalPartyStaffSeeder::class,

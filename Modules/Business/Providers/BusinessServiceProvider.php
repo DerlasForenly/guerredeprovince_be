@@ -37,6 +37,16 @@ class BusinessServiceProvider extends BaseModuleProvider
     }
 
     /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register(): void
+    {
+        $this->app->register(RouteServiceProvider::class);
+    }
+
+    /**
      * Get the services provided by the provider.
      *
      * @return array

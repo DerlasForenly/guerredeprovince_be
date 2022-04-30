@@ -12,25 +12,10 @@ class RegionTreasury extends TreasuryModel
     use HasFactory;
 
     /**
-     * @var string
-     */
-    protected $primaryKey = 'region_id';
-
-    /**
      * @var string[]
      */
     protected $fillable = [
-        'region_id',
-        'resource_id',
         'quantity',
-    ];
-
-    /**
-     * @var string[]
-     */
-    protected $hidden = [
-        'created_at',
-        'updated_at',
     ];
 
     /**

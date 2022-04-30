@@ -45,10 +45,10 @@ class SalaryService
         $this->time = $this->getWorkTime();
 
         switch ($this->business->salary_type_id) {
-            case SalaryType::RESOURCE:
+            case SalaryType::RESOURCE_ID:
                 $this->setTreasuries($this->business->resource_id);
                 break;
-            case SalaryType::MONEY:
+            case SalaryType::MONEY_ID:
                 $this->setTreasuries(Resource::MONEY_ID);
                 break;
         }
@@ -89,11 +89,11 @@ class SalaryService
     private function sendSalary(): int
     {
         switch ($this->business->salary_type_id) {
-            case SalaryType::RESOURCE:
+            case SalaryType::RESOURCE_ID:
                 $resources = $this->countResources($this->time);
                 TransactionService::send($this->businessTreasury, $this->userTreasury, $resources);
                 return $resources;
-            case SalaryType::MONEY:
+            case SalaryType::MONEY_ID:
                 $resources = $this->countMoney($this->time);
                 TransactionService::send($this->businessTreasury, $this->userTreasury, $resources);
                 return $resources;
@@ -133,16 +133,16 @@ class SalaryService
      * @param int $id
      * @return void
      */
-    private function setTreasuries(int $id): void
+    private function setTreasuries(int $resource_id): void
     {
         $this->businessTreasury = $this->business
             ->treasuries()
-            ->where('resource_id', $id)
+            ->where('resource_id', $resource_id)
             ->first();
 
         $this->userTreasury = $this->user
             ->treasuries()
-            ->where('resource_id', $id)
+            ->where('resource_id', $resource_id)
             ->first();
     }
 }

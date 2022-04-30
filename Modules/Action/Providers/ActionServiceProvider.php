@@ -2,9 +2,9 @@
 
 namespace Modules\Action\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Providers\BaseModuleProvider;
 
-class ActionServiceProvider extends ServiceProvider
+class ActionServiceProvider extends BaseModuleProvider
 {
     /**
      * @var string $moduleName
@@ -23,8 +23,7 @@ class ActionServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->registerConfig();
-        $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+        parent::boot();
     }
 
     /**
@@ -38,21 +37,6 @@ class ActionServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register config.
-     *
-     * @return void
-     */
-    protected function registerConfig(): void
-    {
-        $this->publishes([
-            module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
-        ], 'config');
-        $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
-        );
-    }
-
-    /**
      * Get the services provided by the provider.
      *
      * @return array
@@ -60,16 +44,5 @@ class ActionServiceProvider extends ServiceProvider
     public function provides(): array
     {
         return [];
-    }
-
-    private function getPublishableViewPaths(): array
-    {
-        $paths = [];
-        foreach (\Config::get('view.paths') as $path) {
-            if (is_dir($path . '/modules/' . $this->moduleNameLower)) {
-                $paths[] = $path . '/modules/' . $this->moduleNameLower;
-            }
-        }
-        return $paths;
     }
 }

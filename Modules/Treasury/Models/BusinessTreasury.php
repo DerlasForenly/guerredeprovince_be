@@ -12,7 +12,7 @@ class BusinessTreasury extends Treasury
     use HasFactory;
 
     protected $fillable = [
-        'business_id',
+        'quantity',
     ];
 
     public function business(): BelongsTo

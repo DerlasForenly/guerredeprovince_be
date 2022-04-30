@@ -13,17 +13,17 @@ class GetSalaryAction
     public function handle(): JsonResponse
     {
         $user = auth()->userOrFail();
-
         $salaryService = new SalaryService($user);
+
         $compensation  = $salaryService->sendCompensation();
-        $diff          = $compensation['diff'];
+        $time          = $compensation['time'];
         $exp           = $compensation['exp'];
         $resources     = $compensation['resources'];
 
         $this->releasePlayer($user);
 
         return response()->json([
-            'message' => "You worked for $diff minutes.",
+            'message' => "You worked for $time minutes.",
             'salary' => $resources,
             'exp' => $exp,
         ], 200);

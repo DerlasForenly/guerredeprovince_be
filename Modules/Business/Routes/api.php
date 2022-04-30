@@ -11,11 +11,9 @@ use Modules\Business\Http\Controllers\UpdateController;
 use Modules\Business\Http\Controllers\WorkController;
 use Modules\Business\Http\Middleware\BusyMiddleware;
 use Modules\Business\Http\Middleware\EmployedMiddleware;
-use Modules\Business\Http\Middleware\HiredMiddleware;
 use Modules\Business\Http\Middleware\MinWorkTimeMiddleware;
 use Modules\Business\Http\Middleware\NotBusyMiddleware;
 use Modules\Business\Http\Middleware\UnemployedMiddleware;
-use Modules\Business\Models\Business;
 
 /*
 |--------------------------------------------------------------------------

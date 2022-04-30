@@ -12,25 +12,10 @@ class UserTreasury extends TreasuryModel
     use HasFactory;
 
     /**
-     * @var string
-     */
-    protected $primaryKey = 'user_id';
-
-    /**
      * @var string[]
      */
     protected $fillable = [
-        'user_id',
-        'resource_id',
-        'quantity'
-    ];
-
-    /**
-     * @var string[]
-     */
-    protected $hidden = [
-        'created_at',
-        'updated_at',
+        'quantity',
     ];
 
     /**

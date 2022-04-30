@@ -2,13 +2,15 @@
 
 namespace Modules\Treasury\Database\factories;
 
+use Database\Factories\Traits\HasResource;
 use Database\Factories\Traits\HasUser;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\Treasury\Models\UserTreasury;
 
 class UserTreasuryFactory extends Factory
 {
-    use HasUser;
+    use HasUser,
+        HasResource;
 
     /**
      * @var string
@@ -32,15 +34,6 @@ class UserTreasuryFactory extends Factory
         return $this->state(function (array $attributes) use ($quantity) {
             return [
                 'quantity' => $quantity
-            ];
-        });
-    }
-
-    public function resource($id): UserTreasuryFactory
-    {
-        return $this->state(function (array $attributes) use ($id) {
-            return [
-                'resource_id' => $id
             ];
         });
     }

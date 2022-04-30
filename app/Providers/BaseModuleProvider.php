@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Modules\Business\Providers\RouteServiceProvider;
 
 class BaseModuleProvider extends ServiceProvider
 {
@@ -26,16 +25,6 @@ class BaseModuleProvider extends ServiceProvider
     {
         $this->registerConfig();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
-    }
-
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register(): void
-    {
-        $this->app->register(RouteServiceProvider::class);
     }
 
     /**

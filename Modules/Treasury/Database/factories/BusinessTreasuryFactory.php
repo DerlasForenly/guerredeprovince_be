@@ -3,12 +3,14 @@
 namespace Modules\Treasury\Database\factories;
 
 use Database\Factories\Traits\HasBusiness;
+use Database\Factories\Traits\HasResource;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\Treasury\Models\BusinessTreasury;
 
 class BusinessTreasuryFactory extends Factory
 {
-    use HasBusiness;
+    use HasBusiness,
+        HasResource;
 
     /**
      * The name of the factory's corresponding model.
@@ -25,7 +27,7 @@ class BusinessTreasuryFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'quantity' => 1000,
         ];
     }
 
@@ -34,15 +36,6 @@ class BusinessTreasuryFactory extends Factory
         return $this->state(function (array $attributes) use ($quantity) {
             return [
                 'quantity' => $quantity
-            ];
-        });
-    }
-
-    public function resource($id): BusinessTreasuryFactory
-    {
-        return $this->state(function (array $attributes) use ($id) {
-            return [
-                'resource_id' => $id
             ];
         });
     }

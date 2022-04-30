@@ -14,11 +14,9 @@ class TransactionService
      */
     public static function send(Treasury $from, Treasury $to, int $quantity): void
     {
-        $from->update([
-            'quantity' => $from->quantity - $quantity,
-        ]);
-        $to->update([
-            'quantity' => $to->quantity + $quantity,
-        ]);
+        $from->quantity -= $quantity;
+        $to->quantity += $quantity;
+        $from->save();
+        $to->save();
     }
 }

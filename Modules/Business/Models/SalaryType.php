@@ -13,4 +13,12 @@ class SalaryType extends Model
 
     public const MONEY    = 'money';
     public const RESOURCE = 'resource';
+
+    public const MONEY_ID    = 1;
+    public const RESOURCE_ID = 2;
+
+    public const SALARY_TYPES = [
+        self::MONEY_ID    => self::MONEY,
+        self::RESOURCE_ID => self::RESOURCE,
+    ];
 }

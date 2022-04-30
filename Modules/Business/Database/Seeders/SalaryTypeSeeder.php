@@ -14,11 +14,10 @@ class SalaryTypeSeeder extends Seeder
      */
     public function run()
     {
-        SalaryType::factory()
-            ->name(SalaryType::MONEY)
-            ->create();
-        SalaryType::factory()
-            ->name(SalaryType::RESOURCE)
-            ->create();
+        foreach (SalaryType::SALARY_TYPES as $salaryType) {
+            SalaryType::factory()
+                ->name($salaryType)
+                ->create();
+        }
     }
 }
