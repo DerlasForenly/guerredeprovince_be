@@ -4,6 +4,7 @@ namespace Modules\Party\Models;
 
 use App\Models\Traits\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Position\Models\Position;
 use Modules\User\Models\User;
 
@@ -18,21 +19,20 @@ class PoliticalPartyStaff extends Model
     ];
 
     protected $hidden = [
-        'created_at',
         'updated_at',
     ];
 
-    public function political_party()
+    public function political_party(): BelongsTo
     {
         return $this->belongsTo(PoliticalParty::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function position()
+    public function position(): BelongsTo
     {
         return $this->belongsTo(Position::class);
     }

@@ -2,11 +2,22 @@
 
 namespace Modules\Party\Database\factories;
 
+use Database\Factories\Traits\HasPoliticalParty;
+use Database\Factories\Traits\HasPosition;
+use Database\Factories\Traits\HasUser;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\Party\Models\PoliticalPartyStaff;
+use Modules\Position\Models\PositionType;
 
 class PoliticalPartyStaffFactory extends Factory
 {
+    use HasUser,
+        HasPosition,
+        HasPoliticalParty;
+
+    /**
+     * @var string
+     */
     protected $model = PoliticalPartyStaff::class;
 
     /**
@@ -14,37 +25,10 @@ class PoliticalPartyStaffFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
-            'position_id' => '2'
+            'position_type_id' => PositionType::POLITICAL_PARTY_MEMBER_ID,
         ];
-    }
-
-    public function user($id): PoliticalPartyStaffFactory
-    {
-        return $this->state(function (array $attributes) use($id) {
-            return [
-                'user_id' => $id,
-            ];
-        });
-    }
-
-    public function position($id): PoliticalPartyStaffFactory
-    {
-        return $this->state(function (array $attributes) use($id) {
-            return [
-                'position_id' => $id,
-            ];
-        });
-    }
-
-    public function party($id): PoliticalPartyStaffFactory
-    {
-        return $this->state(function (array $attributes) use($id) {
-            return [
-                'political_party_id' => $id,
-            ];
-        });
     }
 }

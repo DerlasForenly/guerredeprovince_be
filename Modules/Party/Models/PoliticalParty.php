@@ -4,6 +4,7 @@ namespace Modules\Party\Models;
 
 use App\Models\Traits\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Request\Models\Request;
 
 class PoliticalParty extends Model
@@ -20,19 +21,15 @@ class PoliticalParty extends Model
     ];
 
     protected $hidden = [
-        'pivot',
+        'updated_at',
     ];
 
-    protected $appends = [
-        'leader_id'
-    ];
-
-    public function political_party_staff()
+    public function political_party_staff(): HasMany
     {
         return $this->hasMany(PoliticalPartyStaff::class);
     }
 
-    public function requests()
+    public function requests(): HasMany
     {
         return $this->hasMany(Request::class);
     }

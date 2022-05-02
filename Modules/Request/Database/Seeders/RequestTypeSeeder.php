@@ -14,20 +14,10 @@ class RequestTypeSeeder extends Seeder
      */
     public function run()
     {
-        RequestType::factory()
-            ->name('Join party')
-            ->create();
-
-        RequestType::factory()
-            ->name('Join army')
-            ->create();
-
-        RequestType::factory()
-            ->name('Get citizenship')
-            ->create();
-
-        RequestType::factory()
-            ->name('Add friend')
-            ->create();
+        foreach (RequestType::REQUEST_TYPES as $requestType) {
+            RequestType::factory()
+                ->name($requestType)
+                ->create();
+        }
     }
 }

@@ -16,7 +16,8 @@ class CreatePoliticalPartyStaffTable extends Migration
         Schema::create('political_party_staff', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')
+                ->unique();
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
@@ -28,11 +29,10 @@ class CreatePoliticalPartyStaffTable extends Migration
                 ->on('political_parties')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger('position_id')
-                ->default(2);
-            $table->foreign('position_id')
+            $table->unsignedBigInteger('position_type_id');
+            $table->foreign('position_type_id')
                 ->references('id')
-                ->on('positions')
+                ->on('position_types')
                 ->onDelete('cascade');
 
             $table->timestamps();

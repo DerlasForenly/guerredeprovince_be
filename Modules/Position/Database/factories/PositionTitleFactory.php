@@ -2,15 +2,17 @@
 
 namespace Modules\Position\Database\factories;
 
+use Database\Factories\Traits\HasDescription;
 use Database\Factories\Traits\HasName;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Modules\Position\Models\PositionType;
+use Modules\Position\Models\PositionTitle;
 
-class PositionTypeFactory extends Factory
+class PositionTitleFactory extends Factory
 {
-    use HasName;
+    use HasName,
+        HasDescription;
 
-    protected $model = PositionType::class;
+    protected $model = PositionTitle::class;
 
     /**
      * Define the model's default state.

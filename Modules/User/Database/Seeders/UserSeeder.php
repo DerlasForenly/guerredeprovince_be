@@ -36,18 +36,7 @@ class UserSeeder extends Seeder
             ->create();
 
         User::factory()
-            ->count(3)
-            ->country(1)
-            ->create();
-
-        User::factory()
-            ->count(3)
-            ->nation(1)
-            ->create();
-
-        User::factory()
-            ->count(10)
-            ->country(1)
+            ->count(5)
             ->create();
     }
 }

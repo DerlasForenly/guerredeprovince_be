@@ -23,6 +23,10 @@ class Request extends Model
         'political_party_id'
     ];
 
+    protected $hidden = [
+        'updated_at',
+    ];
+
     public function sender(): BelongsTo
     {
         return $this->belongsTo(User::class, 'sender_id');

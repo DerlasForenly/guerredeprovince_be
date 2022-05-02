@@ -2,11 +2,17 @@
 
 namespace Modules\Request\Database\factories;
 
+use Database\Factories\Traits\HasName;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\Request\Models\RequestType;
 
 class RequestTypeFactory extends Factory
 {
+    use HasName;
+
+    /**
+     * @var string
+     */
     protected $model = RequestType::class;
 
     /**
@@ -14,17 +20,8 @@ class RequestTypeFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [];
-    }
-
-    public function name($name): RequestTypeFactory
-    {
-        return $this->state(function (array $attributes) use ($name) {
-            return [
-                'name' => $name,
-            ];
-        });
     }
 }

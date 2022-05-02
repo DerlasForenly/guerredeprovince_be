@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Country\Http\Controllers\CountryController;
-use Modules\Request\Http\Controllers\RequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +21,4 @@ Route::group([
     Route::get('{country}', [CountryController::class, 'show']);
     Route::get('{country}/wars', [CountryController::class, 'wars']);
     Route::get('{country}/regions', [CountryController::class, 'regions']);
-    Route::post('{country}/army/join', [RequestController::class, 'joinArmy']);
-    Route::post('{country}/army/requests/{request}/accept', [RequestController::class, 'acceptArmy']);
-    Route::post('{country}/army/requests/{request}/decline', [RequestController::class, 'declineArmy']);
 });
