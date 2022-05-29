@@ -2,8 +2,8 @@
 
 namespace Modules\Business\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Routing\Controller;
 use Modules\Business\Actions\DropJobAction;
 
 class DropJobController extends Controller

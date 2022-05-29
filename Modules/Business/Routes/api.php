@@ -9,11 +9,8 @@ use Modules\Business\Http\Controllers\ShowController;
 use Modules\Business\Http\Controllers\StoreController;
 use Modules\Business\Http\Controllers\UpdateController;
 use Modules\Business\Http\Controllers\WorkController;
-use Modules\Business\Http\Middleware\BusyMiddleware;
-use Modules\Business\Http\Middleware\EmployedMiddleware;
 use Modules\Business\Http\Middleware\MinWorkTimeMiddleware;
-use Modules\Business\Http\Middleware\NotBusyMiddleware;
-use Modules\Business\Http\Middleware\UnemployedMiddleware;
+use Modules\Business\Models\Business;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,14 +31,12 @@ Route::group([
     /**
      * Drop job
      */
-    Route::post('/drop-job', DropJobController::class)
-        ->middleware(EmployedMiddleware::class);
+    Route::post('/drop-job', DropJobController::class)->can('dropJob', Business::class);
 
     /**
      * Get job
      */
-    Route::post('/{business}/get-job', GetJobController::class)
-        ->middleware(UnemployedMiddleware::class);
+    Route::post('/{business}/get-job', GetJobController::class)->can('getJob', 'business');
 
     /**
      * Show
@@ -66,17 +61,14 @@ Route::group([
     /**
      * Work
      */
-    Route::post('/work', WorkController::class)
-        ->middleware(NotBusyMiddleware::class)
-        ->middleware(EmployedMiddleware::class);
+    Route::post('/work', WorkController::class)->can('work', Business::class);
 
     /**
      * Get salary for work
      */
     Route::post('/get-salary', GetSalaryController::class)
-        ->middleware(BusyMiddleware::class)
         ->middleware(MinWorkTimeMiddleware::class)
-        ->middleware(EmployedMiddleware::class);
+        ->can('getSalary', Business::class);
 });
 
 
