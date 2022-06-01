@@ -12,7 +12,7 @@ trait BelongsTo
         return $this->belongsTo(Nation::class);
     }
 
-    public function country()
+    public function country(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Country::class);
     }

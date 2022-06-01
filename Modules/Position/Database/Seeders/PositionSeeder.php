@@ -3,9 +3,9 @@
 namespace Modules\Position\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Modules\Position\Models\PositionType;
+use Modules\Position\Models\Position;
 
-class PositionTypeSeeder extends Seeder
+class PositionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,8 +14,8 @@ class PositionTypeSeeder extends Seeder
      */
     public function run()
     {
-        foreach (PositionType::POSITION_TYPES as $positionType) {
-            PositionType::factory()
+        foreach (Position::POSITIONS as $positionType) {
+            Position::factory()
                 ->name($positionType)
                 ->create();
         }

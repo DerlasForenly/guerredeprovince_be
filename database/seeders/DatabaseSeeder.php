@@ -18,8 +18,6 @@ use Modules\Party\Database\Seeders\PoliticalPartySeeder;
 use Modules\Party\Database\Seeders\PoliticalPartyStaffSeeder;
 use Modules\Position\Database\Seeders\PositionSeeder;
 use Modules\Position\Database\Seeders\PositionTitleSeeder;
-use Modules\Position\Database\Seeders\PositionTypeSeeder;
-use Modules\Position\Models\PositionTitle;
 use Modules\Region\Database\Seeders\RegionSeeder;
 use Modules\Region\Database\Seeders\RegionTypeSeeder;
 use Modules\Request\Database\Seeders\RequestSeeder;
@@ -49,7 +47,7 @@ class DatabaseSeeder extends Seeder
             SalaryTypeSeeder::class,
             ActionTypeSeeder::class,
             RequestTypeSeeder::class,
-            PositionTypeSeeder::class,
+            PositionSeeder::class,
             PositionTitleSeeder::class,
             ResourceSeeder::class,
             WarSideSeeder::class,

@@ -36,7 +36,8 @@ class UserSeeder extends Seeder
             ->create();
 
         User::factory()
-            ->count(5)
+            ->nickname('Туман')
+            ->email('tuman@gmail.com')
             ->create();
     }
 }

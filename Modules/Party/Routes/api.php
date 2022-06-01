@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Party\Http\Controllers\AcceptRequestController;
 use Modules\Party\Http\Controllers\IndexController;
+use Modules\Party\Http\Controllers\LeavePartyController;
 use Modules\Party\Http\Controllers\ShowController;
 use Modules\Party\Http\Controllers\StoreController;
 use Modules\Party\Http\Controllers\IndexRequestController;
@@ -23,7 +24,6 @@ use Modules\Party\Http\Controllers\StoreRequestController;
 Route::group([
     'prefix' => 'parties'
 ], function () {
-
     /**
      * Get all parties
      */
@@ -39,10 +39,14 @@ Route::group([
      */
     Route::get('/{party}', ShowController::class);
 
+    /**
+     * Leave political party
+     */
+    Route::post('/leave', LeavePartyController::class);
+
     Route::group([
         'prefix' => '/{party}/requests'
     ], function () {
-
         /**
          * Get all join party requests
          */

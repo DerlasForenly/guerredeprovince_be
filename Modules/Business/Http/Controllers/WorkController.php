@@ -5,7 +5,7 @@ namespace Modules\Business\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Modules\Business\Actions\WorkAction;
-use Modules\Business\Http\Requests\WorkRequest;
+use Modules\Party\Http\Requests\WorkRequest;
 
 class WorkController extends Controller
 {

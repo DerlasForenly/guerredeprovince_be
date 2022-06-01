@@ -29,10 +29,10 @@ class CreatePoliticalPartyStaffTable extends Migration
                 ->on('political_parties')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger('position_type_id');
-            $table->foreign('position_type_id')
+            $table->unsignedBigInteger('position_id');
+            $table->foreign('position_id')
                 ->references('id')
-                ->on('position_types')
+                ->on('positions')
                 ->onDelete('cascade');
 
             $table->timestamps();

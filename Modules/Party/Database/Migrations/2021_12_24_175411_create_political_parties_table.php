@@ -23,7 +23,8 @@ class CreatePoliticalPartiesTable extends Migration
             $table->string('emblem')
                 ->nullable();
 
-            $table->unsignedBigInteger('country_id');
+            $table->unsignedBigInteger('country_id')
+                ->nullable();
             $table->foreign('country_id')
                 ->references('id')
                 ->on('countries')

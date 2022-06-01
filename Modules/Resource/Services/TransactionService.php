@@ -19,4 +19,14 @@ class TransactionService
         $from->save();
         $to->save();
     }
+
+    /**
+     * @param Treasury $from
+     * @param int $quantity
+     * @return bool
+     */
+    public static function isEnought(Treasury $from, int $quantity): bool
+    {
+        return $from->quantity >= $quantity;
+    }
 }

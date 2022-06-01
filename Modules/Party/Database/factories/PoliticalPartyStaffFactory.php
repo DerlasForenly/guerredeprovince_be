@@ -7,7 +7,7 @@ use Database\Factories\Traits\HasPosition;
 use Database\Factories\Traits\HasUser;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\Party\Models\PoliticalPartyStaff;
-use Modules\Position\Models\PositionType;
+use Modules\Position\Models\Position;
 
 class PoliticalPartyStaffFactory extends Factory
 {
@@ -28,7 +28,7 @@ class PoliticalPartyStaffFactory extends Factory
     public function definition(): array
     {
         return [
-            'position_type_id' => PositionType::POLITICAL_PARTY_MEMBER_ID,
+            'position_id' => Position::POLITICAL_PARTY_MEMBER_ID,
         ];
     }
 }

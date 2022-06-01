@@ -13,7 +13,7 @@ trait HasPosition
     {
         return $this->state(function (array $attributes) use ($id) {
             return [
-                'position_type_id' => $id,
+                'position_id' => $id,
             ];
         });
     }

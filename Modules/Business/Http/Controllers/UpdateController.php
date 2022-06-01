@@ -5,7 +5,7 @@ namespace Modules\Business\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Business\Actions\UpdateAction;
-use Modules\Business\Http\Requests\UpdateRequest;
+use Modules\Party\Http\Requests\UpdateRequest;
 use Modules\Business\Models\Business;
 
 class UpdateController extends Controller

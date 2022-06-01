@@ -5,7 +5,7 @@ namespace Modules\Business\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Modules\Business\Actions\StoreAction;
-use Modules\Business\Http\Requests\StoreRequest;
+use Modules\Party\Http\Requests\StoreRequest;
 
 class StoreController extends Controller
 {

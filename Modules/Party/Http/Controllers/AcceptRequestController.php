@@ -6,7 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Modules\Party\Models\PoliticalParty;
 use Modules\Party\Models\PoliticalPartyStaff;
-use Modules\Position\Models\PositionType;
+use Modules\Position\Models\Position;
 use Modules\Request\Models\Request;
 
 class AcceptRequestController extends Controller
@@ -20,7 +20,7 @@ class AcceptRequestController extends Controller
         $member = PoliticalPartyStaff::factory()
             ->politicalParty($party->id)
             ->user($request->sender_id)
-            ->position(PositionType::POLITICAL_PARTY_MEMBER_ID)
+            ->position(Position::POLITICAL_PARTY_MEMBER_ID)
             ->create();
 
         $request->delete();

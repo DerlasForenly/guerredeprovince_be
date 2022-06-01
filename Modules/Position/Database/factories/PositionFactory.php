@@ -4,13 +4,13 @@ namespace Modules\Position\Database\factories;
 
 use Database\Factories\Traits\HasName;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Modules\Position\Models\PositionType;
+use Modules\Position\Models\Position;
 
-class PositionTypeFactory extends Factory
+class PositionFactory extends Factory
 {
     use HasName;
 
-    protected $model = PositionType::class;
+    protected $model = Position::class;
 
     /**
      * Define the model's default state.

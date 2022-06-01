@@ -5,7 +5,6 @@ namespace Modules\Party\Models;
 use App\Models\Traits\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Modules\Position\Models\Position;
 use Modules\User\Models\User;
 
 class PoliticalPartyStaff extends Model
@@ -30,10 +29,5 @@ class PoliticalPartyStaff extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function position(): BelongsTo
-    {
-        return $this->belongsTo(Position::class);
     }
 }

@@ -33,12 +33,4 @@ class PoliticalParty extends Model
     {
         return $this->hasMany(Request::class);
     }
-
-    public function getLeaderIdAttribute()
-    {
-        $leader = $this->political_party_staff()->
-            where('position_id', '=', 1)->first();
-
-        return $leader->user_id;
-    }
 }

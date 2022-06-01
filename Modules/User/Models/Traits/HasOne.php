@@ -6,6 +6,8 @@ use Modules\Action\Models\Action;
 use Modules\Army\Models\Army;
 use Modules\Business\Models\Employee;
 use Modules\Country\Models\CountryStaff;
+use Modules\Party\Models\PoliticalParty;
+use Modules\Party\Models\PoliticalPartyStaff;
 use Modules\Treasury\Models\UserTreasury;
 
 trait HasOne
@@ -28,5 +30,10 @@ trait HasOne
     public function employee(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Employee::class);
+    }
+
+    public function politicalPartyStaff(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(PoliticalPartyStaff::class);
     }
 }

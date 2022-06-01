@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Resource\Models\Resource;
 
+/**
+ * @property int $quantity
+ */
 abstract class Treasury extends Model
 {
     /**

@@ -5,7 +5,7 @@ namespace Modules\Position\Models;
 use App\Models\Traits\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PositionType extends Model
+class Position extends Model
 {
     use HasFactory;
 
@@ -75,7 +75,7 @@ class PositionType extends Model
     public const DEPUTY_ID = 25;
     public const EMPLOYEE_ID = 26;
 
-    public const POSITION_TYPES = [
+    public const POSITIONS = [
         self::POLITICAL_PARTY_LEADER_ID     => self::POLITICAL_PARTY_LEADER,
         self::COUNTRY_LEADER_ID             => self::COUNTRY_LEADER,
         self::REGION_LEADER_ID              => self::REGION_LEADER,

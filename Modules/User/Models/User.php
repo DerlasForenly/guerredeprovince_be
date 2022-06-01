@@ -6,12 +6,16 @@ use App\Models\Traits\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Party\Models\PoliticalPartyStaff;
 use Modules\Resource\Models\Resource;
 use Modules\User\Models\Traits\Attributes;
 use Modules\User\Models\Traits\GetJWT;
 use Modules\User\Models\Traits\Relationships;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * @property PoliticalPartyStaff $politicalPartyStaff
+ */
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens,
@@ -38,7 +42,6 @@ class User extends Authenticatable implements JWTSubject
         'inactive',
         'premium',
         'country_id',
-        'political_party_id',
         'political_view_id',
         'current_region_id',
         'registration_region_id',

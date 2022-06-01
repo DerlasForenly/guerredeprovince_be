@@ -26,10 +26,10 @@ class CreateCountryStaffTable extends Migration
                 ->on('countries')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger('position_type_id');
-            $table->foreign('position_type_id')
+            $table->unsignedBigInteger('position_id');
+            $table->foreign('position_id')
                 ->references('id')
-                ->on('position_types')
+                ->on('positions')
                 ->onDelete('cascade');
 
             $table->timestamps();
