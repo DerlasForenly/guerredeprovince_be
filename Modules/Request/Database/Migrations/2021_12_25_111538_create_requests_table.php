@@ -16,32 +16,13 @@ class CreateRequestsTable extends Migration
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('sender_id');
-            $table->foreign('sender_id')
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger('political_party_id')
-                ->nullable();
-            $table->foreign('political_party_id')
-                ->references('id')
-                ->on('political_parties')
-                ->onDelete('cascade');
-
-            $table->unsignedBigInteger('country_id')
-                ->nullable();
-            $table->foreign('country_id')
-                ->references('id')
-                ->on('countries')
-                ->onDelete('cascade');
-
-            $table->unsignedBigInteger('region_id')
-                ->nullable();
-            $table->foreign('region_id')
-                ->references('id')
-                ->on('regions')
-                ->onDelete('cascade');
+            $table->morphs('requestable');
 
             $table->unsignedBigInteger('request_type_id');
             $table->foreign('request_type_id')

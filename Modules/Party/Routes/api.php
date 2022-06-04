@@ -53,7 +53,7 @@ Route::group([
      * Leave political party
      */
     Route::post('/leave', LeavePartyController::class)
-        ->can('leaveParty', PoliticalParty::class);
+        ->can('leave', PoliticalParty::class);
 
     Route::group([
         'prefix' => '/{party}/requests'
@@ -66,7 +66,8 @@ Route::group([
         /**
          * Create new join party request
          */
-        Route::post('/', StoreRequestController::class);
+        Route::post('/', StoreRequestController::class)
+            ->can('createRequest', 'party');
 
         /**
          * Get specified join party request
@@ -76,11 +77,13 @@ Route::group([
         /**
          * Accept specified join party request
          */
-        Route::post('/{request}/accept', AcceptRequestController::class);
+        Route::post('/{request}/accept', AcceptRequestController::class)
+            ->can('acceptRequest', 'party');
 
         /**
          * Decline specified join party request
          */
-        Route::post('/{request}/decline', DeclineRequestController::class);
+        Route::post('/{request}/decline', DeclineRequestController::class)
+            ->can('declineRequest', PoliticalParty::class);
     });
 });

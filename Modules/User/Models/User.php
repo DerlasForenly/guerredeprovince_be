@@ -3,11 +3,11 @@
 namespace Modules\User\Models;
 
 use App\Models\Traits\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Party\Models\PoliticalPartyStaff;
-use Modules\Resource\Models\Resource;
 use Modules\User\Models\Traits\Attributes;
 use Modules\User\Models\Traits\GetJWT;
 use Modules\User\Models\Traits\Relationships;
@@ -15,6 +15,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * @property int $id
+ * @property HasMany $requests
  * @property PoliticalPartyStaff $politicalPartyStaff
  */
 class User extends Authenticatable implements JWTSubject

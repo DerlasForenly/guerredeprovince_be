@@ -6,6 +6,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 use Modules\Party\Models\PoliticalParty;
 use Modules\Position\Models\Position;
+use Modules\Request\Models\Request;
 use Modules\User\Models\User;
 
 class PoliticalPartyPolicy
@@ -14,16 +15,25 @@ class PoliticalPartyPolicy
 
     /**
      * @param User $user
+     * @param PoliticalParty $party
      * @return Response
      */
-    public function acceptRequest(User $user)
+    public function acceptRequest(User $user, PoliticalParty $party): Response
     {
-        // TODO bug
-        $position_id = $user->political_party_staff->position_id;
+        $secretary = $party->politicalPartyStaff->where('position_id', Position::POLITICAL_PARTY_SECRETARY_ID);
+        $secretary = $secretary->where('user_id', $user->id)->first();
 
         return match (true) {
-            $position_id !== Position::POLITICAL_PARTY_LEADER_ID,
-            $position_id !== Position::POLITICAL_PARTY_SECRETARY_ID => $this->deny('You cannot access requests'),
+            $party->leader->user_id === $user->id, (bool)$secretary => $this->allow(),
+            default => $this->deny('You cannot access requests'),
+        };
+    }
+
+    public function createRequest(User $user, PoliticalParty $party): Response
+    {
+        return match (true) {
+            (bool)$user->politicalPartyStaff => $this->deny('You are in party'),
+            (bool)$party->requests->where('user_id', $user->id)->first() => $this->deny('You already sent an request'),
             default => $this->allow(),
         };
     }
@@ -33,12 +43,12 @@ class PoliticalPartyPolicy
 
     }
 
-    public function kickUser(User $user)
+    public function kick(User $user)
     {
 
     }
 
-    public function leaveParty(User $user): Response
+    public function leave(User $user): Response
     {
         return match (true) {
             !$user->politicalPartyStaff => $this->deny('You are not in party'),

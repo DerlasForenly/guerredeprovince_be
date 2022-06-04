@@ -6,30 +6,37 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Traits\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Modules\Country\Models\Country;
 use Modules\Region\Models\Region;
 use Modules\Request\Database\factories\RequestFactory;
 use Modules\User\Models\User;
 
+/**
+ * @property int $user_id
+ * @property int $requestable_id
+ * @property string $requestable_type
+ * @property int $request_type_id
+ */
 class Request extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'sender_id',
-        'country_id',
-        'region_id',
+        'user_id',
+        'requestable_type',
+        'requestable_id',
         'request_type_id',
-        'political_party_id'
-    ];
-
-    protected $hidden = [
-        'updated_at',
     ];
 
     public function sender(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'sender_id');
+        return $this->belongsTo(User::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function type(): BelongsTo
@@ -37,13 +44,8 @@ class Request extends Model
         return $this->belongsTo(RequestType::class);
     }
 
-    public function country(): BelongsTo
+    public function requestable(): MorphTo
     {
-        return $this->belongsTo(Country::class);
-    }
-
-    public function region(): BelongsTo
-    {
-        return $this->belongsTo(Region::class);
+        return $this->morphTo();
     }
 }

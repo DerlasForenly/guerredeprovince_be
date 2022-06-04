@@ -6,14 +6,18 @@ use App\Models\Traits\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Modules\Position\Models\Position;
 use Modules\Request\Models\Request;
 use Modules\User\Models\User;
 
 /**
+ * @property int $id
  * @property string $description
  * @property string $name
+ * @property MorphMany $requests
  * @property PoliticalPartyStaff $leader
+ * @property HasMany $politicalPartyStaff
  */
 class PoliticalParty extends Model
 {
@@ -37,9 +41,9 @@ class PoliticalParty extends Model
         return $this->hasMany(PoliticalPartyStaff::class);
     }
 
-    public function requests(): HasMany
+    public function requests(): MorphMany
     {
-        return $this->hasMany(Request::class);
+        return $this->morphMany(Request::class, 'requestable');
     }
 
     public function leader(): HasOne

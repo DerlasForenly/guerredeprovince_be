@@ -4,7 +4,6 @@ namespace Modules\Party\Actions;
 
 use Modules\Party\Models\PoliticalParty;
 use Modules\Party\Models\PoliticalPartyStaff;
-use Modules\Position\Models\Position;
 use Modules\Request\Models\Request;
 
 class AcceptRequestAction
@@ -13,7 +12,7 @@ class AcceptRequestAction
     {
         $member = PoliticalPartyStaff::factory()
             ->politicalParty($party->id)
-            ->user($request->sender_id)
+            ->user($request->user_id)
             ->create();
 
         $request->delete();
@@ -21,6 +20,6 @@ class AcceptRequestAction
         return response()->json([
             'message' => 'OK',
             'member' => $member,
-        ], 200);
+        ], 201);
     }
 }

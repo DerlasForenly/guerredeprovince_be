@@ -17,14 +17,16 @@ class StoreRequestAction
     {
         $user = auth()->userOrFail();
 
-        Request::create([
-            'sender_id' => $user->id,
-            'political_party_id' => $party->id,
+        $request = Request::create([
+            'user_id' => $user->id,
+            'requestable_type' => PoliticalParty::class,
+            'requestable_id' => $party->id,
             'request_type_id' => RequestType::JOIN_PARTY_ID,
         ]);
 
         return response()->json([
             'message' => 'OK',
+            'request' => $request,
         ], 201);
     }
 }
