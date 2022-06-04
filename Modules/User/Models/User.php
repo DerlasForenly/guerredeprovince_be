@@ -14,6 +14,7 @@ use Modules\User\Models\Traits\Relationships;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
+ * @property int $id
  * @property PoliticalPartyStaff $politicalPartyStaff
  */
 class User extends Authenticatable implements JWTSubject

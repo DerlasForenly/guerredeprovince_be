@@ -2,19 +2,24 @@
 
 namespace Modules\Party\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
+use Modules\Party\Actions\DeleteAction;
+use Modules\Party\Models\PoliticalParty;
 
 class DestroyController extends Controller
 {
     /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
+     * Remove the specified political party from storage.
+     *
+     * @param DeleteAction $action
+     * @param PoliticalParty $party
+     * @return JsonResponse
      */
-    public function __invoke($id)
-    {
-        //
+    public function __invoke(
+        DeleteAction $action,
+        PoliticalParty $party
+    ): JsonResponse {
+        return $action->handler($party);
     }
 }

@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\User\Models\User;
 
+/**
+ * @property int $user_id
+ * @property int $political_party_id
+ * @property int $position_id
+ * @property User $user
+ */
 class PoliticalPartyStaff extends Model
 {
     use HasFactory;

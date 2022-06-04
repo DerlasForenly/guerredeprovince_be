@@ -4,10 +4,11 @@ namespace Modules\Party\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
+use Modules\Party\Models\PoliticalParty;
 use Modules\Position\Models\Position;
 use Modules\User\Models\User;
 
-class PartyPolicy
+class PoliticalPartyPolicy
 {
     use HandlesAuthorization;
 
@@ -50,7 +51,7 @@ class PartyPolicy
 
     }
 
-    public function createPoliticalParty(User $user): Response
+    public function create(User $user): Response
     {
         return match (true) {
             (bool)$user->politicalPartyStaff => $this->deny('You are in party'),
@@ -58,8 +59,11 @@ class PartyPolicy
         };
     }
 
-    public function destroyPoliticalParty(User $user)
+    public function destroy(User $user, PoliticalParty $party): Response
     {
-
+        return match (true) {
+            $user->id === $party->leader->user_id => $this->allow(),
+            default => $this->deny('You dont have permissions'),
+        };
     }
 }
