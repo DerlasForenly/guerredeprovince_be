@@ -16,9 +16,9 @@ class CreateRegionsTable extends Migration
         Schema::create('regions', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name', 50)
+            $table->string('name')
                 ->unique();
-            $table->string('description', 500)
+            $table->string('description')
                 ->nullable();
             $table->string('emblem')
                 ->nullable();
@@ -26,15 +26,14 @@ class CreateRegionsTable extends Migration
             $table->unsignedBigInteger('region_type_id');
             $table->foreign('region_type_id')
                 ->references('id')
-                ->on('region_types')
-                ->onDelete('cascade');
+                ->on('region_types');
 
             $table->unsignedBigInteger('country_id')
                 ->nullable();
             $table->foreign('country_id')
                 ->references('id')
                 ->on('countries')
-                ->onDelete('cascade');
+                ->onDelete('set null');
 
             $table->timestamps();
         });
