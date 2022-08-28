@@ -12,6 +12,7 @@ use Modules\Government\Models\RegionGovernment;
 use Modules\War\Models\War;
 
 /**
+ * @property int $id
  * @property string $name
  * @property string $description
  * @property string $emblem

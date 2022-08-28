@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Action\Models\Action;
 use Modules\Party\Models\PoliticalPartyStaff;
 use Modules\User\Models\Traits\Attributes;
 use Modules\User\Models\Traits\GetJWT;
@@ -14,6 +15,13 @@ use Modules\User\Models\Traits\Relationships;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
+ * @property Action $action
+ * @property string $avatar
+ * @property int $nation_id
+ * @property int $current_region_id
+ * @property int $exp
+ * @property string $email
+ * @property string $nickname
  * @property int $id
  * @property HasMany $requests
  * @property PoliticalPartyStaff $politicalPartyStaff

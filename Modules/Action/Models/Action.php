@@ -5,10 +5,20 @@ namespace Modules\Action\Models;
 use App\Models\Traits\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Action
+ *
+ * @property int $user_id
+ * @property int $action_type_id
+ * @property int $time
+ */
 class Action extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string
+     */
     protected $primaryKey = "user_id";
 
     protected $fillable = [

@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Region\Http\Controllers\CancelTravelingController;
 use Modules\Region\Http\Controllers\TravelToController;
+use Modules\Region\Models\Region;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +20,14 @@ Route::group([
     'prefix' => 'region'
 ], function () {
     /**
-     * Travel to new region
+     * Travel to the new region
      */
-    Route::get('/travel-to/{region}', TravelToController::class);
+    Route::post('/travel-to/{region}', TravelToController::class)
+        ->can('travelTo', Region::class);
+
+    /**
+     * Cancel travel to the new region
+     */
+    Route::post('/travel-to/cancel', CancelTravelingController::class)
+        ->can('cancelTraveling', Region::class);
 });
