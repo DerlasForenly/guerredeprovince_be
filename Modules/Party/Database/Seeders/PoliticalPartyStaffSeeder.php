@@ -14,22 +14,6 @@ class PoliticalPartyStaffSeeder extends Seeder
      */
     public function run()
     {
-        PoliticalPartyStaff::factory()
-            ->politicalParty(1)
-            ->user(2)
-            ->position(1)
-            ->create();
 
-        PoliticalPartyStaff::factory()
-            ->politicalParty(1)
-            ->user(3)
-            ->position(3)
-            ->create();
-
-        PoliticalPartyStaff::factory()
-            ->politicalParty(1)
-            ->user(4)
-            ->position(3)
-            ->create();
     }
 }

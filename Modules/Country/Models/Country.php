@@ -4,7 +4,11 @@ namespace Modules\Country\Models;
 
 use App\Models\Traits\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Modules\Region\Models\Region;
+use Modules\Request\Models\Request;
 use Modules\User\Models\User;
 
 class Country extends Model
@@ -20,17 +24,17 @@ class Country extends Model
         'mandatory_visa',
     ];
 
-    public function regions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function regions(): HasMany
     {
         return $this->hasMany(Region::class);
     }
 
-    public function nation(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function nation(): BelongsTo
     {
         return $this->belongsTo(Nation::class);
     }
 
-    public function users(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function users(): HasMany
     {
         return $this->hasMany(User::class);
     }
@@ -45,5 +49,10 @@ class Country extends Model
         $leader = $this->staff()->where('position_id', '=',1)->get()->first();
 
         return $leader;
+    }
+
+    public function requests(): MorphMany
+    {
+        return $this->morphMany(Request::class, 'requestable');
     }
 }

@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Modules\Region\Http\Controllers\TravelToController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -10,3 +13,12 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::group([
+    'prefix' => 'region'
+], function () {
+    /**
+     * Travel to new region
+     */
+    Route::get('/travel-to/{region}', TravelToController::class);
+});

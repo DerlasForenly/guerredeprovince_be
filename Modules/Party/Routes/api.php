@@ -9,7 +9,6 @@ use Modules\Party\Http\Controllers\LeavePartyController;
 use Modules\Party\Http\Controllers\ShowController;
 use Modules\Party\Http\Controllers\StoreController;
 use Modules\Party\Http\Controllers\IndexRequestController;
-use Modules\Party\Http\Controllers\ShowRequestController;
 use Modules\Party\Http\Controllers\StoreRequestController;
 use Modules\Party\Models\PoliticalParty;
 
@@ -68,11 +67,6 @@ Route::group([
          */
         Route::post('/', StoreRequestController::class)
             ->can('createRequest', 'party');
-
-        /**
-         * Get specified join party request
-         */
-        Route::get('/{request}', ShowRequestController::class);
 
         /**
          * Accept specified join party request

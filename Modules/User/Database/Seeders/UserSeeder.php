@@ -3,6 +3,7 @@
 namespace Modules\User\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 use Modules\User\Models\User;
 
 class UserSeeder extends Seeder
@@ -14,6 +15,20 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        for ($i = 0; $i < 5; $i++) {
+            User::factory()
+                ->nickname('Test_user_' . Str::random(10))
+                ->email(Str::random(10) . '@gmail.com')
+                ->create();
+        }
+
+        User::factory()
+            ->nickname('Derlas Forenly')
+            ->email('tany.tany283@gmail.com')
+            ->nation(1)
+            ->country(1)
+            ->create();
+
         User::factory()
             ->nickname('Derlas Forenly')
             ->email('tany.tany283@gmail.com')

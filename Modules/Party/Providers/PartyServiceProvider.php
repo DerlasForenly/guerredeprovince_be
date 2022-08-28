@@ -4,7 +4,7 @@ namespace Modules\Party\Providers;
 
 use App\Providers\BaseModuleProvider;
 use Modules\Party\Models\PoliticalParty;
-use Modules\Party\Policies\PoliticalPartyPolicy;
+use Modules\Country\Policies\PoliticalPartyPolicy;
 
 class PartyServiceProvider extends BaseModuleProvider
 {

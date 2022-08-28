@@ -15,8 +15,6 @@ class PoliticalPartySeeder extends Seeder
      */
     public function run()
     {
-        $users = User::all();
-
         PoliticalParty::factory()
             ->country(1)
             ->name('Пивне Архієпископство')
