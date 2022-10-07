@@ -6,9 +6,11 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 use Modules\Party\Models\PoliticalParty;
 use Modules\Position\Models\Position;
-use Modules\Request\Models\Request;
 use Modules\User\Models\User;
 
+/**
+ * Class PoliticalPartyPolicy
+ */
 class PoliticalPartyPolicy
 {
     use HandlesAuthorization;
@@ -20,6 +22,7 @@ class PoliticalPartyPolicy
      */
     public function acceptRequest(User $user, PoliticalParty $party): Response
     {
+        /* @TODO Refactor to check access for accepting */
         $secretary = $party->politicalPartyStaff->where('position_id', Position::POLITICAL_PARTY_SECRETARY_ID);
         $secretary = $secretary->where('user_id', $user->id)->first();
 
@@ -29,6 +32,11 @@ class PoliticalPartyPolicy
         };
     }
 
+    /**
+     * @param User $user
+     * @param PoliticalParty $party
+     * @return Response
+     */
     public function createRequest(User $user, PoliticalParty $party): Response
     {
         return match (true) {

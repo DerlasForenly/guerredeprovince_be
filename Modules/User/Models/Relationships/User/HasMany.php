@@ -1,10 +1,8 @@
 <?php
 
-namespace Modules\User\Models\Traits;
+namespace Modules\User\Models\Relationships\User;
 
-use Illuminate\Database\Eloquent\Collection;
 use Modules\Business\Models\Business;
-use Modules\Party\Models\PoliticalParty;
 use Modules\Request\Models\Request;
 use Modules\Treasury\Models\UserTreasury;
 

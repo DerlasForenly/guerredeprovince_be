@@ -9,9 +9,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Action\Models\Action;
 use Modules\Party\Models\PoliticalPartyStaff;
-use Modules\User\Models\Traits\Attributes;
+use Modules\User\Models\Attributes\Attributes;
+use Modules\User\Models\Relationships\User\Relationships;
 use Modules\User\Models\Traits\GetJWT;
-use Modules\User\Models\Traits\Relationships;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**

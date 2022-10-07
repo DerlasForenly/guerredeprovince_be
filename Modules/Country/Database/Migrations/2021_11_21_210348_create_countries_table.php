@@ -24,20 +24,14 @@ class CreateCountriesTable extends Migration
             $table->integer('parliament_size')
                 ->default(0);
             $table->boolean('closed_borders')
-                ->default(FALSE);
+                ->default(false);
             $table->boolean('mandatory_visa')
-                ->default(FALSE);
+                ->default(false);
 
             $table->unsignedBigInteger('government_type_id');
             $table->foreign('government_type_id')
                 ->references('id')
                 ->on('government_types')
-                ->onDelete('cascade');
-
-            $table->unsignedBigInteger('nation_id');
-            $table->foreign('nation_id')
-                ->references('id')
-                ->on('nations')
                 ->onDelete('cascade');
 
             $table->timestamps();

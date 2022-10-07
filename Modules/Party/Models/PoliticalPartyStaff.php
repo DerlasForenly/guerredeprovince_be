@@ -5,6 +5,7 @@ namespace Modules\Party\Models;
 use App\Models\Traits\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Party\Models\Relationships\PoliticalPartyStaff\Relationships;
 use Modules\User\Models\User;
 
 /**
@@ -15,25 +16,27 @@ use Modules\User\Models\User;
  */
 class PoliticalPartyStaff extends Model
 {
-    use HasFactory;
+    use HasFactory,
+        Relationships;
 
+    /**
+     * @var string
+     */
+    protected $primaryKey = 'user_id';
+
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'user_id',
         'political_party_id',
         'position_id',
     ];
 
+    /**
+     * @var string[]
+     */
     protected $hidden = [
         'updated_at',
     ];
-
-    public function political_party(): BelongsTo
-    {
-        return $this->belongsTo(PoliticalParty::class);
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 }

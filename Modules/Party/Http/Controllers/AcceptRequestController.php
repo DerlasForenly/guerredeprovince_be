@@ -13,6 +13,8 @@ use Modules\Request\Models\Request;
 class AcceptRequestController extends Controller
 {
     /**
+     * @param AcceptRequestAction $action
+     * @param PoliticalParty $party
      * @param Request $request
      * @return JsonResponse
      */

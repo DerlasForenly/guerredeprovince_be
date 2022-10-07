@@ -1,14 +1,12 @@
 <?php
 
-namespace Modules\User\Models\Traits;
+namespace Modules\User\Models\Relationships\User;
 
 use Modules\Action\Models\Action;
 use Modules\Army\Models\Army;
 use Modules\Business\Models\Employee;
 use Modules\Country\Models\CountryStaff;
-use Modules\Party\Models\PoliticalParty;
 use Modules\Party\Models\PoliticalPartyStaff;
-use Modules\Treasury\Models\UserTreasury;
 
 trait HasOne
 {
@@ -34,6 +32,6 @@ trait HasOne
 
     public function politicalPartyStaff(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(PoliticalPartyStaff::class);
+        return $this->hasOne(PoliticalPartyStaff::class, 'user_id');
     }
 }

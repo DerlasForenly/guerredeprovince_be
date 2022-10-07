@@ -14,9 +14,7 @@ class CreatePoliticalPartyStaffTable extends Migration
     public function up()
     {
         Schema::create('political_party_staff', function (Blueprint $table) {
-            $table->id();
-
-            $table->unsignedBigInteger('user_id')
+            $table->id('user_id')
                 ->unique();
             $table->foreign('user_id')
                 ->references('id')
@@ -33,6 +31,12 @@ class CreatePoliticalPartyStaffTable extends Migration
             $table->foreign('position_id')
                 ->references('id')
                 ->on('positions')
+                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('government_id');
+            $table->foreign('government_id')
+                ->references('id')
+                ->on('governments')
                 ->onDelete('cascade');
 
             $table->timestamps();

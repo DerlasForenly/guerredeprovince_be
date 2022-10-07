@@ -11,6 +11,14 @@ use Modules\Region\Models\Region;
 use Modules\Request\Models\Request;
 use Modules\User\Models\User;
 
+/**
+ * Class Country
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $description
+ * @property string $emblem
+ */
 class Country extends Model
 {
     use HasFactory;
@@ -19,9 +27,10 @@ class Country extends Model
         'name',
         'description',
         'emblem',
-        'nation_id',
         'closed_borders',
         'mandatory_visa',
+        'parliament_size',
+        'government_type_id',
     ];
 
     public function regions(): HasMany

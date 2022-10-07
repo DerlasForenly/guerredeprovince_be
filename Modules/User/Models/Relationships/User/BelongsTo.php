@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\User\Models\Traits;
+namespace Modules\User\Models\Relationships\User;
 
 use Modules\Country\Models\Country;
 use Modules\Country\Models\Nation;

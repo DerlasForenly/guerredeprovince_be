@@ -5,6 +5,7 @@ namespace Modules\Country\Database\factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Modules\Country\Models\Country;
+use Modules\Country\Models\GovernmentType;
 use Modules\Country\Models\Nation;
 
 class CountryFactory extends Factory
@@ -19,10 +20,10 @@ class CountryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Country_' . Str::random(10),
-            'description' => 'It is a test country',
-            'nation_id' => rand(1, Nation::all()->count()),
-            'government_type_id' => 1,
+            'name'               => 'Country_' . Str::random(10),
+            'description'        => 'It is a test country',
+            'nation_id'          => rand(1, Nation::all()->count()),
+            'government_type_id' => GovernmentType::PRESIDENTIAL_REPUBLIC_ID,
         ];
     }
 

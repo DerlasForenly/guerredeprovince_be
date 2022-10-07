@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNationsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -20,8 +20,6 @@ class CreateNationsTable extends Migration
                 ->unique();
             $table->string('emblem', 50)
                 ->nullable();
-
-            $table->timestamps();
         });
     }
 
@@ -34,4 +32,4 @@ class CreateNationsTable extends Migration
     {
         Schema::dropIfExists('nations');
     }
-}
+};

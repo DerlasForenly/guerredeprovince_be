@@ -1,10 +1,11 @@
 <?php
 
-namespace Modules\User\Models\Traits;
+namespace Modules\User\Models\Attributes;
 
 use Modules\User\Models\User;
 
 /**
+ * @TODO I think I should remove all this attributes later
  * @mixin User
  */
 trait Attributes

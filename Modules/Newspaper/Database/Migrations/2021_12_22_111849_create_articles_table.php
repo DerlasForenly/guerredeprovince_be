@@ -15,6 +15,20 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->unsignedBigInteger('newspaper_id')
+                ->nullable();
+            $table->foreign('newspaper_id')
+                ->references('id')
+                ->on('newspapers')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }
