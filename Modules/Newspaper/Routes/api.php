@@ -1,5 +1,23 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Modules\Newspaper\Http\Controllers\Article\VoteController;
+use Modules\Newspaper\Http\Controllers\Newspaper\AssignStaffController;
+use Modules\Newspaper\Http\Controllers\Newspaper\FreeStaffController;
+use Modules\Newspaper\Http\Controllers\Newspaper\IndexController as NewspaperIndexController;
+use Modules\Newspaper\Http\Controllers\Newspaper\ShowController as NewspaperShowController;
+use Modules\Newspaper\Http\Controllers\Newspaper\DeleteController as NewspaperDeleteController;
+use Modules\Newspaper\Http\Controllers\Newspaper\SubscribeController;
+use Modules\Newspaper\Http\Controllers\Newspaper\UnsubscribeController;
+use Modules\Newspaper\Http\Controllers\Newspaper\UpdateController as NewspaperUpdateController;
+use Modules\Newspaper\Http\Controllers\Newspaper\StoreController as NewspaperStoreController;
+use Modules\Newspaper\Http\Controllers\Article\IndexController as ArticleIndexController;
+use Modules\Newspaper\Http\Controllers\Article\ShowController as ArticleShowController;
+use Modules\Newspaper\Http\Controllers\Article\DeleteController as ArticleDeleteController;
+use Modules\Newspaper\Http\Controllers\Article\UpdateController as ArticleUpdateController;
+use Modules\Newspaper\Http\Controllers\Article\StoreController as ArticleStoreController;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -11,30 +29,33 @@
 |
 */
 
-use Illuminate\Support\Facades\Route;
-
 Route::group([
     'prefix' => 'newspapers'
 ], function () {
     /**
      * Get all newspapers
      */
-    Route::get('/', IndexController::class);
+    Route::get('/', NewspaperIndexController::class);
 
     /**
      * Show the newspaper
      */
-    Route::get('/{newspaper}', ShowController::class);
+    Route::get('/{newspaper}', NewspaperShowController::class);
+
+    /**
+     * Update the newspaper
+     */
+    Route::post('/{newspaper}', NewspaperUpdateController::class);
 
     /**
      * Create new newspaper
      */
-    Route::post('/', StoreController::class);
+    Route::post('/', NewspaperStoreController::class);
 
     /**
      * Delete a newspaper
      */
-    Route::delete('/{newspaper}', DeleteController::class);
+    Route::delete('/{newspaper}', NewspaperDeleteController::class);
 
     /**
      * Subscribe to a newspaper
@@ -49,10 +70,44 @@ Route::group([
     /**
      * Assign new staff to a newspaper
      */
-    Route::post('/{newspaper}/assign', AddStaffController::class);
+    Route::post('/{newspaper}/assign', AssignStaffController::class);
 
     /**
      * Free staff from a newspaper
      */
-    Route::post('/{newspaper}/free/{user}', RemoveStaffController::class);
+    Route::post('/{newspaper}/free/{user}', FreeStaffController::class);
+});
+
+Route::group([
+    'prefix' => 'article'
+], function () {
+    /**
+     * Get all newspapers
+     */
+    Route::get('/', ArticleIndexController::class);
+
+    /**
+     * Show the newspaper
+     */
+    Route::get('/{article}', ArticleShowController::class);
+
+    /**
+     * Update the newspaper
+     */
+    Route::post('/{article}', ArticleUpdateController::class);
+
+    /**
+     * Create new newspaper
+     */
+    Route::post('/', ArticleStoreController::class);
+
+    /**
+     * Delete a newspaper
+     */
+    Route::delete('/{article}', ArticleDeleteController::class);
+
+    /**
+     * Subscribe to a newspaper
+     */
+    Route::post('/{article}/vote', VoteController::class);
 });
