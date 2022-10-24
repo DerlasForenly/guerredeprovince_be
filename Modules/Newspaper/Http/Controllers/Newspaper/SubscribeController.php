@@ -6,5 +6,8 @@ use App\Http\Controllers\Controller;
 
 class SubscribeController extends Controller
 {
+    public function __invoke()
+    {
 
+    }
 }

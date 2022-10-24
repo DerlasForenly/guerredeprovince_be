@@ -1135,10 +1135,6 @@
   array (
     'name' => 'GamePrice',
   ),
-  'government' => 
-  array (
-    'name' => 'Government',
-  ),
   'language' => 
   array (
     'name' => 'Language',
@@ -1146,6 +1142,11 @@
   'newspaper' => 
   array (
     'name' => 'Newspaper',
+    'nyckel' => 
+    array (
+      'client_id' => 'e63e3y82n1a13hoc8qsv0x55idu6xof3',
+      'client_secret' => 'ns6bugib465w737li2lg1bxh0yvq324zm6dabcis7gqur8xf59ov2z2cvoavlr81',
+    ),
   ),
   'party' => 
   array (

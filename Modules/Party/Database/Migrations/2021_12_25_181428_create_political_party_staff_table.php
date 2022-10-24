@@ -33,12 +33,6 @@ class CreatePoliticalPartyStaffTable extends Migration
                 ->on('positions')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger('government_id');
-            $table->foreign('government_id')
-                ->references('id')
-                ->on('governments')
-                ->onDelete('cascade');
-
             $table->timestamps();
         });
     }

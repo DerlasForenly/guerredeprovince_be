@@ -16,7 +16,7 @@ class CreateCountriesTable extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name', 50);
+            $table->string('name')->unique();
             $table->string('description', 600)
                 ->nullable();
             $table->string('emblem')
@@ -32,6 +32,12 @@ class CreateCountriesTable extends Migration
             $table->foreign('government_type_id')
                 ->references('id')
                 ->on('government_types')
+                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('nation_id');
+            $table->foreign('nation_id')
+                ->references('id')
+                ->on('nations')
                 ->onDelete('cascade');
 
             $table->timestamps();

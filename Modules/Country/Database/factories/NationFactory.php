@@ -2,12 +2,21 @@
 
 namespace Modules\Country\Database\factories;
 
+use Database\Factories\Traits\HasName;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Modules\Country\Models\Nation;
 
+/**
+ * Class NationFactory
+ */
 class NationFactory extends Factory
 {
+    use HasName;
+
+    /**
+     * @var string
+     */
     protected $model = Nation::class;
 
     /**
@@ -18,16 +27,7 @@ class NationFactory extends Factory
     public function definition()
     {
         return [
-            'name' => Str::random(15)
+            'name' => 'Nation_' . Str::random(10),
         ];
-    }
-
-    public function name($name): NationFactory
-    {
-        return $this->state(function (array $attributes) use ($name) {
-            return [
-                'name' => $name,
-            ];
-        });
     }
 }

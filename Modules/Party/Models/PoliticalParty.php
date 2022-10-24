@@ -9,12 +9,15 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Modules\Party\Models\Relationships\PoliticalPartyStaff\Relationships;
 
 /**
+ * Class PoliticalParty
+ *
  * @property int $id
  * @property string $description
  * @property string $name
  * @property MorphMany $requests
  * @property PoliticalPartyStaff $leader
  * @property HasMany $politicalPartyStaff
+ * @property boolean $in_government
  */
 class PoliticalParty extends Model
 {
@@ -26,8 +29,8 @@ class PoliticalParty extends Model
         'description',
         'tag',
         'country_id',
-        'parliament_id',
         'emblem',
+        'in_government',
     ];
 
     protected $hidden = [

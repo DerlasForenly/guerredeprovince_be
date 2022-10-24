@@ -2,14 +2,25 @@
 
 namespace Modules\Country\Database\factories;
 
+use Database\Factories\Traits\HasDescription;
+use Database\Factories\Traits\HasName;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Modules\Country\Models\Country;
 use Modules\Country\Models\GovernmentType;
 use Modules\Country\Models\Nation;
 
+/**
+ * Class CountryFactory
+ */
 class CountryFactory extends Factory
 {
+    use HasName,
+        HasDescription;
+
+    /**
+     * @var string
+     */
     protected $model = Country::class;
 
     /**
@@ -25,24 +36,6 @@ class CountryFactory extends Factory
             'nation_id'          => rand(1, Nation::all()->count()),
             'government_type_id' => GovernmentType::PRESIDENTIAL_REPUBLIC_ID,
         ];
-    }
-
-    public function name($name): CountryFactory
-    {
-        return $this->state(function (array $attributes) use ($name) {
-            return [
-                'name' => $name,
-            ];
-        });
-    }
-
-    public function description($description): CountryFactory
-    {
-        return $this->state(function (array $attributes) use ($description) {
-            return [
-                'description' => $description,
-            ];
-        });
     }
 
     public function nation($id): CountryFactory

@@ -30,13 +30,6 @@ class UserSeeder extends Seeder
             ->create();
 
         User::factory()
-            ->nickname('Derlas Forenly')
-            ->email('tany.tany283@gmail.com')
-            ->nation(1)
-            ->country(1)
-            ->create();
-
-        User::factory()
             ->nickname('Sora von Einzbern')
             ->email('soso.soso@gmail.com')
             ->nation(1)

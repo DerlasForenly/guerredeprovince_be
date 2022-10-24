@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Article
+ * @property int $id
+ * @property string $title
+ * @property string $content
+ * @property int $user_id
+ * @property int|null $newspaper_id
+ * @property int|null $category_id
  */
 class Article extends Model
 {
@@ -16,8 +22,10 @@ class Article extends Model
      * @var string[]
      */
     protected $fillable = [
-        'name',
+        'title',
+        'content',
         'user_id',
         'newspaper_id',
+        'category_id',
     ];
 }

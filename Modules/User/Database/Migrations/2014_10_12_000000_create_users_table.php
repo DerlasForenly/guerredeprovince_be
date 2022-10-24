@@ -22,8 +22,8 @@ class CreateUsersTable extends Migration
                 ->default(0);
             $table->string('email')
                 ->unique();
-            $table->string('role')
-                ->default('USER');
+            $table->integer('role_id')
+                ->default(1);
 
             $table->integer('country_id')
                 ->nullable();
