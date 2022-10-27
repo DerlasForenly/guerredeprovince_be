@@ -11,6 +11,7 @@ class StoreController extends Controller
 {
     /**
      * Store a newly created resource in storage.
+     *
      * @param StoreAction $action
      * @param StoreRequest $request
      * @return JsonResponse

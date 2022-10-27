@@ -3,8 +3,8 @@
 namespace Modules\Resource\Tests\Feature;
 
 use Modules\Resource\Models\Resource;
-use Modules\Resource\Services\TransactionService;
 use Modules\Treasury\Models\UserTreasury;
+use Modules\Treasury\Services\TransactionService;
 use Modules\User\Models\User;
 use Tests\TestCase;
 

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Newspaper\Http\Controllers\Article\TopController;
 use Modules\Newspaper\Http\Controllers\Article\VoteController;
 use Modules\Newspaper\Http\Controllers\Newspaper\AssignStaffController;
 use Modules\Newspaper\Http\Controllers\Newspaper\FreeStaffController;
@@ -30,7 +31,8 @@ use Modules\Newspaper\Http\Controllers\Article\StoreController as ArticleStoreCo
 */
 
 Route::group([
-    'prefix' => 'newspapers'
+    'prefix'     => 'newspapers',
+    'middleware' => ['jwt.verify'],
 ], function () {
     /**
      * Get all newspapers
@@ -79,12 +81,18 @@ Route::group([
 });
 
 Route::group([
-    'prefix' => 'article'
+    'prefix'     => 'articles',
+    'middleware' => ['jwt.verify'],
 ], function () {
     /**
-     * Get all newspapers
+     * Get all articles
      */
     Route::get('/', ArticleIndexController::class);
+
+    /**
+     * Get top articles
+     */
+    Route::get('/top', TopController::class);
 
     /**
      * Show the newspaper

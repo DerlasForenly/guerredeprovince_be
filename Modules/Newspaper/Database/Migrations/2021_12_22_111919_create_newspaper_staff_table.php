@@ -19,16 +19,21 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
+
             $table->unsignedBigInteger('newspaper_id');
             $table->foreign('newspaper_id')
                 ->references('id')
                 ->on('newspapers')
                 ->onDelete('cascade');
+
             $table->unsignedBigInteger('position_id');
             $table->foreign('position_id')
                 ->references('id')
                 ->on('positions')
                 ->onDelete('cascade');
+
+            $table->string('custom_name')
+                ->nullable();
 
             $table->timestamps();
         });

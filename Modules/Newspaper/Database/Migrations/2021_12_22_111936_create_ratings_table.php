@@ -27,6 +27,8 @@ return new class extends Migration
                 ->on('articles')
                 ->onDelete('cascade');
 
+            $table->boolean('value');
+
             $table->timestamps();
         });
     }

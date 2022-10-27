@@ -12,22 +12,10 @@ class RegionTreasury extends TreasuryModel
     use HasFactory;
 
     /**
-     * @var string[]
-     */
-    protected $fillable = [
-        'quantity',
-    ];
-
-    /**
      * @return BelongsTo
      */
-    public function region(): BelongsTo
-    {
-        return $this->belongsTo(Region::class);
-    }
-
     public function owner(): BelongsTo
     {
-        return $this->region();
+        return $this->belongsTo(Region::class, 'region_id');
     }
 }

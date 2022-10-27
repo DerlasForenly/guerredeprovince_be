@@ -3,27 +3,19 @@
 namespace Modules\Newspaper\Http\Requests\Article;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Modules\Newspaper\Http\Requests\Params\Article\StoreParams;
 
 /**
- * Class StoreRequest
+ * Class VoteRequest
  */
-class StoreRequest extends FormRequest
+class VoteRequest extends FormRequest
 {
-    /**
-     * @var string
-     */
-    protected string $params = StoreParams::class;
-
     /**
      * @return \string[][]
      */
     public function rules(): array
     {
         return [
-            'title'        => ['required', 'max:50', 'min:4', 'string'],
-            'content'      => ['required', 'max:500', 'min:25', 'string'],
-            'newspaper_id' => ['nullable'],
+            'value' => ['required', 'boolean']
         ];
     }
 
@@ -33,8 +25,7 @@ class StoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'lol, man',
-            'content.required' => 'shit, man',
+            'value.required' => 'lol, man',
         ];
     }
 

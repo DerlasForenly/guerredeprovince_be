@@ -24,7 +24,8 @@ use Modules\Party\Models\PoliticalParty;
 */
 
 Route::group([
-    'prefix' => 'parties'
+    'prefix' => 'parties',
+    'middleware' => ['jwt.verify'],
 ], function () {
     /**
      * Get all parties

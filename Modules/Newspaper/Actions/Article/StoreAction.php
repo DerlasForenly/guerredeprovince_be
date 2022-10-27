@@ -2,11 +2,15 @@
 
 namespace Modules\Newspaper\Actions\Article;
 
+use Illuminate\Http\JsonResponse;
 use Modules\Newspaper\Models\Article;
 
+/**
+ * Class StoreAction
+ */
 class StoreAction
 {
-    public function handle(array $params)
+    public function handle(array $params): JsonResponse
     {
         $user = auth()->userOrFail();
 

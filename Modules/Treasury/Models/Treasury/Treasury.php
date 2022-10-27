@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Resource\Models\Resource;
 
 /**
+ * Abstract class Treasury
+ *
  * @property int $quantity
  */
 abstract class Treasury extends Model
@@ -14,9 +16,8 @@ abstract class Treasury extends Model
     /**
      * @var string[]
      */
-    protected $hidden = [
-        'created_at',
-        'updated_at',
+    protected $fillable = [
+        'quantity',
     ];
 
     /**
@@ -27,5 +28,8 @@ abstract class Treasury extends Model
         return $this->belongsTo(Resource::class);
     }
 
+    /**
+     * @return BelongsTo
+     */
     abstract public function owner(): BelongsTo;
 }

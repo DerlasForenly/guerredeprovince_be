@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Action\Models\Action;
 use Modules\Party\Models\PoliticalPartyStaff;
+use Modules\Treasury\Entities\TreasuryGroup;
+use Modules\Treasury\Models\Treasury\Treasurable;
 use Modules\User\Models\Attributes\Attributes;
 use Modules\User\Models\Relationships\User\Relationships;
 use Modules\User\Models\Traits\GetJWT;
@@ -26,7 +28,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property HasMany $requests
  * @property PoliticalPartyStaff $politicalPartyStaff
  */
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements JWTSubject, Treasurable
 {
     use HasApiTokens,
         GetJWT,

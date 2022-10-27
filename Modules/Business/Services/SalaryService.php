@@ -6,8 +6,8 @@ use Carbon\Carbon;
 use Modules\Business\Models\Business;
 use Modules\Business\Models\SalaryType;
 use Modules\Resource\Models\Resource;
-use Modules\Resource\Services\TransactionService;
 use Modules\Treasury\Models\Treasury\Treasury;
+use Modules\Treasury\Services\TransactionService;
 use Modules\User\Models\User;
 
 class SalaryService

@@ -11,17 +11,11 @@ class BusinessTreasury extends Treasury
 {
     use HasFactory;
 
-    protected $fillable = [
-        'quantity',
-    ];
-
-    public function business(): BelongsTo
-    {
-        return $this->belongsTo(Business::class);
-    }
-
+    /**
+     * @return BelongsTo
+     */
     public function owner(): BelongsTo
     {
-        return $this->business();
+        return $this->belongsTo(Business::class, 'business_id');
     }
 }

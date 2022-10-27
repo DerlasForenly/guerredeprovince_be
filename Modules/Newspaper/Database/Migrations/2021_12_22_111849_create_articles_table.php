@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('title', 50);
-            $table->string('content');
+
+            /* @TODO Change to small length and use files to storage content */
+            $table->string('content', 600);
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')

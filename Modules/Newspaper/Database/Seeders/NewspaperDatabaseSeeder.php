@@ -4,7 +4,11 @@ namespace Modules\Newspaper\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Newspaper\Models\Article;
 
+/**
+ * Class NewspaperDatabaseSeeder
+ */
 class NewspaperDatabaseSeeder extends Seeder
 {
     /**
@@ -12,10 +16,8 @@ class NewspaperDatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        Model::unguard();
-
-        // $this->call("OthersTableSeeder");
+        Article::factory()->count(10)->create();
     }
 }

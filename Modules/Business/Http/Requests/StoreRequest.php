@@ -4,6 +4,9 @@ namespace Modules\Business\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class StoreRequest
+ */
 class StoreRequest extends FormRequest
 {
     /**
@@ -11,7 +14,7 @@ class StoreRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             //
@@ -23,7 +26,7 @@ class StoreRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }

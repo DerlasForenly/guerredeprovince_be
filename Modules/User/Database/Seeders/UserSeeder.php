@@ -15,12 +15,11 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 5; $i++) {
-            User::factory()
-                ->nickname('Test_user_' . Str::random(10))
-                ->email(Str::random(10) . '@gmail.com')
-                ->create();
-        }
+        User::factory()
+            ->nickname('Test_user_' . Str::random(10))
+            ->email(Str::random(10) . '@gmail.com')
+            ->count(5)
+            ->create();
 
         User::factory()
             ->nickname('Derlas Forenly')

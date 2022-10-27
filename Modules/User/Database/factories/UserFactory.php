@@ -8,6 +8,9 @@ use Illuminate\Support\Str;
 use Modules\User\Models\User;
 use function now;
 
+/**
+ * Class UserFactory
+ */
 class UserFactory extends Factory
 {
     /**

@@ -10,21 +10,21 @@ trait HasMany
 {
     public function resources(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(UserTreasury::class);
+        return $this->hasMany(UserTreasury::class, 'user_id');
     }
 
     public function businesses(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Business::class);
+        return $this->hasMany(Business::class, 'user_id');
     }
 
     public function requests(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Request::class);
+        return $this->hasMany(Request::class, 'user_id');
     }
 
     public function treasuries(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(UserTreasury::class);
+        return $this->hasMany(UserTreasury::class, 'user_id');
     }
 }

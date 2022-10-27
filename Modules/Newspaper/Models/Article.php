@@ -28,4 +28,9 @@ class Article extends Model
         'newspaper_id',
         'category_id',
     ];
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class, 'article_id');
+    }
 }

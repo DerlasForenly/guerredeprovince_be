@@ -14,10 +14,10 @@ use Modules\Country\Database\Seeders\GovernmentTypeSeeder;
 use Modules\Country\Database\Seeders\NationSeeder;
 use Modules\GamePrice\Database\Seeders\GamePriceResourceSeeder;
 use Modules\GamePrice\Database\Seeders\GamePriceSeeder;
+use Modules\Newspaper\Database\Seeders\NewspaperDatabaseSeeder;
 use Modules\Party\Database\Seeders\PoliticalPartySeeder;
 use Modules\Party\Database\Seeders\PoliticalPartyStaffSeeder;
 use Modules\Position\Database\Seeders\PositionSeeder;
-use Modules\Position\Database\Seeders\PositionTitleSeeder;
 use Modules\Region\Database\Seeders\RegionSeeder;
 use Modules\Region\Database\Seeders\RegionTypeSeeder;
 use Modules\Request\Database\Seeders\RequestSeeder;
@@ -48,7 +48,6 @@ class DatabaseSeeder extends Seeder
             ActionTypeSeeder::class,
             RequestTypeSeeder::class,
             PositionSeeder::class,
-            PositionTitleSeeder::class,
             ResourceSeeder::class,
             WarSideSeeder::class,
             StatusSeeder::class,
@@ -73,6 +72,7 @@ class DatabaseSeeder extends Seeder
             GamePriceResourceSeeder::class,
             RequestSeeder::class,
             CountryStaffSeeder::class,
+            NewspaperDatabaseSeeder::class,
         ]);
     }
 }

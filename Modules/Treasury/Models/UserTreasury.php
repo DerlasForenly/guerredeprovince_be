@@ -12,22 +12,10 @@ class UserTreasury extends TreasuryModel
     use HasFactory;
 
     /**
-     * @var string[]
-     */
-    protected $fillable = [
-        'quantity',
-    ];
-
-    /**
      * @return BelongsTo
      */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function owner(): BelongsTo
     {
-        return $this->user();
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
