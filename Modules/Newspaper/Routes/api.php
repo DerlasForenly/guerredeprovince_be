@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Newspaper\Http\Controllers\Article\PromotedController;
 use Modules\Newspaper\Http\Controllers\Article\TopController;
 use Modules\Newspaper\Http\Controllers\Article\VoteController;
 use Modules\Newspaper\Http\Controllers\Newspaper\AssignStaffController;
@@ -93,6 +94,11 @@ Route::group([
      * Get top articles
      */
     Route::get('/top', TopController::class);
+
+    /**
+     * Get promoted article
+     */
+    Route::get('/promoted', PromotedController::class);
 
     /**
      * Show the newspaper
