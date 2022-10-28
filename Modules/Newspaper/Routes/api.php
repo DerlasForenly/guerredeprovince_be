@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Newspaper\Http\Controllers\Article\PromotedController;
+use Modules\Newspaper\Http\Controllers\Article\SubscriptionsController;
 use Modules\Newspaper\Http\Controllers\Article\TopController;
 use Modules\Newspaper\Http\Controllers\Article\VoteController;
 use Modules\Newspaper\Http\Controllers\Newspaper\AssignStaffController;
@@ -99,6 +100,11 @@ Route::group([
      * Get promoted article
      */
     Route::get('/promoted', PromotedController::class);
+
+    /**
+     * Get promoted article
+     */
+    Route::get('/subscriptions', SubscriptionsController::class);
 
     /**
      * Show the newspaper

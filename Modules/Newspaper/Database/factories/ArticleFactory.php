@@ -2,6 +2,8 @@
 
 namespace Modules\Newspaper\Database\factories;
 
+use Database\Factories\Traits\HasNewspaper;
+use Database\Factories\Traits\HasUser;
 use Illuminate\Support\Str;
 use Modules\Newspaper\Models\Article;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -11,6 +13,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ArticleFactory extends Factory
 {
+    use HasNewspaper,
+        HasUser;
+
     /**
      * @var string
      */
@@ -32,7 +37,11 @@ class ArticleFactory extends Factory
         ];
     }
 
-    public function title($title): ArticleFactory
+    /**
+     * @param string $title
+     * @return \Modules\Newspaper\Database\factories\ArticleFactory
+     */
+    public function title(string $title): ArticleFactory
     {
         return $this->state(function (array $attributes) use ($title) {
             return [
@@ -41,11 +50,15 @@ class ArticleFactory extends Factory
         });
     }
 
-    public function content($content): ArticleFactory
+    /**
+     * @param string $content
+     * @return \Modules\Newspaper\Database\factories\ArticleFactory
+     */
+    public function content(string $content): ArticleFactory
     {
         return $this->state(function (array $attributes) use ($content) {
             return [
-                'title' => $content,
+                'content' => $content,
             ];
         });
     }

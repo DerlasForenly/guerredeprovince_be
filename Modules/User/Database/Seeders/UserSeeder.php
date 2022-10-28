@@ -16,12 +16,6 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::factory()
-            ->nickname('Test_user_' . Str::random(10))
-            ->email(Str::random(10) . '@gmail.com')
-            ->count(5)
-            ->create();
-
-        User::factory()
             ->nickname('Derlas Forenly')
             ->email('tany.tany283@gmail.com')
             ->nation(1)
@@ -46,5 +40,11 @@ class UserSeeder extends Seeder
             ->nickname('Туман')
             ->email('tuman@gmail.com')
             ->create();
+
+//        User::factory()
+//            ->nickname('Test_user_' . Str::random(10))
+//            ->email(Str::random(10) . '@gmail.com')
+//            ->count(5)
+//            ->create();
     }
 }

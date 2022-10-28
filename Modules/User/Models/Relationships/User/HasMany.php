@@ -3,6 +3,7 @@
 namespace Modules\User\Models\Relationships\User;
 
 use Modules\Business\Models\Business;
+use Modules\Newspaper\Models\Subscription;
 use Modules\Request\Models\Request;
 use Modules\Treasury\Models\UserTreasury;
 
@@ -26,5 +27,10 @@ trait HasMany
     public function treasuries(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(UserTreasury::class, 'user_id');
+    }
+
+    public function subscriptions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Subscription::class, 'user_id');
     }
 }

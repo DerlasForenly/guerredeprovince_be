@@ -7,5 +7,6 @@ trait Relationships
     use HasOne,
         BelongsTo,
         HasMany,
+        HasManyThrough,
         BelongsToMany;
 }
