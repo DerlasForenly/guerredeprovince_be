@@ -24,7 +24,7 @@ class RegisterController extends Controller
         return $action->handle($request->only([
             'email',
             'password',
-            'name',
+            'nickname',
         ]));
     }
 }
