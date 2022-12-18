@@ -33,6 +33,13 @@ return new class extends Migration
                 ->on('categories')
                 ->onDelete('cascade');
 
+            $table->unsignedBigInteger('language_id')
+                ->nullable();
+            $table->foreign('language_id')
+                ->references('id')
+                ->on('languages')
+                ->onDelete('cascade');
+
             $table->unsignedBigInteger('newspaper_id')
                 ->nullable();
             $table->foreign('newspaper_id')

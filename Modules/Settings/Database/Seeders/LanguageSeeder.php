@@ -4,6 +4,7 @@ namespace Modules\Settings\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Modules\Settings\Models\Language;
 
 class LanguageSeeder extends Seeder
 {
@@ -14,17 +15,10 @@ class LanguageSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('languages')->insert([
-            'name' => 'Ukrainian',
-        ]);
-        DB::table('languages')->insert([
-            'name' => 'English',
-        ]);
-        DB::table('languages')->insert([
-            'name' => 'Russian',
-        ]);
-        DB::table('languages')->insert([
-            'name' => 'Japanese',
-        ]);
+        foreach (Language::LANGUAGES as $language) {
+            Language::create([
+                'name' => $language
+            ]);
+        }
     }
 }

@@ -45,7 +45,7 @@ class GovernmentType extends Model
     const AUTONOMY_ID = 6;
 
     /**
-     *
+     * Government types
      */
     const GOVERNMENT_TYPES = [
         self::ABSOLUTE_MONARCHY_ID       => self::ABSOLUTE_MONARCHY,

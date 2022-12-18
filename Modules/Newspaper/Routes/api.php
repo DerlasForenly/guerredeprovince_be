@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Newspaper\Http\Controllers\Article\LastController;
 use Modules\Newspaper\Http\Controllers\Article\PromotedController;
 use Modules\Newspaper\Http\Controllers\Article\SubscriptionsController;
 use Modules\Newspaper\Http\Controllers\Article\TopController;
@@ -97,6 +98,11 @@ Route::group([
     Route::get('/top', TopController::class);
 
     /**
+     * Get last articles
+     */
+    Route::get('/last', LastController::class);
+
+    /**
      * Get promoted article
      */
     Route::get('/promoted', PromotedController::class);
@@ -107,27 +113,27 @@ Route::group([
     Route::get('/subscriptions', SubscriptionsController::class);
 
     /**
-     * Show the newspaper
+     * Show the article
      */
     Route::get('/{article}', ArticleShowController::class);
 
     /**
-     * Update the newspaper
+     * Update the article
      */
     Route::post('/{article}', ArticleUpdateController::class);
 
     /**
-     * Create new newspaper
+     * Create an article
      */
     Route::post('/', ArticleStoreController::class);
 
     /**
-     * Delete a newspaper
+     * Delete an article
      */
     Route::delete('/{article}', ArticleDeleteController::class);
 
     /**
-     * Subscribe to a newspaper
+     * Vote for the article
      */
     Route::post('/{article}/vote', VoteController::class);
 });

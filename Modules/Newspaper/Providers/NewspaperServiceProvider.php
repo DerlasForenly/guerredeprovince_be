@@ -3,6 +3,7 @@
 namespace Modules\Newspaper\Providers;
 
 use App\Providers\BaseModuleProvider;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class NewspaperServiceProvider extends BaseModuleProvider
 {
@@ -24,6 +25,7 @@ class NewspaperServiceProvider extends BaseModuleProvider
     public function boot(): void
     {
         parent::boot();
+        JsonResource::withoutWrapping();
     }
 
     /**
