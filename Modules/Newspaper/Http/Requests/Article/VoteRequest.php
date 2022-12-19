@@ -15,7 +15,7 @@ class VoteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'value' => ['required', 'boolean']
+            'value' => ['required', 'numeric', 'min:-1', 'max:1']
         ];
     }
 

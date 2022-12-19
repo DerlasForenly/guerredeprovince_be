@@ -19,7 +19,7 @@ class LastController extends Controller
     public function __invoke(): AnonymousResourceCollection
     {
         return ShortArticleInfoResource::collection(
-            Article::where('language_id', Language::UKRAINIAN_ID)->latest()->paginate(5)
+            Article::latest()->paginate(5)
         );
     }
 }

@@ -24,7 +24,7 @@ class ShortArticleInfoResource extends JsonResource
             'id'         => $this->id,
             'title'      => $this->title,
             'author'     => $author,
-            'rating'     => 15,
+            'rating'     => $this->ratings->sum('value'),
             'created_at' => Carbon::parse($this->created_at)->format('H:i d.m.y'),
             'language'   => $this->language,
             'category'   => $this->category,

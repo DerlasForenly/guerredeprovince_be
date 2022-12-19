@@ -1,0 +1,9 @@
+$article->save();
+$article->refresh();
+
+$fileName = "articles/texts/{$article->id}_content.txt";
+$file = Storage::put($fileName, $content);
+$article->content = $fileName;
+
+$article->save();
+$article->refresh();

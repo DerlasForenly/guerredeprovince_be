@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ratings', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('user_id');
@@ -21,22 +21,24 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger('article_id')
-                ->nullable();
+            $table->unsignedBigInteger('article_id');
             $table->foreign('article_id')
                 ->references('id')
                 ->on('articles')
                 ->onDelete('cascade');
+
+            $table->string('content');
+
+            $table->timestamps();
+        });
+
+        Schema::table('comments', function (Blueprint $table) {
             $table->unsignedBigInteger('comment_id')
                 ->nullable();
             $table->foreign('comment_id')
                 ->references('id')
                 ->on('comments')
                 ->onDelete('cascade');
-
-            $table->smallInteger('value');
-
-            $table->timestamps();
         });
     }
 
@@ -47,6 +49,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ratings');
+        Schema::dropIfExists('comments');
     }
 };

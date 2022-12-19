@@ -2,7 +2,10 @@
 
 namespace Modules\Newspaper\Database\factories;
 
+use Database\Factories\Traits\HasContent;
+use Database\Factories\Traits\HasLanguage;
 use Database\Factories\Traits\HasNewspaper;
+use Database\Factories\Traits\HasTitle;
 use Database\Factories\Traits\HasUser;
 use Illuminate\Support\Str;
 use Modules\Newspaper\Models\Article;
@@ -14,7 +17,10 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class ArticleFactory extends Factory
 {
     use HasNewspaper,
-        HasUser;
+        HasUser,
+        HasTitle,
+        HasContent,
+        HasLanguage;
 
     /**
      * @var string
@@ -29,37 +35,12 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'   => 'Article_' . Str::random(8),
-            'content' => 'Content for article with random string: ' . Str::random(500),
+            'title'        => 'Article_' . Str::random(8),
+            'content'      => 'Content for article with random string',
             'newspaper_id' => null,
-            'user_id' => 1,
-            'category_id' => null,
+            'user_id'      => 1,
+            'category_id'  => null,
+            'language_id'  => null,
         ];
-    }
-
-    /**
-     * @param string $title
-     * @return \Modules\Newspaper\Database\factories\ArticleFactory
-     */
-    public function title(string $title): ArticleFactory
-    {
-        return $this->state(function (array $attributes) use ($title) {
-            return [
-                'title' => $title,
-            ];
-        });
-    }
-
-    /**
-     * @param string $content
-     * @return \Modules\Newspaper\Database\factories\ArticleFactory
-     */
-    public function content(string $content): ArticleFactory
-    {
-        return $this->state(function (array $attributes) use ($content) {
-            return [
-                'content' => $content,
-            ];
-        });
     }
 }

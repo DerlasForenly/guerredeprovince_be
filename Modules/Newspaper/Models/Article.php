@@ -25,6 +25,8 @@ use Modules\User\Models\User;
  * @property Category $category
  * @property User $user
  * @property $ratings
+ * @property Rating $positiveRatings
+ * @property Rating $negativeRatings
  */
 class Article extends Model
 {
@@ -56,6 +58,20 @@ class Article extends Model
     public function ratings(): HasMany
     {
         return $this->hasMany(Rating::class, 'article_id');
+    }
+
+    public function positiveRatings(): HasMany
+    {
+        return $this
+            ->hasMany(Rating::class, 'article_id')
+            ->where('value', 1);
+    }
+
+    public function negativeRatings(): HasMany
+    {
+        return $this
+            ->hasMany(Rating::class, 'article_id')
+            ->where('value', -1);
     }
 
     public function user(): BelongsTo

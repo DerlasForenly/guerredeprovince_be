@@ -135,5 +135,6 @@ Route::group([
     /**
      * Vote for the article
      */
-    Route::post('/{article}/vote', VoteController::class);
+    Route::post('/{article}/vote', VoteController::class)
+        ->can('vote', 'article');
 });

@@ -41,10 +41,11 @@ class UserSeeder extends Seeder
             ->email('tuman@gmail.com')
             ->create();
 
-//        User::factory()
-//            ->nickname('Test_user_' . Str::random(10))
-//            ->email(Str::random(10) . '@gmail.com')
-//            ->count(5)
-//            ->create();
+        for ($i = 0; $i < 15; $i++) {
+            User::factory()
+                ->nickname('Test_user_' . Str::random(10))
+                ->email(Str::random(10) . '@gmail.com')
+                ->create();
+        }
     }
 }
