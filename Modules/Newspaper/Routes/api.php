@@ -7,6 +7,8 @@ use Modules\Newspaper\Http\Controllers\Article\SubscriptionsController;
 use Modules\Newspaper\Http\Controllers\Article\TopController;
 use Modules\Newspaper\Http\Controllers\Article\VoteController;
 use Modules\Newspaper\Http\Controllers\Newspaper\AssignStaffController;
+use Modules\Newspaper\Http\Controllers\Newspaper\AvatarController as NewspaperAvatarController;
+use Modules\Newspaper\Http\Controllers\Article\AvatarController as ArticleAvatarController;
 use Modules\Newspaper\Http\Controllers\Newspaper\FreeStaffController;
 use Modules\Newspaper\Http\Controllers\Newspaper\IndexController as NewspaperIndexController;
 use Modules\Newspaper\Http\Controllers\Newspaper\ShowController as NewspaperShowController;
@@ -48,6 +50,16 @@ Route::group([
     Route::get('/{newspaper}', NewspaperShowController::class);
 
     /**
+     * Show the newspaper avatar
+     */
+    Route::get('/{newspaper}/avatar', NewspaperAvatarController::class);
+
+    /**
+    * Show the newspaper subscriptions
+    */
+    Route::get('/{newspaper}/subscriptions', NewspaperAvatarController::class);
+
+    /**
      * Update the newspaper
      */
     Route::post('/{newspaper}', NewspaperUpdateController::class);
@@ -65,12 +77,14 @@ Route::group([
     /**
      * Subscribe to a newspaper
      */
-    Route::post('/{newspaper}/subscribe', SubscribeController::class);
+    Route::post('/{newspaper}/subscribe', SubscribeController::class)
+        ->can('subscribe', 'newspaper');
 
     /**
      * Unsubscribe from a newspaper
      */
-    Route::post('/{newspaper}/unsubscribe', UnsubscribeController::class);
+    Route::post('/{newspaper}/unsubscribe', UnsubscribeController::class)
+        ->can('unsubscribe', 'newspaper');
 
     /**
      * Assign new staff to a newspaper
@@ -106,6 +120,11 @@ Route::group([
      * Get promoted article
      */
     Route::get('/promoted', PromotedController::class);
+
+    /**
+     * Show the article avatar
+     */
+    Route::get('/{article}/avatar', ArticleAvatarController::class);
 
     /**
      * Get promoted article

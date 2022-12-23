@@ -3,6 +3,7 @@
 namespace Modules\User\Models\Relationships\User;
 
 use Modules\Business\Models\Business;
+use Modules\Newspaper\Models\NewspaperStaff;
 use Modules\Newspaper\Models\Subscription;
 use Modules\Request\Models\Request;
 use Modules\Treasury\Models\UserTreasury;

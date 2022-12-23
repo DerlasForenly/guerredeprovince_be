@@ -29,6 +29,7 @@ class NewspaperFactory extends Factory
         return [
             'name'        => 'Newspaper_' . Str::random(8),
             'description' => Str::random(50),
+            'avatar'      => 'avatars/default.jpg',
         ];
     }
 }

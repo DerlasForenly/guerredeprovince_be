@@ -26,12 +26,13 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'nickname' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
+            'nickname'          => $this->faker->name(),
+            'email'             => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'description' => 'I am a test player',
-            'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'description'       => 'I am a test player',
+            'password'          => Hash::make('password'),
+            'remember_token'    => Str::random(10),
+            'avatar'            => 'avatars/default.jpg',
         ];
     }
 
@@ -53,7 +54,7 @@ class UserFactory extends Factory
     {
         return $this->state(function (array $attributes) use ($id) {
             return [
-                'nation_id' => $id
+                'nation_id' => $id,
             ];
         });
     }
@@ -62,7 +63,7 @@ class UserFactory extends Factory
     {
         return $this->state(function (array $attributes) use ($nickname) {
             return [
-                'nickname' => $nickname
+                'nickname' => $nickname,
             ];
         });
     }
@@ -71,7 +72,7 @@ class UserFactory extends Factory
     {
         return $this->state(function (array $attributes) use ($email) {
             return [
-                'email' => $email
+                'email' => $email,
             ];
         });
     }
@@ -80,7 +81,7 @@ class UserFactory extends Factory
     {
         return $this->state(function (array $attributes) use ($id) {
             return [
-                'country_id' => $id
+                'country_id' => $id,
             ];
         });
     }

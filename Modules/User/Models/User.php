@@ -8,9 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Action\Models\Action;
+use Modules\Newspaper\Models\NewspaperStaff;
 use Modules\Party\Models\PoliticalPartyStaff;
-use Modules\Treasury\Entities\TreasuryGroup;
 use Modules\Treasury\Models\Treasury\Treasurable;
+use Modules\Treasury\Models\Treasury\Treasury;
 use Modules\User\Models\Attributes\Attributes;
 use Modules\User\Models\Relationships\User\Relationships;
 use Modules\User\Models\Traits\GetJWT;
@@ -25,8 +26,16 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property string $email
  * @property string $nickname
  * @property int $id
+ *
+ * @property boolean $banned
+ * @property boolean $inactive
+ * @property boolean $premium
+ *
  * @property HasMany $requests
  * @property PoliticalPartyStaff $politicalPartyStaff
+ * @property NewspaperStaff $newspaperStaff
+ * @property Treasury $treasuries
+ * @property $subscriptions
  */
 class User extends Authenticatable implements JWTSubject, Treasurable
 {
@@ -50,9 +59,11 @@ class User extends Authenticatable implements JWTSubject, Treasurable
         'exp',
         'energy',
         'avatar',
+
         'banned',
         'inactive',
         'premium',
+
         'country_id',
         'political_view_id',
         'current_region_id',
@@ -81,9 +92,11 @@ class User extends Authenticatable implements JWTSubject, Treasurable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'avatar'            => 'string',
+
         'banned'            => 'boolean',
         'inactive'          => 'boolean',
         'premium'           => 'boolean',
+
         'exp'               => 'integer',
         'energy'            => 'integer',
         'nation_id'         => 'integer',

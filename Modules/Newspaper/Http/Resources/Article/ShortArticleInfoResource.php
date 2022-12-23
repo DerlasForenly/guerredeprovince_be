@@ -28,6 +28,7 @@ class ShortArticleInfoResource extends JsonResource
             'created_at' => Carbon::parse($this->created_at)->format('H:i d.m.y'),
             'language'   => $this->language,
             'category'   => $this->category,
+            'avatar'     => $this->avatar,
         ];
     }
 }

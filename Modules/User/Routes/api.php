@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\User\Http\Controllers\IndexController;
 use Modules\User\Http\Controllers\ShowController;
+use Modules\User\Http\Controllers\SubscriptionsController;
 use Modules\User\Http\Controllers\UpdateController;
 use Modules\User\Http\Controllers\UserController;
 
@@ -35,6 +36,11 @@ Route::group([
      * Update specific user
      */
     Route::patch('{user}', UpdateController::class);
+
+    /**
+     * Get specific user subscriptions
+     */
+    Route::get('{user}/subscriptions', SubscriptionsController::class);
 
     /**
      * TODO I dont understand why it is exists

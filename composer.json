@@ -13,7 +13,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4.1",
         "nwidart/laravel-modules": "^9.0",
-        "tymon/jwt-auth": "^1.0.2"
+        "tymon/jwt-auth": "^1.0.2",
+        "ext-zip": "*"
     },
     "require-dev": {
         "spatie/laravel-ignition": "^1.0",

@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\User\Models\User;
 use \Modules\Treasury\Models\Treasury\Treasury as TreasuryModel;
 
+/**
+ * Class UserTreasury
+ */
 class UserTreasury extends TreasuryModel
 {
     use HasFactory;

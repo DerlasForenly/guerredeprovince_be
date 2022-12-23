@@ -5,6 +5,12 @@ namespace Modules\Position\Models;
 use App\Models\Traits\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Position
+ *
+ * @property int $id
+ * @property string $name
+ */
 class Position extends Model
 {
     use HasFactory;
@@ -104,11 +110,17 @@ class Position extends Model
         self::EMPLOYEE_ID                   => self::EMPLOYEE,
     ];
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'id',
         'name',
     ];
 
+    /**
+     * @var string[]
+     */
     protected $hidden = [
         'created_at',
         'updated_at',

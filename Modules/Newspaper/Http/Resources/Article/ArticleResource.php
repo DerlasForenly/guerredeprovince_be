@@ -26,12 +26,19 @@ class ArticleResource extends JsonResource
             'title'          => $this->title,
             'content'        => Storage::get($this->content),
             'created_at'     => Carbon::parse($this->created_at)->format('H:i d.m.Y'),
-            'author'         => $this->user->nickname,
-            'newspaper'      => $this->newspaper?->name,
+            'author'         => [
+                'id'       => $this->user?->id,
+                'nickname' => $this->user?->nickname,
+            ],
+            'newspaper'      => [
+                'id'   => $this->newspaper?->id,
+                'name' => $this->newspaper?->name,
+            ],
             'comments_count' => 0,
             'category'       => $this->category?->name,
             'rating'         => $this->ratings->sum('value'),
             'voted'          => $this->ratings->where('user_id', $currentUser->id)->first()?->value,
+            'avatar'         => $this->avatar,
         ];
     }
 }

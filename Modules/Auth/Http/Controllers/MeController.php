@@ -4,16 +4,17 @@ namespace Modules\Auth\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use Modules\Auth\Http\Resources\MeResource;
 
 class MeController extends Controller
 {
     /**
      * Get the authenticated User.
      *
-     * @return JsonResponse
+     * @return \Modules\Auth\Http\Resources\MeResource
      */
-    public function __invoke(): JsonResponse
+    public function __invoke(): MeResource
     {
-        return response()->json(auth()->user());
+        return new MeResource(auth()->user());
     }
 }

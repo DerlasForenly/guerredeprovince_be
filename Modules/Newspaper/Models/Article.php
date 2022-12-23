@@ -16,6 +16,7 @@ use Modules\User\Models\User;
  * @property string $title
  * @property string $content
  * @property int $user_id
+ * @property string $avatar attribute
  * @property int|null $newspaper_id
  * @property int|null $category_id
  * @property int|null $language_id
@@ -55,6 +56,13 @@ class Article extends Model
         'language_id'  => 'int',
     ];
 
+    /**
+     * @var string[]
+     */
+    protected $appends = [
+        'avatar'
+    ];
+
     public function ratings(): HasMany
     {
         return $this->hasMany(Rating::class, 'article_id');
@@ -92,5 +100,15 @@ class Article extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    /**
+     * @return ?string
+     */
+    public function getAvatarAttribute(): ?string
+    {
+        $avatar = $this->newspaper_id ? $this->newspaper?->avatar : $this->user?->avatar;
+
+        return $avatar ?: 'avatars/default.jpg';
     }
 }
