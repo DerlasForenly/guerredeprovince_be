@@ -28,7 +28,9 @@ class UnsubscribeController extends Controller
         $subscription->delete();
 
         return response()->json([
-            'message' => 'OK',
+            'message'      => 'OK',
+            'subscribed'   => false,
+            'newspaper_id' => $newspaper->id,
         ], 200);
     }
 }

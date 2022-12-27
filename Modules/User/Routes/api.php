@@ -6,6 +6,8 @@ use Modules\User\Http\Controllers\ShowController;
 use Modules\User\Http\Controllers\SubscriptionsController;
 use Modules\User\Http\Controllers\UpdateController;
 use Modules\User\Http\Controllers\UserController;
+use Modules\User\Http\Controllers\Avatar\UpdateController as AvatarUpdateController;
+use Modules\User\Http\Controllers\Avatar\DeleteController as AvatarDeleteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +37,8 @@ Route::group([
     /**
      * Update specific user
      */
-    Route::patch('{user}', UpdateController::class);
+    Route::post('{user}', UpdateController::class)
+        ->can('update', 'user');
 
     /**
      * Get specific user subscriptions

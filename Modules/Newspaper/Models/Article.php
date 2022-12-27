@@ -28,6 +28,7 @@ use Modules\User\Models\User;
  * @property $ratings
  * @property Rating $positiveRatings
  * @property Rating $negativeRatings
+ * @property Comment $comments
  */
 class Article extends Model
 {
@@ -110,5 +111,13 @@ class Article extends Model
         $avatar = $this->newspaper_id ? $this->newspaper?->avatar : $this->user?->avatar;
 
         return $avatar ?: 'avatars/default.jpg';
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'article_id');
     }
 }

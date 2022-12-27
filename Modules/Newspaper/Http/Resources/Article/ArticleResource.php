@@ -34,7 +34,7 @@ class ArticleResource extends JsonResource
                 'id'   => $this->newspaper?->id,
                 'name' => $this->newspaper?->name,
             ],
-            'comments_count' => 0,
+            'comments_count' => $this->comments->count(),
             'category'       => $this->category?->name,
             'rating'         => $this->ratings->sum('value'),
             'voted'          => $this->ratings->where('user_id', $currentUser->id)->first()?->value,

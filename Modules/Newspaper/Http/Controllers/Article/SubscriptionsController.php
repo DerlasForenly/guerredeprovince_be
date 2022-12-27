@@ -10,6 +10,8 @@ use Modules\User\Models\User;
 
 /**
  * Class SubscriptionsController
+ *
+ * Get articles by user subscriptions
  */
 class SubscriptionsController extends Controller
 {

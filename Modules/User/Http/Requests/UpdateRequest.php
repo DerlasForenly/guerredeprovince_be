@@ -4,6 +4,9 @@ namespace Modules\User\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class UpdateRequest
+ */
 class UpdateRequest extends FormRequest
 {
     /**
@@ -11,10 +14,11 @@ class UpdateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            //
+            'avatar'   => [],
+            'nickname' => ['string'],
         ];
     }
 
@@ -23,7 +27,7 @@ class UpdateRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
