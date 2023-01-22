@@ -3,7 +3,7 @@
 namespace Modules\User\Http\Controllers;
 
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Modules\Newspaper\Http\Resources\Newspaper\NewspaperResource;
+use Modules\Newspaper\Http\Resources\NewspaperResource;
 use Modules\Newspaper\Models\Newspaper;
 use Modules\User\Models\User;
 

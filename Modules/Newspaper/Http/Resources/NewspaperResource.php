@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Newspaper\Http\Resources\Newspaper;
+namespace Modules\Newspaper\Http\Resources;
 
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;

@@ -3,7 +3,7 @@
 namespace Modules\Newspaper\Http\Controllers\Newspaper;
 
 use App\Http\Controllers\Controller;
-use Modules\Newspaper\Http\Resources\Newspaper\NewspaperResource;
+use Modules\Newspaper\Http\Resources\NewspaperResource;
 use Modules\Newspaper\Models\Newspaper;
 
 /**
@@ -13,7 +13,7 @@ class ShowController extends Controller
 {
     /**
      * @param \Modules\Newspaper\Models\Newspaper $newspaper
-     * @return \Modules\Newspaper\Http\Resources\Newspaper\NewspaperResource
+     * @return \Modules\Newspaper\Http\Resources\NewspaperResource
      */
     public function __invoke(Newspaper $newspaper): NewspaperResource
     {

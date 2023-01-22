@@ -4,9 +4,11 @@ services:
     nginx:
         image: nginx:latest
         ports:
-            -   "8080:80"
+            -   8000:80
         volumes:
-            - ./:/var/www
+            - ./public:/var/www/public
+            - ./storage/app:/var/www/html/storage/app:cached
+            - ./storage/nginx-logs:/var/log/nginx
             - ./infrastructure/local/docker/nginx/conf.d:/etc/nginx/conf.d
         depends_on:
             -   php-fpm

@@ -31,6 +31,12 @@ use Modules\Newspaper\Http\Controllers\Comment\UpdateController as CommentUpdate
 use Modules\Newspaper\Http\Controllers\Comment\StoreController as CommentStoreController;
 use Modules\Newspaper\Http\Controllers\Comment\VoteController as CommentVoteController;
 
+use Modules\Newspaper\Http\Controllers\Staff\IndexController as StaffIndexController;
+use Modules\Newspaper\Http\Controllers\Staff\ShowController as StaffShowController;
+use Modules\Newspaper\Http\Controllers\Staff\DeleteController as StaffDeleteController;
+use Modules\Newspaper\Http\Controllers\Staff\UpdateController as StaffUpdateController;
+use Modules\Newspaper\Http\Controllers\Staff\StoreController as StaffStoreController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -103,6 +109,35 @@ Route::group([
      * Free staff from a newspaper
      */
     Route::post('/{newspaper}/free/{user}', FreeStaffController::class);
+
+    Route::group([
+        'prefix'     => '{newspaper}',
+    ], function () {
+        /**
+         * Show the staff of the newspaper
+         */
+        Route::get('/staff', StaffIndexController::class);
+
+        /**
+         * Show the staff person
+         */
+        Route::get('/staff/{staff}', StaffShowController::class);
+
+        /**
+         * Update the article
+         */
+        Route::post('/staff', StaffUpdateController::class);
+
+        /**
+         * Update the article
+         */
+        Route::post('/staff/{staff}', StaffUpdateController::class);
+
+        /**
+         * Delete an article
+         */
+        Route::delete('/staff/{staff}', StaffDeleteController::class);
+    });
 });
 
 Route::group([
