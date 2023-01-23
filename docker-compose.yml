@@ -1,10 +1,10 @@
-version: '3'
+version: '3.8'
 
 services:
     nginx:
         image: nginx:latest
         ports:
-            -   8000:80
+            - "8000:80"
         volumes:
             - ./public:/var/www/public
             - ./storage/app:/var/www/html/storage/app:cached
@@ -13,6 +13,18 @@ services:
         depends_on:
             -   php-fpm
         container_name: gdp_nginx
+        networks:
+            - gdp_network
+
+    ngrok:
+        container_name: gdp_ngrok
+        ports:
+            - "0.0.0.0:4040:4040"
+        image: wernight/ngrok
+        environment:
+            - NGROK_AUTH=2KimxVsCHvhbX8W0NRX7yEyX9TB_5REwMx9tGJZomrKvBBRNY
+            - NGROK_REGION=eu
+            - NGROK_PORT=nginx:80
         networks:
             - gdp_network
 
