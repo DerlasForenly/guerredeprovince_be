@@ -23,7 +23,7 @@ class StoreRequest extends FormRequest
         return [
             'title'        => ['required', 'max:50', 'min:4', 'string'],
             'content'      => ['required', 'max:10000', 'min:25', 'string'],
-            'newspaper_id' => ['nullable'],
+            'newspaper_id' => ['nullable', 'integer', 'min:0'],
         ];
     }
 

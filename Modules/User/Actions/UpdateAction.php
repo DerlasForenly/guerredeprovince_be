@@ -21,6 +21,12 @@ class UpdateAction
         $user->update($params);
 
         $picture = $params['avatar'];
+
+        /**
+         * @TODO getClientOriginalExtension() is unsafe way to save files
+         * 
+         * It is better to create unique hash
+         */
         $picture_name = $user->id . "_avatar." . $picture->getClientOriginalExtension();
         $path = "avatars/users/";
 

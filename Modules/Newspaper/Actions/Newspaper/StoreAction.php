@@ -32,6 +32,12 @@ class StoreAction
         $newspaper = Newspaper::create($params);
 
         $picture = $params['avatar'];
+
+        /**
+         * @TODO getClientOriginalExtension() is unsafe way to save files
+         * 
+         * It is better to create unique hash
+         */
         $picture_name = $newspaper->id . "_avatar." . $picture->getClientOriginalExtension();
         $path = "avatars/newspapers/";
 
