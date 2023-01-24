@@ -22,25 +22,6 @@ class UserSeeder extends Seeder
             ->country(1)
             ->create();
 
-        User::factory()
-            ->nickname('Sora von Einzbern')
-            ->email('soso.soso@gmail.com')
-            ->nation(1)
-            ->country(1)
-            ->create();
-
-        User::factory()
-            ->nickname('Бодя Ножик')
-            ->email('bknife@gmail.com')
-            ->nation(1)
-            ->country(1)
-            ->create();
-
-        User::factory()
-            ->nickname('Туман')
-            ->email('tuman@gmail.com')
-            ->create();
-
         for ($i = 0; $i < 15; $i++) {
             User::factory()
                 ->nickname('Test_user_' . Str::random(10))
