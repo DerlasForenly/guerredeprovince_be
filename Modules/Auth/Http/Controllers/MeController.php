@@ -10,11 +10,13 @@ class MeController extends Controller
 {
     /**
      * Get the authenticated User.
-     *
-     * @return \Modules\Auth\Http\Resources\MeResource
      */
-    public function __invoke(): MeResource
+    public function __invoke(): JsonResponse
     {
-        return new MeResource(auth()->user());
+        $response = response()->json(new MeResource(auth()->user()), 200);
+
+        $response->header('Content-Type', 'application/json');
+
+        return $response;
     }
 }

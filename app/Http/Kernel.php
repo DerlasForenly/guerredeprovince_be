@@ -2,7 +2,6 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\NgrokMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -63,6 +62,6 @@ class Kernel extends HttpKernel
         'throttle'         => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified'         => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'jwt.verify'       => \Modules\Auth\Http\Middleware\JwtMiddleware::class,
-        'ngrok'            => NgrokMiddleware::class,
+        'cors'             => \App\Http\Middleware\Cors::class, 
     ];
 }

@@ -25,6 +25,7 @@ services:
             - NGROK_AUTH=2KimxVsCHvhbX8W0NRX7yEyX9TB_5REwMx9tGJZomrKvBBRNY
             - NGROK_REGION=eu
             - NGROK_PORT=nginx:80
+            - NGROK_HEADER=rewrite
         networks:
             - gdp_network
 

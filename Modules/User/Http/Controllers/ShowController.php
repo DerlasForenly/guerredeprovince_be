@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\User\Models\User;
+use Illuminate\Http\JsonResponse;
 
 class ShowController extends Controller
 {
@@ -13,10 +14,10 @@ class ShowController extends Controller
      * Show the specified resource.
      *
      * @param User $user
-     * @return User
+     * @return JsonResponse
      */
-    public function __invoke(User $user): User
+    public function __invoke(User $user): JsonResponse
     {
-        return $user;
+        return response()->json($user);
     }
 }
