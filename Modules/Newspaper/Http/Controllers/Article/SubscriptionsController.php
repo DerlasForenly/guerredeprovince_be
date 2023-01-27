@@ -25,7 +25,7 @@ class SubscriptionsController extends Controller
          */
         $user = auth()->userOrFail();
         $newspaperIds = $user->subscriptionNewspapers->pluck('id');
-        $articles = Article::whereIn('newspaper_id', $newspaperIds)->latest()->paginate(5);
+        $articles = Article::whereIn('newspaper_id', $newspaperIds)->latest()->paginate(9);
 
         return ShortArticleInfoResource::collection($articles);
     }
