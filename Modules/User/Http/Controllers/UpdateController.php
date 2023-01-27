@@ -27,8 +27,6 @@ class UpdateController extends Controller
         UpdateRequest $request,
         UpdateAction $action,
     ): JsonResponse {
-
-        logger($request);
         return $action->handle($user, $request->toArray());
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Modules\User\Actions;
 
+use finfo;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 use Modules\User\Models\User;
@@ -22,13 +23,12 @@ class UpdateAction
 
         $picture = $params['avatar'];
 
-        /**
-         * @TODO getClientOriginalExtension() is unsafe way to save files
-         * 
-         * It is better to create unique hash
-         */
-        $picture_name = $user->id . "_avatar." . $picture->getClientOriginalExtension();
-        $path = "avatars/users/";
+        $picture_name = $user->id . "_avatar";
+        $path         = "avatars/users/";
+
+        if (Storage::exists($path . $picture_name)) {
+            Storage::delete($path . $picture_name);
+        }
 
         Storage::putFileAs($path, $picture, $picture_name);
 
