@@ -14,3 +14,7 @@ yarn-error.log
 /.idea
 /.vscode
 /storage/mysql-image-data
+/storage/app/avatars
+/storage/app/articles
+/storage/app/backgrounds
+!/storage/app/avatars/default.jpg
