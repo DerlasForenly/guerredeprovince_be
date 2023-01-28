@@ -124,6 +124,11 @@ Route::group([
         Route::get('/staff/{staff}', StaffShowController::class);
 
         /**
+         * Show the newspaper articles
+         */
+        Route::get('/articles', \Modules\Newspaper\Http\Controllers\Newspaper\ArticlesController::class);
+
+        /**
          * Update the article
          */
         Route::post('/staff', StaffUpdateController::class);
