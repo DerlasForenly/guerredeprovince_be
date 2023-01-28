@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\User\Models\User;
 
+/**
+ * Class Employee
+ *
+ * @property int $user_id
+ * @property int $business_id
+ * @property int $salary
+ * @property int $salary_type
+ * @property \Modules\Business\Models\Business $business
+ */
 class Employee extends Model
 {
     use HasFactory;

@@ -46,6 +46,8 @@ class MeResource extends JsonResource
             'gold'                   => $gold->quantity,
             'diamonds'               => $diamonds->quantity,
             'newspaper_id'           => $this->newspaperStaff?->newspaper_id,
+            'job_business_id'        => $this->employee?->business_id,
+            'action'                 => $this->action,
         ];
     }
 }

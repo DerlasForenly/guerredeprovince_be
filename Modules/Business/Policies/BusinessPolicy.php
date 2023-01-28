@@ -44,8 +44,8 @@ class BusinessPolicy
     public function work(User $user): Response
     {
         return match (true) {
-            $user->action => $this->deny('You are busy right now'),
-            !$user->job => $this->deny('You dont have job any'),
+            (bool)$user->action => $this->deny('You are busy right now'),
+            !$user->employee => $this->deny('You dont have job any'),
             default => $this->allow(),
         };
     }
@@ -58,7 +58,7 @@ class BusinessPolicy
     {
         return match (true) {
             !$user->action => $this->deny('You are not busy right now'),
-            !$user->job => $this->deny('You dont have job any'),
+            !$user->employee => $this->deny('You dont have job any'),
             $user->action->action_type_id !== ActionType::WORKING_ID => $this->deny('You are busy on other action. Nothing to get'),
             default => $this->allow(),
         };

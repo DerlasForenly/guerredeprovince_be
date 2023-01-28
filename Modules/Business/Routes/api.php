@@ -31,12 +31,14 @@ Route::group([
     /**
      * Drop job
      */
-    Route::post('/drop-job', DropJobController::class)->can('dropJob', Business::class);
+    Route::post('/drop-job', DropJobController::class)
+        ->can('dropJob', Business::class);
 
     /**
      * Get job
      */
-    Route::post('/{business}/get-job', GetJobController::class)->can('getJob', 'business');
+    Route::post('/{business}/get-job', GetJobController::class)
+        ->can('getJob', 'business');
 
     /**
      * Show
@@ -61,7 +63,8 @@ Route::group([
     /**
      * Work
      */
-    Route::post('/work', WorkController::class)->can('work', Business::class);
+    Route::post('/work', WorkController::class)
+        ->can('work', Business::class);
 
     /**
      * Get salary for work

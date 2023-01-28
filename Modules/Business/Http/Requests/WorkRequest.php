@@ -11,10 +11,10 @@ class WorkRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'time' => ['required'],
+            'time' => ['required', 'min:0', 'integer'],
         ];
     }
 
@@ -23,7 +23,7 @@ class WorkRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }

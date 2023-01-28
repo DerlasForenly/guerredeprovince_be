@@ -19,18 +19,6 @@ class StoreRequest extends FormRequest
     }
 
     /**
-     * @return array
-     */
-    public function messages(): array
-    {
-        return [
-            'name.required'        => 'lol, man',
-            'description.required' => 'shit, man',
-            'avatar.required'      => 'shit, man',
-        ];
-    }
-
-    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool

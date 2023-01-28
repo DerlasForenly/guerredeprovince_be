@@ -18,7 +18,8 @@ use Modules\User\Models\Traits\GetJWT;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
- * @property Action $action
+ * Class User
+ *
  * @property string $avatar
  * @property int $nation_id
  * @property int $current_region_id
@@ -36,6 +37,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property NewspaperStaff $newspaperStaff
  * @property Treasury $treasuries
  * @property $subscriptions
+ * @property \Modules\Business\Models\Employee $employee
+ * @property \Modules\Action\Models\Action $action
  */
 class User extends Authenticatable implements JWTSubject, Treasurable
 {
