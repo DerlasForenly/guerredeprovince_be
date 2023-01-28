@@ -3,18 +3,18 @@
 namespace Modules\Newspaper\Http\Controllers\Newspaper;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\JsonResponse;
-use Modules\Newspaper\Http\Resources\Article\ArticleResource;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Modules\Newspaper\Http\Resources\Article\ShortArticleInfoResource;
 use Modules\Newspaper\Models\Newspaper;
 
 class ArticlesController extends Controller
 {
     /**
      * @param \Modules\Newspaper\Models\Newspaper $newspaper
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function __invoke(Newspaper $newspaper): JsonResponse
+    public function __invoke(Newspaper $newspaper): AnonymousResourceCollection
     {
-        return response()->json(ArticleResource::collection($newspaper->articles()->paginate(9)));
+        return ShortArticleInfoResource::collection($newspaper->articles()->latest()->paginate(9));
     }
 }
