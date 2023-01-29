@@ -35,4 +35,40 @@ class CommentPolicy
             default => $this->allow(),
         };
     }
+
+    /**
+     * @param \Modules\User\Models\User $user
+     * @param \Modules\Newspaper\Models\Comment $comment
+     * @return \Illuminate\Auth\Access\Response
+     */
+    public function delete(User $user, Comment $comment): Response
+    {
+        return match (true) {
+            $this->isAuthor($user, $comment) => $this->allow(),
+            default => $this->deny('It is not your comment'),
+        };
+    }
+
+    /**
+     * @param \Modules\User\Models\User $user
+     * @param \Modules\Newspaper\Models\Comment $comment
+     * @return \Illuminate\Auth\Access\Response
+     */
+    public function edit(User $user, Comment $comment): Response
+    {
+        return match (true) {
+            $this->isAuthor($user, $comment) => $this->allow(),
+            default => $this->deny('It is not your comment'),
+        };
+    }
+
+    /**
+     * @param \Modules\User\Models\User $user
+     * @param \Modules\Newspaper\Models\Comment $comment
+     * @return bool
+     */
+    private function isAuthor(User $user, Comment $comment): bool
+    {
+        return $user->id === $comment->user_id;
+    }
 }

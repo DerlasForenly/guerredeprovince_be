@@ -27,7 +27,7 @@ return new class extends Migration
                 ->on('articles')
                 ->onDelete('cascade');
 
-            $table->string('content');
+            $table->string('content', 300);
 
             $table->timestamps();
         });

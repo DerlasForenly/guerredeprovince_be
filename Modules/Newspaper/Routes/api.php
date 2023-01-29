@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Newspaper\Http\Controllers\Article\CommentsController;
 use Modules\Newspaper\Http\Controllers\Article\LastController;
 use Modules\Newspaper\Http\Controllers\Article\PromotedController;
+use Modules\Newspaper\Http\Controllers\Article\RecommendedController;
 use Modules\Newspaper\Http\Controllers\Article\SubscriptionsController;
 use Modules\Newspaper\Http\Controllers\Article\TopController;
 use Modules\Newspaper\Http\Controllers\Article\VoteController;
@@ -111,7 +112,7 @@ Route::group([
     Route::post('/{newspaper}/free/{user}', FreeStaffController::class);
 
     Route::group([
-        'prefix'     => '{newspaper}',
+        'prefix' => '{newspaper}',
     ], function () {
         /**
          * Show the staff of the newspaper
@@ -129,17 +130,17 @@ Route::group([
         Route::get('/articles', \Modules\Newspaper\Http\Controllers\Newspaper\ArticlesController::class);
 
         /**
-         * Update the article
+         * Update the article staff
          */
         Route::post('/staff', StaffUpdateController::class);
 
         /**
-         * Update the article
+         * Update the article staff
          */
         Route::post('/staff/{staff}', StaffUpdateController::class);
 
         /**
-         * Delete an article
+         * Delete an article staff
          */
         Route::delete('/staff/{staff}', StaffDeleteController::class);
     });
@@ -170,6 +171,11 @@ Route::group([
     Route::get('/promoted', PromotedController::class);
 
     /**
+     * Get promoted article
+     */
+    Route::get('/recommended', RecommendedController::class);
+
+    /**
      * Show the article avatar
      */
     Route::get('/{article}/avatar', ArticleAvatarController::class);
@@ -185,7 +191,7 @@ Route::group([
     Route::get('/{article}', ArticleShowController::class);
 
     /**
-     * Show the article
+     * Show the article comments
      */
     Route::get('/{article}/comments', CommentsController::class);
 
@@ -197,7 +203,7 @@ Route::group([
     /**
      * Update the article
      */
-    Route::post('/{article}', ArticleUpdateController::class);
+    //Route::post('/{article}', ArticleUpdateController::class);
 
     /**
      * Create an article
@@ -207,7 +213,8 @@ Route::group([
     /**
      * Delete an article
      */
-    Route::delete('/{article}', ArticleDeleteController::class);
+    Route::delete('/{article}', ArticleDeleteController::class)
+        ->can('delete', 'article');
 
     /**
      * Vote for the article
@@ -228,7 +235,8 @@ Route::group([
     /**
      * Update the article
      */
-    Route::post('/{comment}', CommentUpdateController::class);
+    Route::post('/{comment}', CommentUpdateController::class)
+        ->can('edit', 'comment');
 
     /**
      * Delete an article

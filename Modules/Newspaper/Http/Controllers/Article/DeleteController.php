@@ -18,6 +18,7 @@ class DeleteController extends Controller
         Article $article,
         DeleteAction $action
     ): JsonResponse {
+        sleep(2);
         return $action->handle($article);
     }
 }

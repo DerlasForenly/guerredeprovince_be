@@ -18,6 +18,7 @@ class StoreController extends Controller
         StoreAction $action,
         StoreRequest $request
     ): JsonResponse {
+        sleep(2);
         return $action->handle($request->toArray());
     }
 }

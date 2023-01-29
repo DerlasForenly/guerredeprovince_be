@@ -30,4 +30,33 @@ class ArticlePolicy
             default => $this->allow(),
         };
     }
+
+    /**
+     * @param \Modules\User\Models\User $user
+     * @param \Modules\Newspaper\Models\Article $article
+     * @return \Illuminate\Auth\Access\Response
+     */
+    public function delete(User $user, Article $article): Response
+    {
+        return match (true) {
+            $this->isAuthor($user, $article),
+            $this->isNewspaperStaff($user, $article) => $this->allow(),
+            default => $this->deny('It is not your article'),
+        };
+    }
+
+    /**
+     * @param \Modules\User\Models\User $user
+     * @param \Modules\Newspaper\Models\Article $article
+     * @return bool
+     */
+    private function isAuthor(User $user, Article $article): bool
+    {
+        return $user->id === $article->user_id;
+    }
+
+    private function isNewspaperStaff(User $user, Article $article): bool
+    {
+        return false;
+    }
 }
