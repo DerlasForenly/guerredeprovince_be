@@ -4,13 +4,13 @@
     'name' => 'Laravel',
     'env' => 'local',
     'debug' => true,
-    'url' => 'http://localhost',
+    'url' => 'http://guerredeprovince.ddns.net',
     'asset_url' => NULL,
     'timezone' => 'UTC',
     'locale' => 'en',
     'fallback_locale' => 'en',
     'faker_locale' => 'en_US',
-    'key' => 'base64:MqJgB9KuuvlXR/3Tiua8qVngXDL7AZ2F1e2tZ8YrMew=',
+    'key' => 'base64:9cvrPQ6Wys+keyakmHYQW8yKQqC0e+4YiCvXBpQnPG0=',
     'cipher' => 'AES-256-CBC',
     'providers' => 
     array (
@@ -379,7 +379,7 @@
       array (
         'driver' => 'local',
         'root' => '/var/www/storage/app/public',
-        'url' => 'http://localhost/storage',
+        'url' => 'http://guerredeprovince.ddns.net/storage',
         'visibility' => 'public',
       ),
       's3' => 
@@ -920,7 +920,7 @@
       2 => '127.0.0.1',
       3 => '127.0.0.1:8000',
       4 => '::1',
-      5 => 'localhost',
+      5 => 'guerredeprovince.ddns.net',
     ),
     'guard' => 
     array (
@@ -1069,7 +1069,7 @@
   ),
   'jwt' => 
   array (
-    'secret' => 'RP2vmErkQhLP8zvirUWn7vV0uhHg4XeFbW6dDMvxAWDfvuzDdwJHvFzrIaepcPmF',
+    'secret' => 'TirGNCjOds7ScXfkAQ81JWzWIlemraYpLimA0gcLtyZJAc63XaQJMXuyZrUlWi34',
     'keys' => 
     array (
       'public' => NULL,
@@ -1150,8 +1150,8 @@
     'name' => 'Newspaper',
     'nyckel' => 
     array (
-      'client_id' => NULL,
-      'client_secret' => NULL,
+      'client_id' => 'e63e3y82n1a13hoc8qsv0x55idu6xof3',
+      'client_secret' => 'ns6bugib465w737li2lg1bxh0yvq324zm6dabcis7gqur8xf59ov2z2cvoavlr81',
     ),
   ),
   'party' => 

@@ -249,3 +249,8 @@ Route::group([
     Route::post('/{comment}/vote', CommentVoteController::class)
         ->can('vote', 'comment');
 });
+
+/**
+ * Show the article
+ */
+Route::get('/categories', [\Modules\Newspaper\Http\Controllers\CategoryController::class, 'index']);

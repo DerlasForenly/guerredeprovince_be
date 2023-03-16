@@ -14,6 +14,7 @@ use Modules\Country\Database\Seeders\GovernmentTypeSeeder;
 use Modules\Country\Database\Seeders\NationSeeder;
 use Modules\GamePrice\Database\Seeders\GamePriceResourceSeeder;
 use Modules\GamePrice\Database\Seeders\GamePriceSeeder;
+use Modules\Newspaper\Database\Seeders\CategorySeeder;
 use Modules\Newspaper\Database\Seeders\NewspaperDatabaseSeeder;
 use Modules\Party\Database\Seeders\PoliticalPartySeeder;
 use Modules\Party\Database\Seeders\PoliticalPartyStaffSeeder;
@@ -43,6 +44,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            CategorySeeder::class,
             GovernmentTypeSeeder::class,
             SalaryTypeSeeder::class,
             ActionTypeSeeder::class,

@@ -10,6 +10,7 @@ use Database\Factories\Traits\HasUser;
 use Illuminate\Support\Str;
 use Modules\Newspaper\Models\Article;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Newspaper\Models\Category;
 
 /**
  * Class ArticleFactory
@@ -39,7 +40,7 @@ class ArticleFactory extends Factory
             'content'      => 'Content for article with random string',
             'newspaper_id' => null,
             'user_id'      => 1,
-            'category_id'  => null,
+            'category_id'  => Category::all()->random(),
             'language_id'  => null,
         ];
     }

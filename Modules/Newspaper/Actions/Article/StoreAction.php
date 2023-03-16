@@ -5,6 +5,7 @@ namespace Modules\Newspaper\Actions\Article;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 use Modules\Newspaper\Models\Article;
+use Modules\Newspaper\Models\Category;
 
 /**
  * Class StoreAction
@@ -26,7 +27,7 @@ class StoreAction
         $article->refresh();
 
         $fileName = "articles/texts/{$article->id}_content.txt";
-        $file = Storage::put($fileName, $content);
+        Storage::put($fileName, $content);
         $article->content = $fileName;
 
         $article->save();
