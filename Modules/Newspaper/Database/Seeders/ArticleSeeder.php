@@ -91,18 +91,5 @@ class ArticleSeeder extends Seeder
                 ->article($article->id)
                 ->create();
         }
-
-        foreach (User::all() as $user) {
-            foreach (Article::all() as $article) {
-                $rating = Rating::where('user_id', $user->id)->where('article_id', $article->id)->first();
-
-                if (!$rating) {
-                    Rating::factory()
-                        ->user($user->id)
-                        ->article($article->id)
-                        ->create();
-                }
-            }
-        }
     }
 }
