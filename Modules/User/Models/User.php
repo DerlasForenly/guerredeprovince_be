@@ -104,4 +104,9 @@ class User extends Authenticatable implements JWTSubject, Treasurable
         'energy'            => 'integer',
         'nation_id'         => 'integer',
     ];
+
+    public static function findByNickname(string $nickname): User
+    {
+        return self::where('nickname', $nickname)->first();
+    }
 }

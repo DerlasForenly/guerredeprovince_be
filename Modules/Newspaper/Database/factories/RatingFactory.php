@@ -31,4 +31,17 @@ class RatingFactory extends Factory
             'value' => rand(0, 1) === 1 ? 1 : -1,
         ];
     }
+
+    /**
+     * @param bool $value
+     * @return $this
+     */
+    public function value(bool $value): self
+    {
+        return $this->state(function (array $attributes) use ($value) {
+            return [
+                'value' => $value,
+            ];
+        });
+    }
 }

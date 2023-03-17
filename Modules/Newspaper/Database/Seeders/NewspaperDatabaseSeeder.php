@@ -29,65 +29,10 @@ class NewspaperDatabaseSeeder extends Seeder
     {
         Newspaper::factory()->count(2)->create();
 
-        Article::factory()
-            ->newspaper(1)
-            ->count(5)
-            ->language(Language::UKRAINIAN_ID)
-            ->create();
-
-        Article::factory()
-            ->newspaper(2)
-            ->count(3)
-            ->language(Language::UKRAINIAN_ID)
-            ->create();
-
-        Article::factory()
-            ->count(5)
-            ->language(Language::UKRAINIAN_ID)
-            ->create();
-
         Subscription::factory()
             ->user(1)
             ->newspaper(1)
             ->create();
-
-
-        Comment::factory()
-            ->user(1)
-            ->article(1)
-            ->count(3)
-            ->create();
-
-        Comment::factory()
-            ->user(2)
-            ->article(1)
-            ->count(3)
-            ->create();
-
-        Comment::factory()
-            ->user(3)
-            ->article(1)
-            ->count(3)
-            ->create();
-
-        /**
-         * @var User $user
-         * @var Article $article
-         */
-        foreach (User::all() as $user) {
-            foreach (Article::all() as $article) {
-                Rating::factory()
-                    ->user($user->id)
-                    ->article($article->id)
-                    ->create();
-            }
-        }
-
-//        NewspaperStaff::factory()
-//            ->user(1)
-//            ->newspaper(1)
-//            ->position(Position::NEWSPAPER_OWNER_ID)
-//            ->create();
 
         NewspaperStaff::factory()
             ->user(2)

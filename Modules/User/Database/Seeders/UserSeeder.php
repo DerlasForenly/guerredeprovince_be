@@ -22,9 +22,31 @@ class UserSeeder extends Seeder
             ->country(1)
             ->create();
 
-        for ($i = 0; $i < 15; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             User::factory()
                 ->nickname('Test_user_' . Str::random(10))
+                ->email(Str::random(10) . '@gmail.com')
+                ->create();
+        }
+
+        $recommendationTestingUsers = [
+            'HumorLover',
+            'ScienceLover',
+            'PoliticLover',
+            'HumorScienceLover',
+            'HumorHater',
+            'PoliticHaterHumorLover',
+            'NoneLover',
+            'NoneHater',
+            'AllLover',
+            'AllHater',
+            'AllExceptHumorLover',
+            'HSPLover',
+        ];
+
+        foreach ($recommendationTestingUsers as $user) {
+            User::factory()
+                ->nickname($user)
                 ->email(Str::random(10) . '@gmail.com')
                 ->create();
         }

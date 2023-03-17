@@ -14,8 +14,11 @@ use Modules\Country\Database\Seeders\GovernmentTypeSeeder;
 use Modules\Country\Database\Seeders\NationSeeder;
 use Modules\GamePrice\Database\Seeders\GamePriceResourceSeeder;
 use Modules\GamePrice\Database\Seeders\GamePriceSeeder;
+use Modules\Newspaper\Database\Seeders\ArticleSeeder;
 use Modules\Newspaper\Database\Seeders\CategorySeeder;
+use Modules\Newspaper\Database\Seeders\CommentSeeder;
 use Modules\Newspaper\Database\Seeders\NewspaperDatabaseSeeder;
+use Modules\Newspaper\Models\Article;
 use Modules\Party\Database\Seeders\PoliticalPartySeeder;
 use Modules\Party\Database\Seeders\PoliticalPartyStaffSeeder;
 use Modules\Position\Database\Seeders\PositionSeeder;
@@ -75,6 +78,8 @@ class DatabaseSeeder extends Seeder
             RequestSeeder::class,
             CountryStaffSeeder::class,
             NewspaperDatabaseSeeder::class,
+            ArticleSeeder::class,
+            CommentSeeder::class,
         ]);
     }
 }

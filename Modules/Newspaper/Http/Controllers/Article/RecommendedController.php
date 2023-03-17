@@ -16,8 +16,7 @@ class RecommendedController extends Controller
         /**
          * @var User $user
          */
-        $user = auth()->userOrFail();
-
+        $user    = auth()->userOrFail();
         $article = $service->createRecommendationList($user);
 
         return new ShortArticleInfoResource($article);
