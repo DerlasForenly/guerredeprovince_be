@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $user_id
  * @property int $action_type_id
  * @property int $time
+ * @property $created_at
  */
 class Action extends Model
 {

@@ -10,6 +10,9 @@ use Modules\Treasury\Models\Treasury\Treasury;
 use Modules\Treasury\Services\TransactionService;
 use Modules\User\Models\User;
 
+/**
+ * Class SalaryService
+ */
 class SalaryService
 {
     /**
@@ -18,16 +21,16 @@ class SalaryService
     private Business $business;
 
     /**
-     * @var Treasury|null
+     * @var Treasury
      */
-    private ?Treasury $businessTreasury;
+    private Treasury $businessTreasury;
 
     /**
      * User treasury for specified resource
      *
-     * @var Treasury|null
+     * @var Treasury
      */
-    private ?Treasury $userTreasury;
+    private Treasury $userTreasury;
 
     /**
      * Work time, has minimum and maximum
@@ -37,10 +40,18 @@ class SalaryService
     private int $time;
 
     /**
+     * @var \Modules\Treasury\Services\TransactionService
+     */
+    protected TransactionService $transactionService;
+
+    /**
      * @param User $user
      */
-    public function __construct(private User $user)
-    {
+    public function __construct(
+        private User $user,
+    ) {
+        $this->transactionService = app(TransactionService::class);
+
         $this->business = $this->user->employee->business;
         $this->time = $this->getWorkTime();
 
@@ -91,11 +102,11 @@ class SalaryService
         switch ($this->business->salary_type_id) {
             case SalaryType::RESOURCE_ID:
                 $resources = $this->countResources($this->time);
-                TransactionService::send($this->businessTreasury, $this->userTreasury, $resources);
+                //$this->transactionService->send($this->businessTreasury, $this->userTreasury, $resources);
                 return $resources;
             case SalaryType::MONEY_ID:
                 $resources = $this->countMoney($this->time);
-                TransactionService::send($this->businessTreasury, $this->userTreasury, $resources);
+                //$this->transactionService->send($this->businessTreasury, $this->userTreasury, $resources);
                 return $resources;
             default:
                 return 0;

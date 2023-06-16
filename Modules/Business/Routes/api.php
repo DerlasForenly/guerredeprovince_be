@@ -27,6 +27,18 @@ Route::group([
     'prefix' => 'businesses',
     'middleware' => ['jwt.verify'],
 ], function () {
+    /**
+     * Work
+     */
+    Route::post('/work', WorkController::class)
+        ->can('work', Business::class);
+
+    /**
+     * Get salary for work
+     */
+    Route::post('/get-salary', GetSalaryController::class)
+        ->middleware(MinWorkTimeMiddleware::class)
+        ->can('getSalary', Business::class);
 
     /**
      * Drop job
@@ -59,19 +71,6 @@ Route::group([
      * Destroy
      */
     Route::delete('/{business}', DestroyController::class);
-
-    /**
-     * Work
-     */
-    Route::post('/work', WorkController::class)
-        ->can('work', Business::class);
-
-    /**
-     * Get salary for work
-     */
-    Route::post('/get-salary', GetSalaryController::class)
-        ->middleware(MinWorkTimeMiddleware::class)
-        ->can('getSalary', Business::class);
 });
 
 

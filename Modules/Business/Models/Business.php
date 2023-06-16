@@ -13,6 +13,23 @@ use Modules\Resource\Models\Resource;
 use Modules\Treasury\Models\BusinessTreasury;
 use Modules\User\Models\User;
 
+/**
+ * Class Business
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $description
+ * @property string $emblem
+ * @property int $resource_id
+ * @property int $region_id
+ * @property int $salary_type_id
+ * @property int $user_id
+ * @property int $exp
+ * @property int|null $corporation_id
+ *
+ * @property \Modules\Region\Models\Region $region
+ * @property \Modules\Corporation\Models\Corporation $corporation
+ */
 class Business extends Model
 {
     use HasFactory;

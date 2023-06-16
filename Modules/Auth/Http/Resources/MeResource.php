@@ -3,6 +3,7 @@
 namespace Modules\Auth\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Modules\Action\Http\Resources\ActionResource;
 use Modules\Resource\Models\Resource;
 use Modules\Treasury\Models\Treasury\Treasury;
 use Modules\User\Models\User;
@@ -47,7 +48,7 @@ class MeResource extends JsonResource
             'diamonds'               => $diamonds->quantity,
             'newspaper_id'           => $this->newspaperStaff?->newspaper_id,
             'job_business_id'        => $this->employee?->business_id,
-            'action'                 => $this->action,
+            'action'                 => new ActionResource($this->action),
         ];
     }
 }
