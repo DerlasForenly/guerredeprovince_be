@@ -63,6 +63,11 @@ Route::group([
     Route::post('/', StoreController::class);
 
     /**
+     * Get all businesses
+     */
+    Route::get('/', \Modules\Business\Http\Controllers\IndexController::class);
+
+    /**
      * Update
      */
     Route::patch('/{business}', UpdateController::class);
