@@ -20,6 +20,7 @@ use Modules\User\Models\User;
  * @property string $name
  * @property string $description
  * @property string $emblem
+ * @property int $salary
  * @property int $resource_id
  * @property int $region_id
  * @property int $salary_type_id
@@ -29,6 +30,8 @@ use Modules\User\Models\User;
  *
  * @property \Modules\Region\Models\Region $region
  * @property \Modules\Corporation\Models\Corporation $corporation
+ * @property \Modules\User\Models\User $user
+ * @property \Modules\Resource\Models\Resource $resourceType
  */
 class Business extends Model
 {
@@ -52,7 +55,7 @@ class Business extends Model
         return $this->belongsTo(Corporation::class);
     }
 
-    public function resource(): BelongsTo
+    public function resourceType(): BelongsTo
     {
         return $this->belongsTo(Resource::class);
     }

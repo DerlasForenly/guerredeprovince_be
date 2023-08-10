@@ -5,6 +5,12 @@ namespace Modules\Resource\Models;
 use App\Models\Traits\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Resource
+ *
+ * @property int $id
+ * @property string $name
+ */
 class Resource extends Model
 {
     use HasFactory;
@@ -51,6 +57,7 @@ class Resource extends Model
      * @var string[]
      */
     protected $fillable = [
+        'id',
         'name'
     ];
 

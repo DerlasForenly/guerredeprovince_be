@@ -5,6 +5,7 @@ use Modules\Business\Http\Controllers\DestroyController;
 use Modules\Business\Http\Controllers\DropJobController;
 use Modules\Business\Http\Controllers\GetJobController;
 use Modules\Business\Http\Controllers\GetSalaryController;
+use Modules\Business\Http\Controllers\IndexController;
 use Modules\Business\Http\Controllers\ShowController;
 use Modules\Business\Http\Controllers\StoreController;
 use Modules\Business\Http\Controllers\UpdateController;
@@ -65,7 +66,7 @@ Route::group([
     /**
      * Get all businesses
      */
-    Route::get('/', \Modules\Business\Http\Controllers\IndexController::class);
+    Route::get('/', IndexController::class);
 
     /**
      * Update
