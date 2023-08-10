@@ -8,6 +8,19 @@ use Modules\Treasury\Models\Treasury\Treasury;
 class TransactionService
 {
     /**
+     * Send resources from game
+     *
+     * @param Treasury $to
+     * @param int $quantity
+     * @return void
+     */
+    public function sendResourcesFromGame(Treasury $to, int $quantity): void
+    {
+        $to->quantity += $quantity;
+        $to->save();
+    }
+
+    /**
      * Send resources from one treasury to another
      *
      * @param Treasury $from

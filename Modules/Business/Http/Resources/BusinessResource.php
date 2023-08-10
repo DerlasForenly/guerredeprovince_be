@@ -31,10 +31,10 @@ class BusinessResource extends JsonResource
                 'name'   => $this->region->name,
                 'emblem' => $this->region->emblem,
             ],
-            'salary'          => $this->salary_type_id === SalaryType::RESOURCE_ID ? $this->salary . '%' : $this->salary . '$',
-            'expected_salary' => 1355,
+            'salary'          => $this->salary_type_id === SalaryType::RESOURCE_ID ? $this->salary . '%' : $this->salary . 'G',
+            'expected_salary' => $this->salary_type_id === SalaryType::RESOURCE_ID ? 'Calculating...' : $this->salary,
             'exp'             => $this->exp,
-            'lvl'             => 15,
+            'lvl'             => 1,
             'corporation'     => $this->corporation_id ? [
                 'id'   => $this->corporation_id,
                 'name' => $this->corporation->name,

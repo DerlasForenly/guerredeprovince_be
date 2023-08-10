@@ -23,6 +23,8 @@ class CreateBusinessesTable extends Migration
                 ->nullable();
             $table->unsignedBigInteger('exp')
                 ->default(0);
+            $table->integer('lvl')
+                ->default(1);
             $table->unsignedBigInteger('salary')
                 ->default(90);
 

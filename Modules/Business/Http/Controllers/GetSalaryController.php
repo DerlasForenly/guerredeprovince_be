@@ -4,37 +4,30 @@ namespace Modules\Business\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Modules\Business\Services\SalaryService;
 
 class GetSalaryController extends Controller
 {
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function __invoke(): JsonResponse
     {
-        $user = auth()->userOrFail();
+        /**
+         * @var \Modules\User\Models\User $user
+         */
+        $user          = auth()->userOrFail();
         $salaryService = new SalaryService($user);
+        $time          = $salaryService->getWorkTime();
 
-        $compensation  = $salaryService->sendCompensation();
-        $time          = $compensation['time'];
-        $exp           = $compensation['exp'];
-        $resources     = $compensation['resources'];
-
-        $this->releasePlayer($user);
+        DB::transaction(function () use ($user, $salaryService) {
+            $salaryService->sendCompensation();
+            $user->action->delete();
+        });
 
         return response()->json([
-            'message' => "You worked for $time minutes.",
-            'salary' => $resources,
-            'exp' => $exp,
+            'message' => "You have been working for $time minutes.",
         ]);
-    }
-
-    /**
-     * Remove action to make player able to act other actions
-     *
-     * @param $user
-     * @return void
-     */
-    private function releasePlayer($user): void
-    {
-        $user->action->delete();
     }
 }

@@ -26,6 +26,7 @@ use Modules\User\Models\User;
  * @property int $salary_type_id
  * @property int $user_id
  * @property int $exp
+ * @property int $lvl
  * @property int|null $corporation_id
  *
  * @property \Modules\Region\Models\Region $region
@@ -41,6 +42,7 @@ class Business extends Model
         'name',
         'description',
         'emblem',
+        'lvl',
         'resource_id',
         'user_id',
         'region_id',

@@ -28,7 +28,7 @@ return new class extends Migration
                 ->on('resources')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger('quantity');
+            $table->unsignedBigInteger('quantity')->default(0);
 
             $table->timestamps();
         });

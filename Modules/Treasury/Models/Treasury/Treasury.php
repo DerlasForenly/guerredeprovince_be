@@ -9,7 +9,11 @@ use Modules\Resource\Models\Resource;
 /**
  * Abstract class Treasury
  *
+ * @property int $resource_id
  * @property int $quantity
+ *
+ * @property \Modules\Resource\Models\Resource $resource
+ * @property Model $owner
  */
 abstract class Treasury extends Model
 {
@@ -17,6 +21,7 @@ abstract class Treasury extends Model
      * @var string[]
      */
     protected $fillable = [
+        'resource_id',
         'quantity',
     ];
 
