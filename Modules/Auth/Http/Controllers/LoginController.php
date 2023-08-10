@@ -19,8 +19,7 @@ class LoginController extends Controller
     public function __invoke(
         LoginRequest $request,
         LoginAction $action
-    ): JsonResponse
-    {
+    ): JsonResponse {
         return $action->handle($request->only(['email', 'password']));
     }
 }

@@ -7,6 +7,9 @@ YARN := $(DC) node yarn
 ssh:
 	@$(FPM) sh
 
+nginx-reload:
+	@docker exec -it gdp_nginx service nginx reload
+
 start:
 	@docker-compose up -d
 
