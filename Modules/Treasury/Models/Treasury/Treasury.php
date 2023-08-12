@@ -18,14 +18,6 @@ use Modules\Resource\Models\Resource;
 abstract class Treasury extends Model
 {
     /**
-     * @var string[]
-     */
-    protected $fillable = [
-        'resource_id',
-        'quantity',
-    ];
-
-    /**
      * @return BelongsTo
      */
     public function resource(): BelongsTo

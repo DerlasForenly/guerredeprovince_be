@@ -1,9 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Region\Http\Controllers\CancelTravelingController;
-use Modules\Region\Http\Controllers\TravelToController;
-use Modules\Region\Models\Region;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,17 +14,8 @@ use Modules\Region\Models\Region;
 */
 
 Route::group([
-    'prefix' => 'region'
+    'prefix' => 'world-map',
+    'middleware' => ['jwt.verify'],
 ], function () {
-    /**
-     * Travel to the new region
-     */
-    Route::post('/travel-to/{region}', TravelToController::class)
-        ->can('travelTo', Region::class);
-
-    /**
-     * Cancel travel to the new region
-     */
-    Route::post('/travel-to/cancel', CancelTravelingController::class)
-        ->can('cancelTraveling', Region::class);
+    Route::get('/', \Modules\Region\Http\Controllers\WorldMapController::class);
 });

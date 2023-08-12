@@ -2,6 +2,7 @@
 
 namespace Modules\Region\Database\factories;
 
+use Database\Factories\Traits\HasDescription;
 use Database\Factories\Traits\HasName;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -10,7 +11,8 @@ use Modules\Region\Models\Region;
 
 class RegionFactory extends Factory
 {
-    use HasName;
+    use HasName,
+        HasDescription;
 
     /**
      * @var string
@@ -27,7 +29,7 @@ class RegionFactory extends Factory
         return [
             'name'           => 'Region_' . Str::random(10),
             'description'    => 'It is a test region',
-            'country_id'     => rand(2, Country::all()->count()),
+            'country_id'     => Country::inRandomOrder()->first()->id,
             'region_type_id' => 1
         ];
     }
@@ -46,15 +48,6 @@ class RegionFactory extends Factory
         return $this->state(function (array $attributes) use ($id) {
             return [
                 'country_id' => $id,
-            ];
-        });
-    }
-
-    public function description($description): RegionFactory
-    {
-        return $this->state(function (array $attributes) use ($description) {
-            return [
-                'description' => $description,
             ];
         });
     }

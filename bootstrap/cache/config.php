@@ -4,7 +4,7 @@
     'name' => 'Laravel',
     'env' => 'local',
     'debug' => true,
-    'url' => 'http://guerredeprovince.ddns.net',
+    'url' => 'http://localhost',
     'asset_url' => NULL,
     'timezone' => 'UTC',
     'locale' => 'en',
@@ -350,7 +350,7 @@
       'default' => 
       array (
         'url' => NULL,
-        'host' => '127.0.0.1',
+        'host' => 'redis',
         'password' => NULL,
         'port' => '6379',
         'database' => '0',
@@ -358,7 +358,7 @@
       'cache' => 
       array (
         'url' => NULL,
-        'host' => '127.0.0.1',
+        'host' => 'redis',
         'password' => NULL,
         'port' => '6379',
         'database' => '1',
@@ -379,7 +379,7 @@
       array (
         'driver' => 'local',
         'root' => '/var/www/storage/app/public',
-        'url' => 'http://guerredeprovince.ddns.net/storage',
+        'url' => 'http://localhost/storage',
         'visibility' => 'public',
       ),
       's3' => 
@@ -859,7 +859,7 @@
   ),
   'queue' => 
   array (
-    'default' => 'sync',
+    'default' => 'redis',
     'connections' => 
     array (
       'sync' => 
@@ -920,7 +920,7 @@
       2 => '127.0.0.1',
       3 => '127.0.0.1:8000',
       4 => '::1',
-      5 => 'guerredeprovince.ddns.net',
+      5 => 'localhost',
     ),
     'guard' => 
     array (

@@ -12,8 +12,9 @@ use Modules\User\Models\User;
  *
  * @property int $user_id
  * @property int $business_id
+ * @property int $salary_type_id
  * @property int $salary
- * @property int $salary_type
+ * @property \Modules\Business\Models\SalaryType $salary_type
  * @property \Modules\Business\Models\Business $business
  */
 class Employee extends Model

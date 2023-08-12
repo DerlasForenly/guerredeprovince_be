@@ -35,6 +35,8 @@ class CountryFactory extends Factory
             'description'        => 'It is a test country',
             'nation_id'          => rand(1, Nation::all()->count()),
             'government_type_id' => GovernmentType::PRESIDENTIAL_REPUBLIC_ID,
+            'color'              => '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT),
+            'border_color'       => '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT),
         ];
     }
 

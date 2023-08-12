@@ -15,53 +15,38 @@ class RegionSeeder extends Seeder
     public function run()
     {
         $ukraine_regions = [
-            'Київ',
-            'Київська область',
-            'Полтавська область',
-            'Харківська область',
-            'Донецька область',
-            'Одеська область',
-            'Луганська область',
-            'Черкаська область',
-            'Івано-Франківська область',
-            'Львівська область',
-            'Волинська область',
-            'Закарпатська область',
-            'Рівненська область',
-            'Миколаївська область',
-            'Автономна Республіка Крим',
-            'Севастополь',
-            'Чернівецька область',
-            'Житомирська область',
-            'Чернігівська область',
-            'Хмельницька область',
-            'Тернопільська область',
-            'Сумська область',
-            'Вінницька область',
-            'Дніпропетровська область',
-            'Запорізька область',
-            'Кропивницька область',
-            'Херсонська область',
-            'Воронежська область',
-            'Білгородська область',
-            'Ростовська область',
+            'kyiv-city',
+            'kyiv',
+            'poltava',
+            'kharkiv',
+            'donetsk',
+            'odesa',
+            'luhansk',
+            'cherkasy',
+            'ivano-frankivsk',
+            'lviv',
+            'volyn',
+            'zakarpattia',
+            'rivne',
+            'mykolaiv',
+            'crimea',
+            'chernivtsi',
+            'zhytomyr',
+            'chernihiv',
+            'khmelnytskyi',
+            'ternopil',
+            'sumy',
+            'vinnytsia',
+            'dnipro',
+            'zaporizhia',
+            'kropyvnytskyi',
+            'kherson',
         ];
 
         foreach ($ukraine_regions as $region) {
             Region::factory()
                 ->name($region)
-                ->country(1)
                 ->create();
         }
-
-        Region::factory()
-            ->count(5)
-            ->country(2)
-            ->create();
-
-        Region::factory()
-            ->count(5)
-            ->independent()
-            ->create();
     }
 }

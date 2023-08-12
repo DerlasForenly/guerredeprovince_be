@@ -14,6 +14,10 @@ RUN apt-get update && apt-get install -y \
       apt-get clean && \
       rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# Install the Redis extension
+RUN pecl install redis \
+    && docker-php-ext-enable redis
+
 COPY ./infrastructure/local/docker/php-fpm/php.ini /usr/local/etc/php/conf.d/php.ini
 
 # Install composer

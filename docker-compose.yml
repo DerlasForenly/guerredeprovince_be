@@ -57,6 +57,29 @@ services:
         command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
         container_name: gdp_mysql
 
+    redis:
+        image: redis:latest
+        container_name: gdp_redis
+        networks:
+            - gdp_network
+        ports:
+            - 6379:6379
+
+    queue-worker:
+        build:
+            context: .
+            dockerfile: infrastructure/local/docker/php-fpm/Dockerfile
+        volumes:
+            - ./:/var/www
+        command: php artisan queue:work
+        container_name: gdp_worker
+        networks:
+            - gdp_network
+        depends_on:
+            - php-fpm
+            - mysql
+            - redis
+
 networks:
     gdp_network:
         driver: bridge

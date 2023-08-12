@@ -15,6 +15,8 @@ use Modules\War\Models\War;
  * @property string $description
  * @property string $emblem
  * @property int|null $country_id
+ *
+ * @property \Modules\Country\Models\Country $country
  */
 class Region extends Model
 {

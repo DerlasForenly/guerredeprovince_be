@@ -12,6 +12,15 @@ class BusinessTreasury extends Treasury
     use HasFactory;
 
     /**
+     * @var string[]
+     */
+    protected $fillable = [
+        'business_id',
+        'resource_id',
+        'quantity',
+    ];
+
+    /**
      * @return BelongsTo
      */
     public function owner(): BelongsTo

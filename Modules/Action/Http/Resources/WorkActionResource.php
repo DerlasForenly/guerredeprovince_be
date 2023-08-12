@@ -8,9 +8,9 @@ use Modules\Action\Services\ActionCalculationsService;
 /**
  * Class ActionResource
  *
- * @mixin \Modules\Action\Models\Action $action
+ * @mixin \Modules\Action\Models\WorkAction $action
  */
-class ActionResource extends JsonResource
+class WorkActionResource extends JsonResource
 {
     /**
      * @param $request
@@ -22,11 +22,11 @@ class ActionResource extends JsonResource
 
         return [
             'time'           => $this->time,
-            'id'             => $this->user_id,
+            'id'             => $this->id,
             'user_id'        => $this->user_id,
             'start_date'     => $this->created_at,
-            'action_type_id' => $this->action_type_id,
             'remaining_time' => max($remainingTime, 0),
+            'business_id'    => $this->business_id,
         ];
     }
 }

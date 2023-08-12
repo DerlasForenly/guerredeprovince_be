@@ -3,6 +3,9 @@
 namespace Modules\Action\Providers;
 
 use App\Providers\BaseModuleProvider;
+use Modules\Action\Models\Action;
+use Modules\Action\Policies\ActionPolicy;
+use Modules\Region\Models\Region;
 
 class ActionServiceProvider extends BaseModuleProvider
 {
@@ -15,6 +18,14 @@ class ActionServiceProvider extends BaseModuleProvider
      * @var string $moduleNameLower
      */
     protected string $moduleNameLower = 'action';
+
+    /**
+     * @var string[]
+     */
+    protected $policies = [
+        Action::class => ActionPolicy::class,
+        Region::class => ActionPolicy::class,
+    ];
 
     /**
      * Boot the application events.

@@ -17,16 +17,13 @@ class CreateCountriesTable extends Migration
             $table->id();
 
             $table->string('name')->unique();
-            $table->string('description', 600)
-                ->nullable();
-            $table->string('emblem')
-                ->nullable();
-            $table->integer('parliament_size')
-                ->default(0);
-            $table->boolean('closed_borders')
-                ->default(false);
-            $table->boolean('mandatory_visa')
-                ->default(false);
+            $table->string('color')->nullable();
+            $table->string('border_color')->nullable();
+            $table->string('description', 600)->nullable();
+            $table->string('emblem')->nullable();
+            $table->integer('parliament_size')->default(0);
+            $table->boolean('closed_borders')->default(false);
+            $table->boolean('mandatory_visa')->default(false);
 
             $table->unsignedBigInteger('government_type_id');
             $table->foreign('government_type_id')

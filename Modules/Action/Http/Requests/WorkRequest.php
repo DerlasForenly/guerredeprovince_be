@@ -1,9 +1,12 @@
 <?php
 
-namespace Modules\Business\Http\Requests;
+namespace Modules\Action\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property int $time
+ */
 class WorkRequest extends FormRequest
 {
     /**

@@ -3,7 +3,9 @@
 namespace Modules\Business\Services;
 
 use Carbon\Carbon;
+use http\Encoding\Stream\Enbrotli;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 use Modules\Business\Models\Business;
 use Modules\Business\Models\SalaryType;
 use Modules\Resource\Models\Resource;
@@ -15,6 +17,8 @@ use Modules\User\Models\User;
 
 /**
  * Class SalaryService
+ *
+ * @TODO Add personal salary functional
  */
 class SalaryService
 {
@@ -54,10 +58,17 @@ class SalaryService
 
     /**
      * @param User $user
+     * @throws \Exception
      */
     public function __construct(
         private User $user,
     ) {
+        $this->user->refresh();
+
+        if (!$this->user->inProcessWork) {
+            throw new \Exception('There is no processed work.');
+        }
+
         $this->transactionService = app(TransactionService::class);
         $this->business           = $this->user->employee->business;
         $this->time               = $this->getWorkTime();
@@ -77,9 +88,9 @@ class SalaryService
      */
     public function getWorkTime(): int
     {
-        $diff = Carbon::now()->diffInMinutes($this->user->action->created_at);
+        $diff = Carbon::now()->diffInMinutes($this->user->inProcessWork->created_at);
 
-        return min($diff, $this->user->action->time);
+        return min($diff, $this->user->inProcessWork->time);
     }
 
     /**

@@ -3,6 +3,8 @@
 namespace Modules\Region\Providers;
 
 use App\Providers\BaseModuleProvider;
+use Modules\Region\Models\Region;
+use Modules\Region\Policies\RegionPolicy;
 
 class RegionServiceProvider extends BaseModuleProvider
 {
@@ -15,6 +17,13 @@ class RegionServiceProvider extends BaseModuleProvider
      * @var string $moduleNameLower
      */
     protected string $moduleNameLower = 'region';
+
+    /**
+     * @var string[]
+     */
+    protected $policies = [
+        Region::class => RegionPolicy::class,
+    ];
 
     /**
      * Boot the application events.

@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Modules\Action\Models\Action;
 use Modules\Newspaper\Models\NewspaperStaff;
 use Modules\Party\Models\PoliticalPartyStaff;
 use Modules\Treasury\Models\Treasury\Treasurable;
@@ -39,6 +38,13 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property $subscriptions
  * @property \Modules\Business\Models\Employee $employee
  * @property \Modules\Action\Models\Action $action
+ * @property \Modules\Region\Models\Region $currentRegion
+ * @property \Modules\Region\Models\Region $registrationRegion
+ * @property \Modules\Action\Models\MoveAction $inProcessMove
+ * @property \Modules\Action\Models\WarAction $inProcessWar
+ * @property \Modules\Action\Models\WorkAction $inProcessWork
+ *
+ * @property array $job
  */
 class User extends Authenticatable implements JWTSubject, Treasurable
 {

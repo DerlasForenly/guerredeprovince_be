@@ -5,6 +5,8 @@ namespace Modules\User\Database\factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Modules\Region\Models\Region;
+use Modules\User\Models\PoliticalView;
 use Modules\User\Models\User;
 use function now;
 
@@ -26,13 +28,16 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'nickname'          => $this->faker->name(),
-            'email'             => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'description'       => 'I am a test player',
-            'password'          => Hash::make('password123'),
-            'remember_token'    => Str::random(10),
-            'avatar'            => 'avatars/default.jpg',
+            'nickname'               => $this->faker->name(),
+            'email'                  => $this->faker->unique()->safeEmail(),
+            'email_verified_at'      => now(),
+            'description'            => 'I am a test player',
+            'password'               => Hash::make('password123'),
+            'remember_token'         => Str::random(10),
+            'avatar'                 => 'avatars/default.jpg',
+            'current_region_id'      => Region::inRandomOrder()->first()->id,
+            'registration_region_id' => Region::inRandomOrder()->first()->id,
+             //'political_view_id'      => PoliticalView::inRandomOrder()->first()->id,
         ];
     }
 

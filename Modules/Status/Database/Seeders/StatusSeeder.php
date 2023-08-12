@@ -4,6 +4,7 @@ namespace Modules\Status\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Modules\Status\Models\Status;
 
 class StatusSeeder extends Seeder
 {
@@ -12,22 +13,13 @@ class StatusSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        DB::table('statuses')->insert([
-            'name' => 'Active',
-        ]);
-
-        DB::table('statuses')->insert([
-            'name' => 'Inactive',
-        ]);
-
-        DB::table('statuses')->insert([
-            'name' => 'In process',
-        ]);
-
-        DB::table('statuses')->insert([
-            'name' => 'Ended',
-        ]);
+        foreach (Status::STATUSES as $key => $status) {
+            Status::create([
+               'id' => $key,
+               'name' => $status,
+            ]);
+        }
     }
 }

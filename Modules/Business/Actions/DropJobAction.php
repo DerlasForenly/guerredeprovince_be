@@ -14,6 +14,6 @@ class DropJobAction
 
         return response()->json([
             'message' => 'OK',
-        ], 200);
+        ]);
     }
 }

@@ -21,9 +21,15 @@ class CountrySeeder extends Seeder
             ->create();
 
         Country::factory()
-            ->name('Poland')
+            ->name('Storm Shadow Launcher')
             ->description("Wanna know how I got this borders?")
             ->nation(2)
+            ->create();
+
+        Country::factory()
+            ->name('Ben Wallace Thankland')
+            ->description("Wanna know how I got this borders?")
+            ->nation(1)
             ->create();
     }
 }

@@ -18,12 +18,10 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         foreach (Category::CATEGORIES as $key => $category) {
-            $newCategory = new Category();
-
-            $newCategory->id = $key;
-            $newCategory->name = $category;
-
-            $newCategory->save();
+            Category::firstOrCreate([
+                'id' => $key,
+                'name' => $category,
+            ]);
         }
     }
 }

@@ -2,6 +2,9 @@
 
 namespace Modules\User\Models\Relationships\User;
 
+use Modules\Action\Models\MoveAction;
+use Modules\Action\Models\WarAction;
+use Modules\Action\Models\WorkAction;
 use Modules\Business\Models\Business;
 use Modules\Newspaper\Models\NewspaperStaff;
 use Modules\Newspaper\Models\Rating;
@@ -46,5 +49,20 @@ trait HasMany
     {
         return $this->hasMany(Rating::class, 'user_id')
             ->where('comment_id', '<>', '');
+    }
+
+    public function workActions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(WorkAction::class);
+    }
+
+    public function warActions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(WarAction::class);
+    }
+
+    public function moveActions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(MoveAction::class);
     }
 }

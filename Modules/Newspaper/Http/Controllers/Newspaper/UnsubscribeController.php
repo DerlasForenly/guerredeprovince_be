@@ -31,6 +31,6 @@ class UnsubscribeController extends Controller
             'message'      => 'OK',
             'subscribed'   => false,
             'newspaper_id' => $newspaper->id,
-        ], 200);
+        ]);
     }
 }

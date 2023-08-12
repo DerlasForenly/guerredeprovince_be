@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDamagesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDamagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('damages', function (Blueprint $table) {
+        Schema::create('war_actions', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('user_id');
@@ -28,13 +28,15 @@ class CreateDamagesTable extends Migration
                 ->on('wars')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger('region_id');
-            $table->foreign('region_id')
+            $table->unsignedBigInteger('status_id');
+            $table->foreign('status_id')
                 ->references('id')
-                ->on('regions')
+                ->on('statuses')
+                ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->unsignedBigInteger('damage');
+            $table->unsignedMediumInteger('time');
 
             $table->timestamps();
         });
@@ -47,6 +49,6 @@ class CreateDamagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('damages');
+        Schema::dropIfExists('war_actions');
     }
-}
+};

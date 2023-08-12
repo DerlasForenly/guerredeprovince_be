@@ -4,13 +4,10 @@ use Illuminate\Support\Facades\Route;
 use Modules\Business\Http\Controllers\DestroyController;
 use Modules\Business\Http\Controllers\DropJobController;
 use Modules\Business\Http\Controllers\GetJobController;
-use Modules\Business\Http\Controllers\GetSalaryController;
 use Modules\Business\Http\Controllers\IndexController;
 use Modules\Business\Http\Controllers\ShowController;
 use Modules\Business\Http\Controllers\StoreController;
 use Modules\Business\Http\Controllers\UpdateController;
-use Modules\Business\Http\Controllers\WorkController;
-use Modules\Business\Http\Middleware\MinWorkTimeMiddleware;
 use Modules\Business\Models\Business;
 
 /*
@@ -28,19 +25,6 @@ Route::group([
     'prefix' => 'businesses',
     'middleware' => ['jwt.verify'],
 ], function () {
-    /**
-     * Work
-     */
-    Route::post('/work', WorkController::class)
-        ->can('work', Business::class);
-
-    /**
-     * Get salary for work
-     */
-    Route::post('/get-salary', GetSalaryController::class)
-        ->middleware(MinWorkTimeMiddleware::class)
-        ->can('getSalary', Business::class);
-
     /**
      * Drop job
      */
