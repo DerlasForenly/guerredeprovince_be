@@ -19,6 +19,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 /**
  * Class User
  *
+ * Properties
  * @property string $avatar
  * @property int $nation_id
  * @property int $current_region_id
@@ -26,11 +27,11 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property string $email
  * @property string $nickname
  * @property int $id
- *
  * @property boolean $banned
  * @property boolean $inactive
  * @property boolean $premium
  *
+ * Relationships
  * @property HasMany $requests
  * @property PoliticalPartyStaff $politicalPartyStaff
  * @property NewspaperStaff $newspaperStaff
@@ -44,7 +45,9 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property \Modules\Action\Models\WarAction $inProcessWar
  * @property \Modules\Action\Models\WorkAction $inProcessWork
  *
+ * Attributes
  * @property array $job
+ * @property bool $busy
  */
 class User extends Authenticatable implements JWTSubject, Treasurable
 {

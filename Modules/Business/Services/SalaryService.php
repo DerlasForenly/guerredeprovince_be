@@ -63,6 +63,7 @@ class SalaryService
     public function __construct(
         private User $user,
     ) {
+        Log::info('Hello, constructor');
         $this->user->refresh();
 
         if (!$this->user->inProcessWork) {
@@ -98,6 +99,7 @@ class SalaryService
      */
     public function sendCompensation(): void
     {
+        Log::info('Send compensation.');
         $this->sendExp();
         $this->sendSalary();
     }
@@ -167,7 +169,10 @@ class SalaryService
      */
     protected function countExp(int $time): int
     {
-        return $time;
+        /**
+         * @TODO Exp count formula
+         */
+        return 15;
     }
 
     protected function getBusinessTreasury(int $resource_id): BusinessTreasury

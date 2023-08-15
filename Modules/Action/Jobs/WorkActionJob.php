@@ -2,26 +2,29 @@
 
 namespace Modules\Action\Jobs;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Modules\Action\Models\WorkAction;
-use Modules\Business\Models\Business;
 use Modules\Business\Services\SalaryService;
-use Modules\Region\Models\Region;
 use Modules\Status\Models\Status;
-use Modules\User\Models\User;
 
-class WorkActionJob extends ActionJob {
+class WorkActionJob extends ActionJob
+{
+    /**
+     * Create a new job instance.
+     *
+     * @param int $user_id
+     * @param \Modules\Action\Models\WorkAction $action
+     */
+    public function __construct(int $user_id, protected WorkAction $action)
+    {
+        parent::__construct($user_id);
+    }
 
     /**
      * @throws \Exception
      */
-    function handle(): void
+    public function handle(): void
     {
         Log::info("Work action job for user has been started.", ['user_id' => $this->user->id]);
 
@@ -34,11 +37,9 @@ class WorkActionJob extends ActionJob {
             return;
         }
 
-        $salaryService = new SalaryService($this->user);
-
-        DB::transaction(function () use ($salaryService) {
+        DB::transaction(function () {
+            $salaryService = new SalaryService($this->user);
             $salaryService->sendCompensation();
-
             $this->action->status_id = Status::FINISHED_ID;
             $this->action->save();
         });

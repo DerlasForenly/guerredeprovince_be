@@ -24,7 +24,6 @@ class ActionServiceProvider extends BaseModuleProvider
      */
     protected $policies = [
         Action::class => ActionPolicy::class,
-        Region::class => ActionPolicy::class,
     ];
 
     /**

@@ -3,6 +3,9 @@
 namespace Modules\Auth\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Modules\Action\Http\Resources\MoveActionResource;
+use Modules\Action\Http\Resources\WorkActionResource;
+use Modules\Action\Jobs\WarActionJob;
 use Modules\Resource\Models\Resource;
 use Modules\Treasury\Models\Treasury\Treasury;
 use Modules\User\Models\User;
@@ -30,13 +33,6 @@ class MeResource extends JsonResource
          */
         $diamonds = $this->treasuries->where('resource_id', Resource::DIAMONDS_ID)->first();
 
-        $action = match (true) {
-            (bool) $this->inProcessWork => $this->inProcessWork,
-            (bool) $this->inProcessMove => $this->inProcessMove,
-            (bool) $this->inProcessWar => $this->inProcessWar,
-            default => null,
-        };
-
         return [
             'id'                     => $this->id,
             'nickname'               => $this->nickname,
@@ -61,7 +57,10 @@ class MeResource extends JsonResource
             'diamonds'               => $diamonds->quantity,
             'newspaper_id'           => $this->newspaperStaff?->newspaper_id,
             'job_business_id'        => $this->employee?->business_id,
-            'action'                 => $action,
+            'work_action'            => new WorkActionResource($this->inProcessWork),
+            'war_action'             => $this->inProcessWar,
+            'move_action'            => new MoveActionResource($this->inProcessMove),
+            'busy'                   => true,
         ];
     }
 }

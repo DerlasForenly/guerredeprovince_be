@@ -18,7 +18,7 @@ class WorkActionResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $remainingTime = ActionCalculationsService::getRemainingTimeInSec($this->created_at, $this->time);
+        $remainingTime = ActionCalculationsService::getRemainingTimeInSec($this->created_at, $this->time, true);
 
         return [
             'time'           => $this->time,

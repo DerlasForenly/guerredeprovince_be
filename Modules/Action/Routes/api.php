@@ -16,6 +16,7 @@ use Modules\Action\Http\Controllers\CancelTravelingController;
 use Modules\Action\Http\Controllers\WorkController;
 use Modules\Action\Models\Action;
 use Modules\Action\Http\Controllers\TravelToController;
+use Modules\Region\Models\Region;
 
 Route::group([
     'prefix' => 'world-map',
@@ -31,7 +32,7 @@ Route::group([
      * Travel to the new region
      */
     Route::post('/traveling/{region}', TravelToController::class)
-        ->can('travelTo', 'region');
+        ->can('travelTo', [Action::class, 'region']);
 });
 
 Route::group([

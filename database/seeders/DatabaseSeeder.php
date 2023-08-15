@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Modules\Action\Database\Seeders\ActionTypeSeeder;
 use Modules\Business\Database\Seeders\BusinessSeeder;
 use Modules\Business\Database\Seeders\EmployeeSeeder;
 use Modules\Business\Database\Seeders\SalaryTypeSeeder;
@@ -18,7 +17,6 @@ use Modules\Newspaper\Database\Seeders\ArticleSeeder;
 use Modules\Newspaper\Database\Seeders\CategorySeeder;
 use Modules\Newspaper\Database\Seeders\CommentSeeder;
 use Modules\Newspaper\Database\Seeders\NewspaperDatabaseSeeder;
-use Modules\Newspaper\Models\Article;
 use Modules\Party\Database\Seeders\PoliticalPartySeeder;
 use Modules\Party\Database\Seeders\PoliticalPartyStaffSeeder;
 use Modules\Position\Database\Seeders\PositionSeeder;
@@ -50,7 +48,6 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             GovernmentTypeSeeder::class,
             SalaryTypeSeeder::class,
-            ActionTypeSeeder::class,
             RequestTypeSeeder::class,
             PositionSeeder::class,
             ResourceSeeder::class,

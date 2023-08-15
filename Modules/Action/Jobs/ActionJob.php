@@ -10,6 +10,9 @@ use Illuminate\Queue\SerializesModels;
 use Modules\Action\Models\Action;
 use Modules\User\Models\User;
 
+/**
+ * @TODO Update logic for jobs to work with realizations instead of abstractions
+ */
 abstract class ActionJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -23,12 +26,11 @@ abstract class ActionJob implements ShouldQueue
      * Create a new job instance.
      *
      * @param int $user_id
-     * @param \Modules\Action\Models\Action $action
      */
-    public function __construct(int $user_id, protected Action $action)
+    public function __construct(int $user_id)
     {
         $this->user = User::find($user_id);
     }
 
-    abstract function handle();
+    abstract public function handle();
 }

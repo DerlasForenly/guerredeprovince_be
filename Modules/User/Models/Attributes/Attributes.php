@@ -28,9 +28,12 @@ trait Attributes
         ];
     }
 
-    public function getBusyAttribute()
+    /**
+     * @return bool
+     */
+    public function getBusyAttribute(): bool
     {
-        return (boolean)$this->action()->first();
+        return $this->inProcessMove || $this->inProcessWork || $this->inProcessWar;
     }
 
     public function getCitizenshipAttribute()

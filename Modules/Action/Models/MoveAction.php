@@ -7,6 +7,12 @@ use Modules\Region\Models\Region;
 
 /**
  * @property int $id
+ * @property int $end_region_id
+ * @property int $start_region_id
+ * @property int $price
+ *
+ * @property \Modules\Region\Models\Region $endRegion
+ * @property \Modules\Region\Models\Region $startRegion
  */
 class MoveAction extends Action
 {
@@ -21,6 +27,7 @@ class MoveAction extends Action
         'user_id',
         'status_id',
         'price',
+        'time',
     ];
 
     public function endRegion(): BelongsTo
@@ -32,6 +39,4 @@ class MoveAction extends Action
     {
         return $this->belongsTo(Region::class, 'start_region_id');
     }
-
-
 }

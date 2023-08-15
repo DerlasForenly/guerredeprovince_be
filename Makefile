@@ -36,5 +36,7 @@ seed:
 
 reset-db: truncate migrate seed
 
+restart: stop start
+
 install:
 	@$(FPM) composer install

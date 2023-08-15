@@ -5,6 +5,7 @@ namespace Modules\Action\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Modules\Action\Http\Requests\WorkRequest;
+use Modules\Action\Http\Resources\WorkActionResource;
 use Modules\Action\Jobs\WorkActionJob;
 use Modules\Action\Models\WorkAction;
 use Modules\Status\Models\Status;
@@ -33,11 +34,11 @@ class WorkController extends Controller
         ]);
 
         WorkActionJob::dispatch($user->id, $action)
-            ->delay(now()->addMinutes($request->time));
+            ->delay(now()->addSeconds($request->time));
 
         return response()->json([
             'message' => 'OK',
-            'action'  => $action,
+            'action'  => new WorkActionResource($action),
         ], 201);
     }
 }
