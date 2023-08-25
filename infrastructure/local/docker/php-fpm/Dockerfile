@@ -7,6 +7,8 @@ RUN apt-get update && apt-get install -y \
       libzip-dev \
       zip unzip \
       git && \
+      docker-php-ext-install pcntl && \
+      docker-php-ext-install sockets && \
       docker-php-ext-install pdo_mysql && \
       docker-php-ext-install bcmath && \
       docker-php-ext-install gd && \

@@ -1,6 +1,21 @@
 version: '3.8'
 
 services:
+    octane:
+        build:
+            context: .
+            dockerfile: infrastructure/local/docker/php-fpm/Dockerfile
+        volumes:
+            - ./:/var/www
+        container_name: gdp_octane
+        ports:
+            - "8080:8080"
+        command: php artisan octane:start --host=0.0.0.0 --port=8080
+        depends_on:
+            - mysql
+        networks:
+            - gdp_network
+
     nginx:
         image: nginx:latest
         ports:
@@ -11,7 +26,7 @@ services:
             - ./storage/nginx-logs:/var/log/nginx
             - ./infrastructure/local/docker/nginx/conf.d:/etc/nginx/conf.d
         depends_on:
-            -   php-fpm
+            - octane
         container_name: gdp_nginx
         networks:
             - gdp_network
@@ -28,18 +43,6 @@ services:
 #            - NGROK_HEADER=rewrite
 #        networks:
 #            - gdp_network
-
-    php-fpm:
-        build:
-            context: .
-            dockerfile: infrastructure/local/docker/php-fpm/Dockerfile
-        volumes:
-            - ./:/var/www
-        container_name: gdp_php-fpm
-        depends_on:
-            -   mysql
-        networks:
-            - gdp_network
 
     mysql:
         image: mysql:8.0.31
@@ -76,7 +79,7 @@ services:
         networks:
             - gdp_network
         depends_on:
-            - php-fpm
+            - octane
             - mysql
             - redis
 

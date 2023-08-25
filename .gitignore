@@ -18,3 +18,5 @@ yarn-error.log
 /storage/app/articles
 /storage/app/backgrounds
 !/storage/app/avatars/default.jpg
+rr
+.rr.yaml
