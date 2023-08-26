@@ -13,7 +13,7 @@ class ResourceSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         foreach (Resource::RESOURCES as $resourceName) {
             Resource::factory()

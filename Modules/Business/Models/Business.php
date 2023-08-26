@@ -59,7 +59,7 @@ class Business extends Model
 
     public function resourceType(): BelongsTo
     {
-        return $this->belongsTo(Resource::class);
+        return $this->belongsTo(Resource::class, 'resource_id', 'id');
     }
 
     public function region(): BelongsTo

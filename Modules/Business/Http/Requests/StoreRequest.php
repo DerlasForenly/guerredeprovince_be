@@ -17,7 +17,10 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string',
+            'description' => 'string',
+            'resource_id' => 'required|int|exists:resources,id',
+            'avatar' => '',
         ];
     }
 

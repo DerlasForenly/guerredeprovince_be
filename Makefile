@@ -1,14 +1,10 @@
 DC := docker-compose exec
-FPM := $(DC) php-fpm
-OC := $(DC) gdp_octane
-ARTISAN := $(FPM) php artisan
+OC := $(DC) octane
+ARTISAN := $(OC) php artisan
 MYSQL := $(DC) -T mysql
 YARN := $(DC) node yarn
 
 ssh:
-	@$(FPM) sh
-
-ssh-oc:
 	@$(OC) sh
 
 nginx-reload:
@@ -40,6 +36,9 @@ fresh:
 
 seed:
 	@$(ARTISAN) db:seed
+
+cache:
+	@$(ARTISAN) optimize
 
 reset-db: truncate migrate seed
 

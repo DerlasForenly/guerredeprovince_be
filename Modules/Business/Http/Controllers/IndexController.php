@@ -17,6 +17,6 @@ class IndexController extends Controller
      */
     public function __invoke(): AnonymousResourceCollection
     {
-        return BusinessResource::collection(Business::all());
+        return BusinessResource::collection(Business::with('resourceType')->get());
     }
 }

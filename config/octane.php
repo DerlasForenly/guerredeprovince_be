@@ -185,10 +185,13 @@ return [
         'bootstrap',
         'config',
         'database',
+        'infrastructure',
+        'Modules',
         'public/**/*.php',
         'resources/**/*.php',
         'routes',
         'composer.lock',
+        'tests',
         '.env',
     ],
 

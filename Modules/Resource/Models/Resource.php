@@ -15,33 +15,24 @@ class Resource extends Model
 {
     use HasFactory;
 
-    /**
-     *
-     */
-    public const GOLD     = 'Gold';
+    public const GOLD = 'Gold';
     public const DIAMONDS = 'Diamonds';
-    public const WOOD     = 'Wood';
-    public const METAL    = 'Metal';
-    public const URAN     = 'Uran';
-    public const HELIUM   = 'Helium';
-    public const OIL      = 'Oil';
-    public const MONEY    = 'Money';
+    public const WOOD = 'Wood';
+    public const METAL = 'Metal';
+    public const URAN = 'Uran';
+    public const HELIUM = 'Helium';
+    public const OIL = 'Oil';
+    public const MONEY = 'Money';
 
-    /**
-     *
-     */
-    public const GOLD_ID     = 1;
+    public const GOLD_ID = 1;
     public const DIAMONDS_ID = 2;
-    public const WOOD_ID     = 3;
-    public const METAL_ID    = 4;
-    public const URAN_ID     = 5;
-    public const HELIUM_ID   = 6;
-    public const OIL_ID      = 7;
-    public const MONEY_ID    = 8;
+    public const WOOD_ID = 3;
+    public const METAL_ID = 4;
+    public const URAN_ID = 5;
+    public const HELIUM_ID = 6;
+    public const OIL_ID = 7;
+    public const MONEY_ID = 8;
 
-    /**
-     *
-     */
     public const RESOURCES = [
         self::GOLD_ID     => self::GOLD,
         self::DIAMONDS_ID => self::DIAMONDS,
@@ -58,14 +49,6 @@ class Resource extends Model
      */
     protected $fillable = [
         'id',
-        'name'
-    ];
-
-    /**
-     * @var string[]
-     */
-    protected $hidden = [
-        'created_at',
-        'updated_at',
+        'name',
     ];
 }

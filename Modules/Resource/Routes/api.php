@@ -10,3 +10,8 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+use Illuminate\Support\Facades\Route;
+use Modules\Resource\Http\Controllers\IndexController;
+
+Route::get('resources', IndexController::class);
