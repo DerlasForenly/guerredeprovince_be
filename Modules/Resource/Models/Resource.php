@@ -15,6 +15,8 @@ class Resource extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public const GOLD = 'Gold';
     public const DIAMONDS = 'Diamonds';
     public const WOOD = 'Wood';

@@ -5,6 +5,7 @@ namespace Modules\Auth\Actions;
 use Illuminate\Http\JsonResponse;
 use Modules\Resource\Models\Resource;
 use Modules\Treasury\Models\UserTreasury;
+use Modules\Region\Models\Region;
 use Modules\User\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,6 +23,7 @@ class RegisterAction
     public function handle(array $params): JsonResponse
     {
         $params['password'] = bcrypt($params['password']);
+        $params['current_region_id'] = Region::inRandomOrder()->first()->id;
 
         $user = User::create($params);
 
