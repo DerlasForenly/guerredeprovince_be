@@ -62,7 +62,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             BusinessTreasurySeeder::class,
             WarSeeder::class,
-            //RegionWarSeeder::class,
             DamageSeeder::class,
             BusinessSeeder::class,
             BusinessTreasurySeeder::class,

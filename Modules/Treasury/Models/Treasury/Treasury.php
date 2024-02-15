@@ -9,10 +9,12 @@ use Modules\Resource\Models\Resource;
 /**
  * Abstract class Treasury
  *
+ * @property int $id
  * @property int $resource_id
  * @property int $quantity
  *
  * @property \Modules\Resource\Models\Resource $resource
+ * @property \Modules\Resource\Models\Resource $resourceType
  * @property Model $owner
  */
 abstract class Treasury extends Model
@@ -23,6 +25,11 @@ abstract class Treasury extends Model
     public function resource(): BelongsTo
     {
         return $this->belongsTo(Resource::class);
+    }
+
+    public function resourceType(): BelongsTo
+    {
+        return $this->belongsTo(Resource::class, 'resource_id', 'id');
     }
 
     /**

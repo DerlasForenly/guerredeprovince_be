@@ -5,7 +5,6 @@ namespace Modules\Auth\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Action\Http\Resources\MoveActionResource;
 use Modules\Action\Http\Resources\WorkActionResource;
-use Modules\Action\Jobs\WarActionJob;
 use Modules\Resource\Models\Resource;
 use Modules\Treasury\Models\Treasury\Treasury;
 use Modules\User\Models\User;
@@ -47,8 +46,12 @@ class MeResource extends JsonResource
             ],
             'email'                  => $this->email,
             'exp'                    => $this->exp,
+            'level'                  => $this->level,
             'last_activity'          => null,
-            'nation_id'              => $this->nation_id,
+            'nation'                 => [
+                'id'   => $this->nation_id,
+                'name' => $this->nation->name,
+            ],
             'political_view_id'      => null,
             'premium'                => false,
             'registration_region_id' => null,

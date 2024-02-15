@@ -3,8 +3,6 @@
 namespace Modules\Business\Services;
 
 use Carbon\Carbon;
-use http\Encoding\Stream\Enbrotli;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Modules\Business\Models\Business;
 use Modules\Business\Models\SalaryType;
@@ -63,16 +61,10 @@ class SalaryService
     public function __construct(
         private User $user,
     ) {
-        Log::info('Hello, constructor');
         $this->user->refresh();
-
-        if (!$this->user->inProcessWork) {
-            throw new \Exception('There is no processed work.');
-        }
 
         $this->transactionService = app(TransactionService::class);
         $this->business           = $this->user->employee->business;
-        $this->time               = $this->getWorkTime();
         $salaryTypeId             = $this->business->salary_type_id;
 
         $this->businessMoneyTreasury    = $this->getBusinessTreasury(Resource::MONEY_ID);
@@ -89,17 +81,31 @@ class SalaryService
      */
     public function getWorkTime(): int
     {
-        $diff = Carbon::now()->diffInMinutes($this->user->inProcessWork->created_at);
+        /**
+         * @TODO Update to work with minutes
+         */
+        $diff = Carbon::now()->diffInSeconds($this->user->inProcessWork->created_at);
 
         return min($diff, $this->user->inProcessWork->time);
     }
 
+    public function countExpectedSalary(): int
+    {
+        return 60 / 100 * (100 - $this->business->salary);
+    }
+
     /**
      * @return void
+     * @throws \Exception
      */
     public function sendCompensation(): void
     {
-        Log::info('Send compensation.');
+        if (!$this->user->inProcessWork) {
+            throw new \Exception('There is no processed work.');
+        }
+
+        $this->time = $this->getWorkTime();
+
         $this->sendExp();
         $this->sendSalary();
     }
@@ -133,13 +139,27 @@ class SalaryService
      */
     protected function sendResources(): void
     {
+        $forUser     = $this->time / 100 * (100 - $this->business->salary);
+        $forBusiness = $this->time / 100 * $this->business->salary;
+
+        Log::info(
+            'Send resources after job:',
+            [
+                'time'              => $this->time,
+                'user_id'           => $this->user->id,
+                'user_quantity'     => round($forUser),
+                'business'          => $this->business->id,
+                'business_quantity' => round($forBusiness),
+            ]
+        );
+
         $this->transactionService->sendResourcesFromGame(
-            $this->businessResourceTreasury,
-            $this->time / 100 * (100 - $this->business->salary)
+            $this->userTreasury,
+            round($forUser)
         );
         $this->transactionService->sendResourcesFromGame(
             $this->businessResourceTreasury,
-            $this->time / 100 * $this->business->salary
+            round($forBusiness)
         );
     }
 
@@ -172,7 +192,7 @@ class SalaryService
         /**
          * @TODO Exp count formula
          */
-        return 15;
+        return $time;
     }
 
     protected function getBusinessTreasury(int $resource_id): BusinessTreasury

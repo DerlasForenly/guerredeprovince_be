@@ -5,6 +5,8 @@ RUN apt-get update && apt-get install -y \
       libpq-dev \
       libpng-dev \
       libzip-dev \
+      nodejs \
+      npm \
       zip unzip \
       git && \
       docker-php-ext-install pcntl && \

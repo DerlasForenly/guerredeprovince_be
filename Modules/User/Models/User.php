@@ -44,10 +44,12 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property \Modules\Action\Models\MoveAction $inProcessMove
  * @property \Modules\Action\Models\WarAction $inProcessWar
  * @property \Modules\Action\Models\WorkAction $inProcessWork
+ * @property \Modules\Country\Models\Nation $nation
  *
  * Attributes
  * @property array $job
  * @property bool $busy
+ * @property int $level
  */
 class User extends Authenticatable implements JWTSubject, Treasurable
 {

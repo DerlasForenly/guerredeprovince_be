@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group([
+    'prefix' => 'regions',
+    'middleware' => ['jwt.verify'],
+], function () {
+    Route::get('/{region}', \Modules\Region\Http\Controllers\ShowRegionController::class);
+});
+
+
+Route::group([
     'prefix' => 'world-map',
     'middleware' => ['jwt.verify'],
 ], function () {

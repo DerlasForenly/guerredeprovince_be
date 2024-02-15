@@ -10,7 +10,7 @@ use Modules\User\Models\User;
  */
 trait Attributes
 {
-    public function getJobAttribute()
+    public function getJobAttribute(): ?array
     {
         if (!$this->employee) return null;
 
@@ -36,7 +36,7 @@ trait Attributes
         return $this->inProcessMove || $this->inProcessWork || $this->inProcessWar;
     }
 
-    public function getCitizenshipAttribute()
+    public function getCitizenshipAttribute(): ?array
     {
         $country = $this->country()->first();
 
@@ -50,7 +50,7 @@ trait Attributes
         ];
     }
 
-    public function getPartyAttribute()
+    public function getPartyAttribute(): ?array
     {
         $party = $this->political_party()->first();
 
@@ -65,7 +65,7 @@ trait Attributes
         ];
     }
 
-    public function getSalaryTypeAttribute()
+    public function getSalaryTypeAttribute(): int
     {
         if ($this->employee->salary !== null) {
             return $this->employee->salary_type_id;
@@ -74,12 +74,17 @@ trait Attributes
         }
     }
 
-    public function getSalaryAttribute()
+    public function getSalaryAttribute(): int
     {
         if ($this->employee->salary !== null) {
             return $this->employee->salary;
         } else {
             return $this->employee->business->salary;
         }
+    }
+
+    public function getLevelAttribute(): int
+    {
+        return 1;
     }
 }

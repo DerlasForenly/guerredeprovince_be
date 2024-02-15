@@ -40,6 +40,9 @@ seed:
 cache:
 	@$(ARTISAN) optimize
 
+reload:
+	@$(ARTISAN) octane:reload
+
 reset-db: truncate migrate seed
 
 restart: stop start

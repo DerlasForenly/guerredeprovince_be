@@ -41,7 +41,7 @@ class TransactionService
      * @param int $quantity
      * @return bool
      */
-    private function isEnought(Treasury $from, int $quantity): bool
+    private function isEnough(Treasury $from, int $quantity): bool
     {
         return $from->quantity >= $quantity;
     }
@@ -60,7 +60,7 @@ class TransactionService
             $treasuryFrom = $from->treasuries()->where('resource_id', $treasury['id']);
             $treasuryTo   = $to->treasuries()->where('resource_id', $treasury['id']);
 
-            $this->isEnought($treasuryFrom, $treasury['quantity']) ??
+            $this->isEnough($treasuryFrom, $treasury['quantity']) ??
                 $this->sendResources($treasuryFrom, $treasuryTo, $treasury['quantity']);
         }
     }
