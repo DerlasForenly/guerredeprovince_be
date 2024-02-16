@@ -58,28 +58,14 @@ class SalaryService
      * @param User $user
      * @throws \Exception
      */
-    public function __construct(
-        private User $user,
-    ) {
-        $this->user->refresh();
-
-        $this->transactionService = app(TransactionService::class);
-        $this->business           = $this->user->employee->business;
-        $salaryTypeId             = $this->business->salary_type_id;
-
-        $this->businessMoneyTreasury    = $this->getBusinessTreasury(Resource::MONEY_ID);
-        $this->businessResourceTreasury = $this->getBusinessTreasury($this->business->resource_id);
-
-        $this->userTreasury = match (true) {
-            SalaryType::RESOURCE_ID === $salaryTypeId => $this->getUserTreasury($this->business->resource_id),
-            SalaryType::MONEY_ID === $salaryTypeId => $this->getUserTreasury(Resource::MONEY_ID),
-        };
+    public function __construct(private User $user)
+    {
     }
 
     /**
      * @return int
      */
-    public function getWorkTime(): int
+    protected function getWorkTime(): int
     {
         /**
          * @TODO Update to work with minutes
@@ -89,9 +75,15 @@ class SalaryService
         return min($diff, $this->user->inProcessWork->time);
     }
 
-    public function countExpectedSalary(): int
+    /**
+     * Returns expected salary for some period working on a business
+     *
+     * @param int $salary
+     * @return int
+     */
+    public function countExpectedSalary(int $salary): int
     {
-        return 60 / 100 * (100 - $this->business->salary);
+        return 60 / 100 * (100 - $salary);
     }
 
     /**
@@ -105,6 +97,19 @@ class SalaryService
         }
 
         $this->time = $this->getWorkTime();
+        $this->user->refresh();
+
+        $this->transactionService = app(TransactionService::class);
+        $this->business           = $this->user->employee->business;
+        $salaryTypeId             = $this->business->salary_type_id;
+
+        $this->businessMoneyTreasury    = $this->getBusinessTreasury(Resource::MONEY_ID);
+        $this->businessResourceTreasury = $this->getBusinessTreasury($this->business->resource_id);
+
+        $this->userTreasury = match (true) {
+            SalaryType::RESOURCE_ID === $salaryTypeId => $this->getUserTreasury($this->business->resource_id),
+            SalaryType::MONEY_ID === $salaryTypeId => $this->getUserTreasury(Resource::MONEY_ID),
+        };
 
         $this->sendExp();
         $this->sendSalary();

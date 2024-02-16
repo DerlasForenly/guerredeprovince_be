@@ -13,6 +13,7 @@ use Modules\User\Models\User;
  * @property int $political_party_id
  * @property int $position_id
  * @property User $user
+ * @property \Modules\Party\Models\PoliticalParty $politicalParty
  */
 class PoliticalPartyStaff extends Model
 {

@@ -14,10 +14,15 @@ use Modules\Party\Models\Relationships\PoliticalPartyStaff\Relationships;
  * @property int $id
  * @property string $description
  * @property string $name
+ * @property string $tag
+ * @property boolean $in_government
+ * @property int $country_id
+ * @property string $emblem
+ *
  * @property MorphMany $requests
  * @property PoliticalPartyStaff $leader
  * @property HasMany $politicalPartyStaff
- * @property boolean $in_government
+ * @property \Modules\Country\Models\Country $country
  */
 class PoliticalParty extends Model
 {

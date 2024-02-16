@@ -33,8 +33,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  *
  * Relationships
  * @property HasMany $requests
- * @property PoliticalPartyStaff $politicalPartyStaff
- * @property NewspaperStaff $newspaperStaff
+ * @property PoliticalPartyStaff|null $politicalPartyStaff
+ * @property NewspaperStaff|null $newspaperStaff
  * @property Treasury $treasuries
  * @property $subscriptions
  * @property \Modules\Business\Models\Employee $employee

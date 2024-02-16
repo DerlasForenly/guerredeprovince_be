@@ -16,6 +16,7 @@ use Modules\User\Models\User;
 /**
  * Class Business
  *
+ * Properties
  * @property int $id
  * @property string $name
  * @property string $description
@@ -29,10 +30,14 @@ use Modules\User\Models\User;
  * @property int $lvl
  * @property int|null $corporation_id
  *
+ * Relationships
  * @property \Modules\Region\Models\Region $region
  * @property \Modules\Corporation\Models\Corporation $corporation
  * @property \Modules\User\Models\User $user
  * @property \Modules\Resource\Models\Resource $resourceType
+ *
+ * Attributes
+ * @property int $level
  */
 class Business extends Model
 {
@@ -80,5 +85,10 @@ class Business extends Model
     public function treasuries(): HasMany
     {
         return $this->HasMany(BusinessTreasury::class);
+    }
+
+    public function getLevelAttribute(): int
+    {
+        return 1;
     }
 }

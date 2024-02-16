@@ -40,7 +40,7 @@ class PoliticalPartyPolicy
     public function createRequest(User $user, PoliticalParty $party): Response
     {
         return match (true) {
-            (bool)$user->politicalPartyStaff => $this->deny('You are in party'),
+            (bool)$user->politicalPartyStaff => $this->deny('You are in the party already.'),
             (bool)$party->requests->where('user_id', $user->id)->first() => $this->deny('You already sent an request'),
             default => $this->allow(),
         };
@@ -72,7 +72,7 @@ class PoliticalPartyPolicy
     public function create(User $user): Response
     {
         return match (true) {
-            (bool)$user->politicalPartyStaff => $this->deny('You are in party'),
+            (bool)$user->politicalPartyStaff => $this->deny('You are in the party already.'),
             default => $this->allow(),
         };
     }
