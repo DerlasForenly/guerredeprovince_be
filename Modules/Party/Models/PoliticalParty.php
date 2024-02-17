@@ -6,7 +6,7 @@ use App\Models\Traits\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Modules\Party\Models\Relationships\PoliticalPartyStaff\Relationships;
+use Modules\Party\Models\Relationships\PoliticalParty\Relationships;
 
 /**
  * Class PoliticalParty
@@ -21,7 +21,7 @@ use Modules\Party\Models\Relationships\PoliticalPartyStaff\Relationships;
  *
  * @property MorphMany $requests
  * @property PoliticalPartyStaff $leader
- * @property HasMany $politicalPartyStaff
+ * @property \Modules\Party\Models\PoliticalPartyStaff[] $politicalPartyStaff
  * @property \Modules\Country\Models\Country $country
  */
 class PoliticalParty extends Model

@@ -19,6 +19,8 @@ class Status extends Model
     const ACTIVE_ID = 4;
     const IN_ACTIVE_ID = 5;
     const CANCELED_ID = 6;
+    const ACCEPTED_ID = 7;
+    const DECLINED_ID = 8;
 
     const READY = 'ready';
     const FINISHED = 'finished';
@@ -26,6 +28,8 @@ class Status extends Model
     const ACTIVE = 'active';
     const IN_ACTIVE = 'inactive';
     const CANCELED = 'canceled';
+    const ACCEPTED = 'accepted';
+    const DECLINED = 'declined';
 
     const STATUSES = [
         self::READY_ID => self::READY,
@@ -34,6 +38,8 @@ class Status extends Model
         self::ACTIVE_ID => self::ACTIVE,
         self::IN_ACTIVE_ID => self::IN_ACTIVE,
         self::CANCELED_ID => self::CANCELED,
+        self::ACCEPTED_ID => self::ACCEPTED,
+        self::DECLINED_ID => self::DECLINED,
     ];
 
     protected $fillable = [

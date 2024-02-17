@@ -30,16 +30,8 @@ trait Relationships
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function country(): BelongsTo
+    public function position(): BelongsTo
     {
-        return $this->belongsTo(Country::class, 'country_id', 'id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function leader(): \Illuminate\Database\Eloquent\Relations\HasOne
-    {
-        return $this->hasOne(PoliticalPartyStaff::class)->where('position_id', Position::POLITICAL_PARTY_LEADER_ID);
+        return $this->belongsTo(Position::class, 'position_id', 'id');
     }
 }

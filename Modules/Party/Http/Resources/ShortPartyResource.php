@@ -28,7 +28,7 @@ class ShortPartyResource extends JsonResource
             ],
             'country' => [
                 'id'   => $this->country_id,
-                'name' => $this->country->id,
+                'name' => $this->country->name,
             ],
         ];
     }

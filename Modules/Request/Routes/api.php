@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Request\Http\Controllers\AcceptRequestController;
+use Modules\Request\Http\Controllers\DeclineRequestController;
 use Modules\Request\Http\Controllers\IndexController;
 use Modules\Request\Http\Controllers\ShowController;
+use Modules\Request\Http\Controllers\StoreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +19,8 @@ use Modules\Request\Http\Controllers\ShowController;
 */
 
 Route::group([
-    'prefix' => 'requests'
+    'prefix' => 'requests',
+    'middleware' => ['jwt.verify'],
 ], function ($router) {
     /**
      *
@@ -26,5 +30,23 @@ Route::group([
     /**
      *
      */
-    Route::get('/{request}', ShowController::class);
+    Route::get('/{requestModel}', ShowController::class);
+
+    /**
+     * Accept specified join party request
+     */
+    Route::post('/{requestModel}/accept', AcceptRequestController::class)
+        ->can('acceptRequest', 'requestModel');
+
+    /**
+     * Decline specified join party request
+     */
+    Route::post('/{requestModel}/decline', DeclineRequestController::class)
+        ->can('declineRequest', 'requestModel');
+
+    /**
+     * Create new join party request
+     */
+    Route::post('/', StoreController::class)
+        ->can('createRequest', \Modules\Request\Models\Request::class);
 });

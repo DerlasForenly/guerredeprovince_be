@@ -15,42 +15,6 @@ class PoliticalPartyPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * @param User $user
-     * @param PoliticalParty $party
-     * @return Response
-     */
-    public function acceptRequest(User $user, PoliticalParty $party): Response
-    {
-        /* @TODO Refactor to check access for accepting */
-        $secretary = $party->politicalPartyStaff->where('position_id', Position::POLITICAL_PARTY_SECRETARY_ID);
-        $secretary = $secretary->where('user_id', $user->id)->first();
-
-        return match (true) {
-            $party->leader->user_id === $user->id, (bool)$secretary => $this->allow(),
-            default => $this->deny('You cannot access requests'),
-        };
-    }
-
-    /**
-     * @param User $user
-     * @param PoliticalParty $party
-     * @return Response
-     */
-    public function createRequest(User $user, PoliticalParty $party): Response
-    {
-        return match (true) {
-            (bool)$user->politicalPartyStaff => $this->deny('You are in the party already.'),
-            (bool)$party->requests->where('user_id', $user->id)->first() => $this->deny('You already sent an request'),
-            default => $this->allow(),
-        };
-    }
-
-    public function declineRequest(User $user)
-    {
-
-    }
-
     public function kick(User $user)
     {
 

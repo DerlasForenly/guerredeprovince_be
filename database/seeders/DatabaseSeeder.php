@@ -22,6 +22,7 @@ use Modules\Party\Database\Seeders\PoliticalPartyStaffSeeder;
 use Modules\Position\Database\Seeders\PositionSeeder;
 use Modules\Region\Database\Seeders\RegionSeeder;
 use Modules\Region\Database\Seeders\RegionTypeSeeder;
+use Modules\Request\Database\Seeders\JoinRequestSeeder;
 use Modules\Request\Database\Seeders\RequestSeeder;
 use Modules\Request\Database\Seeders\RequestTypeSeeder;
 use Modules\Resource\Database\Seeders\ResourceSeeder;
@@ -31,7 +32,6 @@ use Modules\Treasury\Database\Seeders\BusinessTreasurySeeder;
 use Modules\Treasury\Database\Seeders\UserTreasurySeeder;
 use Modules\User\Database\Seeders\UserSeeder;
 use Modules\War\Database\Seeders\DamageSeeder;
-use Modules\War\Database\Seeders\RegionWarSeeder;
 use Modules\War\Database\Seeders\WarSeeder;
 use Modules\War\Database\Seeders\WarSideSeeder;
 
@@ -68,6 +68,7 @@ class DatabaseSeeder extends Seeder
             UserTreasurySeeder::class,
             EmployeeSeeder::class,
             PoliticalPartySeeder::class,
+            JoinRequestSeeder::class,
             PoliticalPartyStaffSeeder::class,
             GamePriceSeeder::class,
             GamePriceResourceSeeder::class,

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 trait HasPosition
 {
-    public function position($id): self
+    public function position(int $id): self
     {
         return $this->state(function (array $attributes) use ($id) {
             return [

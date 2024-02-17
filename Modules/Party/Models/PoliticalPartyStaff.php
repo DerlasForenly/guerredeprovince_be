@@ -12,8 +12,10 @@ use Modules\User\Models\User;
  * @property int $user_id
  * @property int $political_party_id
  * @property int $position_id
+ * @property string $created_at
  * @property User $user
  * @property \Modules\Party\Models\PoliticalParty $politicalParty
+ * @property \Modules\Position\Models\Position $position
  */
 class PoliticalPartyStaff extends Model
 {

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Modules\Status\Models\Status;
 
 class CreateRequestsTable extends Migration
 {
@@ -20,6 +21,12 @@ class CreateRequestsTable extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
+                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('status_id');
+            $table->foreign('status_id')
+                ->references('id')
+                ->on('statuses')
                 ->onDelete('cascade');
 
             $table->morphs('requestable');

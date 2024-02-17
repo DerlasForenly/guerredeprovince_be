@@ -3,6 +3,8 @@
 namespace Modules\Request\Providers;
 
 use App\Providers\BaseModuleProvider;
+use Modules\Request\Models\Request;
+use Modules\Request\Policies\RequestPolicy;
 
 class RequestServiceProvider extends BaseModuleProvider
 {
@@ -17,6 +19,13 @@ class RequestServiceProvider extends BaseModuleProvider
     protected string $moduleNameLower = 'request';
 
     /**
+     * @var array|string[]
+     */
+    protected $policies = [
+        Request::class => RequestPolicy::class
+    ];
+
+    /**
      * Boot the application events.
      *
      * @return void
@@ -24,6 +33,7 @@ class RequestServiceProvider extends BaseModuleProvider
     public function boot(): void
     {
         parent::boot();
+        $this->registerPolicies();
     }
 
     /**

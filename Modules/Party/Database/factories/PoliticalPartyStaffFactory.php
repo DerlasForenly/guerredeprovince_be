@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\Party\Models\PoliticalPartyStaff;
 use Modules\Position\Models\Position;
 
+/**
+ * @method user(int $id)
+ * @method position(int $id)
+ * @method politicalParty(int $id)
+ */
 class PoliticalPartyStaffFactory extends Factory
 {
     use HasUser,

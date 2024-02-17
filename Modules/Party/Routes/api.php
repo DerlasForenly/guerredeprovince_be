@@ -1,15 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Party\Http\Controllers\AcceptRequestController;
-use Modules\Party\Http\Controllers\DeclineRequestController;
 use Modules\Party\Http\Controllers\DestroyController;
 use Modules\Party\Http\Controllers\IndexController;
+use Modules\Party\Http\Controllers\IndexStaffController;
 use Modules\Party\Http\Controllers\LeavePartyController;
 use Modules\Party\Http\Controllers\ShowController;
 use Modules\Party\Http\Controllers\StoreController;
 use Modules\Party\Http\Controllers\IndexRequestController;
-use Modules\Party\Http\Controllers\StoreRequestController;
 use Modules\Party\Models\PoliticalParty;
 
 /*
@@ -55,6 +53,11 @@ Route::group([
     Route::post('/leave', LeavePartyController::class)
         ->can('leave', PoliticalParty::class);
 
+    /**
+     * Get party staff
+     */
+    Route::get('/{party}/staff', IndexStaffController::class);
+
     Route::group([
         'prefix' => '/{party}/requests'
     ], function () {
@@ -62,23 +65,5 @@ Route::group([
          * Get all join party requests
          */
         Route::get('/', IndexRequestController::class);
-
-        /**
-         * Create new join party request
-         */
-        Route::post('/', StoreRequestController::class)
-            ->can('createRequest', 'party');
-
-        /**
-         * Accept specified join party request
-         */
-        Route::post('/{request}/accept', AcceptRequestController::class)
-            ->can('acceptRequest', 'party');
-
-        /**
-         * Decline specified join party request
-         */
-        Route::post('/{request}/decline', DeclineRequestController::class)
-            ->can('declineRequest', PoliticalParty::class);
     });
 });

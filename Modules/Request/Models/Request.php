@@ -13,10 +13,15 @@ use Modules\Request\Database\factories\RequestFactory;
 use Modules\User\Models\User;
 
 /**
+ * @property int $id
  * @property int $user_id
+ * @property int $status_id
  * @property int $requestable_id
  * @property string $requestable_type
  * @property int $request_type_id
+ * @property string $created_at
+ *
+ * @property User $user
  */
 class Request extends Model
 {
