@@ -17,7 +17,7 @@ Route::group([
     'prefix' => 'regions',
     'middleware' => ['jwt.verify'],
 ], function () {
-    Route::get('/{region}', \Modules\Region\Http\Controllers\ShowRegionController::class);
+    Route::get('/{region}', \Modules\Region\Http\Controllers\ShowController::class);
 });
 
 

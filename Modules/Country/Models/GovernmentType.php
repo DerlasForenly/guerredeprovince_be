@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Model;
  * Class GovernmentType
  *
  * @TODO Add comments to each position
+ *
+ * @property int id
+ * @property string name
  */
 class GovernmentType extends Model
 {

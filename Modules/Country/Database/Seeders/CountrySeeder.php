@@ -12,7 +12,7 @@ class CountrySeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         Country::factory()
             ->name('Holy Ukrainian Reich')

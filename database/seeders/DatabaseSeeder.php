@@ -10,6 +10,7 @@ use Modules\Corporation\Database\Seeders\CorporationSeeder;
 use Modules\Country\Database\Seeders\CountrySeeder;
 use Modules\Country\Database\Seeders\CountryStaffSeeder;
 use Modules\Country\Database\Seeders\GovernmentTypeSeeder;
+use Modules\Country\Database\Seeders\LawTypesSeeder;
 use Modules\Country\Database\Seeders\NationSeeder;
 use Modules\GamePrice\Database\Seeders\GamePriceResourceSeeder;
 use Modules\GamePrice\Database\Seeders\GamePriceSeeder;
@@ -77,6 +78,7 @@ class DatabaseSeeder extends Seeder
             NewspaperDatabaseSeeder::class,
             ArticleSeeder::class,
             CommentSeeder::class,
+            LawTypesSeeder::class,
         ]);
     }
 }

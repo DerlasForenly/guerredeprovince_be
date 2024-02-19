@@ -60,3 +60,30 @@ Route::group([
             ->can('declineRequest', Country::class);
     });
 });
+
+
+Route::group([
+    'prefix' => 'laws'
+], function ($router) {
+    /**
+     * Get all laws
+     */
+    Route::get('/', function () {});
+
+    /**
+     * Create new law
+     */
+    Route::post('/', \Modules\Country\Http\Controllers\Law\StoreController::class);
+
+    /**
+     * Get specified law
+     */
+    Route::get('/{law}', function () {});
+});
+
+/**
+ * Get all law types
+ */
+Route::get('/law-types', function () {
+    return \Modules\Country\Models\LawType::all();
+});

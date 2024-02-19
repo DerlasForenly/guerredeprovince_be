@@ -6,7 +6,9 @@ use App\Models\Traits\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Modules\Position\Models\Position;
 use Modules\Region\Models\Region;
 use Modules\Request\Models\Request;
 use Modules\User\Models\User;
@@ -14,10 +16,18 @@ use Modules\User\Models\User;
 /**
  * Class Country
  *
- * @property int $id
- * @property string $name
- * @property string $description
- * @property string $emblem
+ * @property int id
+ * @property string name
+ * @property string description
+ * @property string emblem
+ * @property string color
+ * @property bool mandatory_visa
+ * @property string border_color
+ * @property int government_type_id
+ * @property int parliament_size
+ *
+ * @property \Modules\Country\Models\GovernmentType governmentType
+ * @property \Modules\Country\Models\CountryStaff staff
  */
 class Country extends Model
 {
@@ -48,20 +58,18 @@ class Country extends Model
         return $this->hasMany(User::class);
     }
 
-    public function staff()
+    public function staff(): HasMany
     {
         return $this->hasMany(CountryStaff::class);
-    }
-
-    public function getLeaderAttribute()
-    {
-        $leader = $this->staff()->where('position_id', '=',1)->get()->first();
-
-        return $leader;
     }
 
     public function requests(): MorphMany
     {
         return $this->morphMany(Request::class, 'requestable');
+    }
+
+    public function governmentType(): BelongsTo
+    {
+        return $this->belongsTo(GovernmentType::class);
     }
 }

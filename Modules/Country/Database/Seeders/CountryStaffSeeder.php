@@ -13,7 +13,7 @@ class CountryStaffSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         CountryStaff::factory()
             ->user(1)

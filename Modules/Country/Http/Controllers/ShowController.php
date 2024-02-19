@@ -2,6 +2,7 @@
 
 namespace Modules\Country\Http\Controllers;
 
+use Modules\Country\Http\Resources\CountryResource;
 use Modules\Country\Models\Country;
 
 class ShowController
@@ -9,10 +10,10 @@ class ShowController
     /**
      * Show the specified resource.
      * @param Country $country
-     * @return Country
+     * @return \Modules\Country\Http\Resources\CountryResource
      */
-    public function __invoke(Country $country): Country
+    public function __invoke(Country $country): CountryResource
     {
-        return $country;
+        return new CountryResource($country);
     }
 }

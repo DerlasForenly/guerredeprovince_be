@@ -11,12 +11,13 @@ use Modules\User\Models\User;
 /**
  * Class CountryStaff
  *
- * @property int $user_id
- * @property int $country_id
- * @property int $position_id
- * @property User $user
- * @property Country $country
- * @property Position $position
+ * @property int user_id
+ * @property int country_id
+ * @property int position_id
+ *
+ * @property User user
+ * @property Country country
+ * @property Position position
  */
 class CountryStaff extends Model
 {
