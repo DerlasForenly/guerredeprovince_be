@@ -40,8 +40,8 @@ class MeResource extends JsonResource
                 'id'      => $this->current_region_id,
                 'name'    => $this->currentRegion->name,
                 'country' => [
-                    'id'      => $this->currentRegion->country_id,
-                    'name'    => $this->currentRegion->country?->name,
+                    'id'   => $this->currentRegion->country_id,
+                    'name' => $this->currentRegion->country?->name,
                 ],
             ],
             'email'                  => $this->email,
@@ -56,10 +56,14 @@ class MeResource extends JsonResource
             'political_party'        => $this->politicalPartyStaff ? [
                 'id'   => $this->politicalPartyStaff->political_party_id,
                 'name' => $this->politicalPartyStaff->politicalParty->name,
-                'tag' => $this->politicalPartyStaff->politicalParty->tag,
+                'tag'  => $this->politicalPartyStaff->politicalParty->tag,
             ] : null,
             'premium'                => false,
             'registration_region_id' => null,
+            'citizenship'            => [
+                'id'   => $this->country_id,
+                'name' => $this->country->name,
+            ],
             'role_id'                => null,
             'gold'                   => $gold->quantity,
             'diamonds'               => $diamonds->quantity,

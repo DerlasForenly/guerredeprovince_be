@@ -19,20 +19,22 @@ class CountryResource extends JsonResource
         $leader = $this->staff->where('position_id', Position::COUNTRY_LEADER_ID)->first();
 
         return [
-            'id'               => $this->id,
-            'name'             => $this->name,
-            'regions'          => $this->regions()->get(['id', 'name']),
-            'color'            => $this->color,
-            'border_color'     => $this->border_color,
-            'capital'          => null,
-            'leader'           => [
+            'id'                => $this->id,
+            'name'              => $this->name,
+            'regions'           => $this->regions()->get(['id', 'name']),
+            'color'             => $this->color,
+            'border_color'      => $this->border_color,
+            'capital'           => null,
+            'leader'            => [
                 'id'       => $leader?->user_id,
                 'nickname' => $leader?->user->nickname,
             ],
-            'political_system' => [
+            'political_system'  => [
                 'id'   => $this->government_type_id,
-                'name' => $this->governmentType?->name,
+                'name' => $this->governmentType->name,
             ],
+            'parliament_size'   => $this->parliament_size,
+            'political_parties' => $this->politicalParties()->get(['id', 'name']),
         ];
     }
 }

@@ -30,6 +30,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property boolean $banned
  * @property boolean $inactive
  * @property boolean $premium
+ * @property int $country_id
  *
  * Relationships
  * @property HasMany $requests
@@ -45,6 +46,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property \Modules\Action\Models\WarAction $inProcessWar
  * @property \Modules\Action\Models\WorkAction $inProcessWork
  * @property \Modules\Country\Models\Nation $nation
+ * @property \Modules\Country\Models\Country $country Citizenship
  *
  * Attributes
  * @property array $job

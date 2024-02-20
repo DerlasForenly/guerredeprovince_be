@@ -3,7 +3,6 @@
 namespace Modules\Country\Services\LawStrategies;
 
 use Illuminate\Support\Facades\DB;
-use Modules\Country\Models\Country;
 use Modules\Country\Models\Law;
 use Modules\Country\Services\LawStrategy;
 use Modules\Status\Models\Status;

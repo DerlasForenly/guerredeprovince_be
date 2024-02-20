@@ -31,6 +31,7 @@ class PoliticalPartyFactory extends Factory
             'description' => 'Test party',
             'tag'         => Str::random(3),
             'country_id'  => $country_id,
+            'color'       => '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT),
         ];
     }
 

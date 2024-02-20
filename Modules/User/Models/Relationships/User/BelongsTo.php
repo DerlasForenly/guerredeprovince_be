@@ -15,7 +15,7 @@ trait BelongsTo
 
     public function country(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(Country::class, 'country_id', 'id');
     }
 
     public function currentRegion(): \Illuminate\Database\Eloquent\Relations\BelongsTo

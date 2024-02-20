@@ -33,6 +33,9 @@ class CreatePoliticalPartyStaffTable extends Migration
                 ->on('positions')
                 ->onDelete('cascade');
 
+            $table->boolean('in_government')
+                ->default(false);
+
             $table->timestamps();
         });
     }

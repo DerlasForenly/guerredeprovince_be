@@ -7,12 +7,14 @@ use Modules\Country\Models\Law;
 use Modules\Country\Models\LawType;
 use Modules\Country\Services\LawStrategies\ChangeEmblemStrategy;
 use Modules\Country\Services\LawStrategies\ChangeNameStrategy;
+use Modules\Country\Services\LawStrategies\StartPresidentElectionStrategy;
 
 class LawProjectExecutor
 {
     const STRATEGIES = [
-        LawType::CHANGE_COUNTRY_EMBLEM => ChangeEmblemStrategy::class,
-        LawType::CHANGE_COUNTRY_NAME   => ChangeNameStrategy::class,
+        LawType::CHANGE_COUNTRY_EMBLEM    => ChangeEmblemStrategy::class,
+        LawType::CHANGE_COUNTRY_NAME      => ChangeNameStrategy::class,
+        LawType::START_PRESIDENT_ELECTION => StartPresidentElectionStrategy::class,
     ];
 
     /**

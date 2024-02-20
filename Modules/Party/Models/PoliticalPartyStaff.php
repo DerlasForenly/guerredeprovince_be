@@ -9,13 +9,15 @@ use Modules\Party\Models\Relationships\PoliticalPartyStaff\Relationships;
 use Modules\User\Models\User;
 
 /**
- * @property int $user_id
- * @property int $political_party_id
- * @property int $position_id
- * @property string $created_at
- * @property User $user
- * @property \Modules\Party\Models\PoliticalParty $politicalParty
- * @property \Modules\Position\Models\Position $position
+ * @property int user_id
+ * @property int political_party_id
+ * @property int position_id
+ * @property string created_at
+ * @property bool in_government
+ *
+ * @property User user
+ * @property \Modules\Party\Models\PoliticalParty politicalParty
+ * @property \Modules\Position\Models\Position position
  */
 class PoliticalPartyStaff extends Model
 {
@@ -34,12 +36,6 @@ class PoliticalPartyStaff extends Model
         'user_id',
         'political_party_id',
         'position_id',
-    ];
-
-    /**
-     * @var string[]
-     */
-    protected $hidden = [
-        'updated_at',
+        'in_government',
     ];
 }

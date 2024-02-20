@@ -2,6 +2,7 @@
 
 namespace Modules\Party\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -13,16 +14,17 @@ class StaffResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'user'     => [
+            'user'          => [
                 'id'       => $this->user_id,
                 'nickname' => $this->user->nickname,
                 'level'    => $this->user->level,
             ],
-            'position' => [
+            'position'      => [
                 'id'   => $this->position_id,
                 'name' => $this->position->name,
             ],
-            'created_at' => $this->created_at,
+            'in_parliament' => $this->in_government,
+            'created_at'    => Carbon::parse($this->created_at)->format('H:i d.m.Y'),
         ];
     }
 }

@@ -25,6 +25,7 @@ class RequestPolicy
     public function acceptRequest(User $user, Request $request): Response
     {
         /* @TODO Refactor to check access for accepting */
+        /* @TODO Refactor to check user already in some party */
         $isLeader     = $request->requestable->leader->user_id === $user->id;
         $isSecretary  = false;
         $isInProgress = $request->status_id === Status::IN_PROCESS_ID;

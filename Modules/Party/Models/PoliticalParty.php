@@ -15,7 +15,6 @@ use Modules\Party\Models\Relationships\PoliticalParty\Relationships;
  * @property string $description
  * @property string $name
  * @property string $tag
- * @property boolean $in_government
  * @property int $country_id
  * @property string $emblem
  *
@@ -35,7 +34,6 @@ class PoliticalParty extends Model
         'tag',
         'country_id',
         'emblem',
-        'in_government',
     ];
 
     protected $hidden = [

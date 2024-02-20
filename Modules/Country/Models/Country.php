@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Modules\Party\Models\PoliticalParty;
 use Modules\Position\Models\Position;
 use Modules\Region\Models\Region;
 use Modules\Request\Models\Request;
@@ -28,6 +29,8 @@ use Modules\User\Models\User;
  *
  * @property \Modules\Country\Models\GovernmentType governmentType
  * @property \Modules\Country\Models\CountryStaff staff
+ * @property \Modules\Party\Models\PoliticalParty[] politicalParties
+ * @property \Modules\Country\Models\Election[] elections
  */
 class Country extends Model
 {
@@ -71,5 +74,15 @@ class Country extends Model
     public function governmentType(): BelongsTo
     {
         return $this->belongsTo(GovernmentType::class);
+    }
+
+    public function politicalParties(): HasMany
+    {
+        return $this->hasMany(PoliticalParty::class, 'country_id', 'id');
+    }
+
+    public function elections(): HasMany
+    {
+        return $this->hasMany(Election::class, 'country_id', 'id');
     }
 }

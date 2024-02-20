@@ -3,7 +3,7 @@
 namespace Modules\Newspaper\Database\factories;
 
 use Database\Factories\Traits\HasArticle;
-use Database\Factories\Traits\HasComment;
+use Database\Factories\Traits\HasCountry;
 use Database\Factories\Traits\HasUser;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\Newspaper\Models\Rating;
@@ -15,7 +15,7 @@ class RatingFactory extends Factory
 {
     use HasUser,
         HasArticle,
-        HasComment;
+        HasCountry;
 
     /**
      * @var string

@@ -36,8 +36,8 @@ class CreatePoliticalPartiesTable extends Migration
                 ->on('regions')
                 ->onDelete('cascade');
 
-            $table->boolean('in_government')
-                ->default(false);
+            $table->string('color')
+                ->nullable();
 
             $table->timestamps();
         });

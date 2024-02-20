@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Modules\Country\Http\Controllers\AcceptRequestController;
 use Modules\Country\Http\Controllers\DeclineRequestController;
 use Modules\Country\Http\Controllers\IndexController;
+use Modules\Country\Http\Controllers\IndexElectionsController;
+use Modules\Country\Http\Controllers\IndexParliamentariansController;
 use Modules\Country\Http\Controllers\IndexRequestController;
 use Modules\Country\Http\Controllers\ShowController;
 use Modules\Country\Http\Controllers\StoreRequestController;
@@ -32,6 +34,16 @@ Route::group([
      * Get specified country
      */
     Route::get('/{country}', ShowController::class);
+
+    /**
+     * Get list of parliamentarians
+     */
+    Route::get('/{country}/parliamentarians', IndexParliamentariansController::class);
+
+    /**
+     * Get list of active elections
+     */
+    Route::get('/{country}/elections', IndexElectionsController::class);
 
     Route::group([
         'prefix' => '/{country}/requests'

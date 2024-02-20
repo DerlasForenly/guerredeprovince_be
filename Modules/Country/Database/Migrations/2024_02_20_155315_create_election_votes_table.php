@@ -13,24 +13,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('country_staff', function (Blueprint $table) {
-            $table->id('user_id');
+        Schema::create('election_votes', function (Blueprint $table) {
+            $table->id();
+
+            $table->unsignedBigInteger('election_id');
+            $table->foreign('election_id')
+                ->references('id')
+                ->on('elections')
+                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger('country_id');
-            $table->foreign('country_id')
-                ->references('id')
-                ->on('countries')
-                ->onDelete('cascade');
-
-            $table->unsignedBigInteger('position_id');
-            $table->foreign('position_id')
-                ->references('id')
-                ->on('positions')
-                ->onDelete('cascade');
+            $table->boolean('value');
 
             $table->timestamps();
         });
@@ -43,6 +41,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('country_staff');
+        Schema::dropIfExists('election_votes');
     }
 };

@@ -12,7 +12,7 @@ class RequestTypeSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         foreach (RequestType::REQUEST_TYPES as $requestType) {
             RequestType::factory()
