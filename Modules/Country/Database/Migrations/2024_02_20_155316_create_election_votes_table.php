@@ -28,8 +28,6 @@ return new class extends Migration
                 ->on('candidates')
                 ->onDelete('cascade');
 
-            $table->boolean('value');
-
             $table->timestamps();
         });
     }

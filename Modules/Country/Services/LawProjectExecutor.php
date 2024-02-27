@@ -4,6 +4,7 @@ namespace Modules\Country\Services;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Modules\Country\Models\GovernmentType;
 use Modules\Country\Models\Law;
 use Modules\Country\Models\LawType;
 use Modules\Country\Services\LawStrategies\ChangeEmblemStrategy;
@@ -70,6 +71,16 @@ class LawProjectExecutor
      */
     public function isLawAcceptable(): bool
     {
+        $isOnePerson = match (true) {
+            $this->law->country->government_type_id === GovernmentType::DICTATORSHIP_ID,
+                $this->law->country->government_type_id === GovernmentType::ABSOLUTE_MONARCHY_ID => true,
+            default => false,
+        };
+
+        if ($isOnePerson) {
+            return true;
+        }
+
         $countAllVotes = $this->law->votes()->count();
         $countAcceptVotes = $this->law->votes()->where('value', true)->count();
         $countDeclineVotes = $this->law->votes()->where('value', false)->count();

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Modules\Country\Http\Requests\Law\StoreRequest;
 use Modules\Country\Jobs\ExecuteLawProjectJob;
+use Modules\Country\Models\GovernmentType;
 use Modules\Country\Models\Law;
 use Modules\Status\Models\Status;
 
@@ -25,8 +26,12 @@ class StoreController extends Controller
             'meta'        => $request->meta,
         ]);
 
-        ExecuteLawProjectJob::dispatch($law)
-            ->delay(now()->addHours());
+        match (true) {
+            $law->country->government_type_id === GovernmentType::DICTATORSHIP_ID,
+            $law->country->government_type_id === GovernmentType::ABSOLUTE_MONARCHY_ID => ExecuteLawProjectJob::dispatch($law),
+            default => ExecuteLawProjectJob::dispatch($law)
+                ->delay(now()->addHours()),
+        };
 
         return response()->json([
             'message' => 'OK',

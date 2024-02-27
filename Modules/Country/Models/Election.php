@@ -18,6 +18,8 @@ use Modules\Status\Models\Status;
  *
  * @property \Modules\Country\Models\ElectionVote[] votes
  * @property \Modules\Country\Models\ElectionType type
+ * @property PoliticalParty $party
+ * @property \Modules\Country\Models\Country $country
  */
 class Election extends Model
 {
@@ -53,5 +55,10 @@ class Election extends Model
     public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class, 'status_id', 'id');
+    }
+
+    public function candidates(): HasMany
+    {
+        return $this->hasMany(ElectionCandidate::class, 'election_id', 'id');
     }
 }

@@ -98,6 +98,8 @@ Route::group([
      * Get list of elections
      */
     Route::get('/', \Modules\Country\Http\Controllers\Election\IndexController::class);
+
+    Route::post('/', \Modules\Country\Http\Controllers\Election\VoteController::class);
 });
 
 /**
