@@ -2,6 +2,7 @@
 
 namespace Modules\Country\Models;
 
+use App\Models\Traits\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -20,6 +21,8 @@ use Modules\Status\Models\Status;
  */
 class Election extends Model
 {
+    use Filterable;
+
     protected $fillable = [
         'type_id',
         'country_id',

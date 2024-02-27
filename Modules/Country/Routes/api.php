@@ -91,10 +91,14 @@ Route::group([
     Route::post('/{law}/vote', \Modules\Country\Http\Controllers\Law\VoteController::class);
 });
 
-/**
- * Get list of active elections
- */
-Route::get('/elections', \Modules\Country\Http\Controllers\Election\IndexController::class);
+Route::group([
+    'prefix' => '/elections',
+], function () {
+    /**
+     * Get list of elections
+     */
+    Route::get('/', \Modules\Country\Http\Controllers\Election\IndexController::class);
+});
 
 /**
  * Get all law types

@@ -14,8 +14,10 @@ class LawResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
-        $countAcceptVotes = $this->votes()->where('value', true)->count();
-        $countDeclineVotes = $this->votes()->where('value', false)->count();
+        $votes = $this->votes();
+
+        $countAcceptVotes = $votes->where('value', true)->count();
+        $countDeclineVotes = $votes->where('value', false)->count();
 
         return [
             'id'          => $this->id,
@@ -29,8 +31,8 @@ class LawResource extends JsonResource
             ],
             'rating'      => $countAcceptVotes - $countDeclineVotes,
             'created_at'  => Carbon::parse($this->created_at)->format('H:i d.m.Y'),
-            'time_to_end' => ActionCalculationsService::getRemainingTimeInSec($this->created_at, 60, true),
-            'votes'       => $this->votes()->count(),
+            'time_to_end' => ActionCalculationsService::getRemainingTimeInSec($this->created_at, 60),
+            'votes'       => $countAcceptVotes + $countDeclineVotes,
         ];
     }
 }

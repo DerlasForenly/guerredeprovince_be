@@ -43,16 +43,19 @@ class LawProjectExecutor
      */
     public function execute(): void
     {
-        if (!$this->isLawAccepted() && $this->law->status_id === Status::IN_PROCESS_ID) {
+        if (!$this->isLawAcceptable() && $this->law->status_id === Status::IN_PROCESS_ID) {
             Log::info('Law does not meet the requirements.', ['law_id' => $this->law->id]);
             $this->law->status_id = Status::DECLINED_ID;
             $this->law->save();
+
+            return;
         }
 
         Log::info('Start executing law project.', ['law_id' => $this->law->id]);
         DB::beginTransaction();
 
         $this->strategy->execute($this->law);
+
         $this->law->status_id = Status::ACCEPTED_ID;
         $this->law->save();
 
@@ -61,14 +64,16 @@ class LawProjectExecutor
     }
 
     /**
+     * @TODO Update to pass only if >50% of parliamentarians voted this project
+     *
      * @return bool
      */
-    public function isLawAccepted(): bool
+    public function isLawAcceptable(): bool
     {
         $countAllVotes = $this->law->votes()->count();
         $countAcceptVotes = $this->law->votes()->where('value', true)->count();
         $countDeclineVotes = $this->law->votes()->where('value', false)->count();
 
-        return $countAllVotes >= 0 && $countAcceptVotes > $countDeclineVotes;
+        return $countAllVotes > 0 && $countAcceptVotes > $countDeclineVotes;
     }
 }
