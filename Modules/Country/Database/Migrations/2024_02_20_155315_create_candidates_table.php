@@ -13,22 +13,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('election_votes', function (Blueprint $table) {
+        Schema::create('candidates', function (Blueprint $table) {
             $table->id();
+            $table->morphs('candidable');
 
             $table->unsignedBigInteger('election_id');
             $table->foreign('election_id')
                 ->references('id')
                 ->on('elections')
                 ->onDelete('cascade');
-
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-
-            $table->boolean('value');
 
             $table->timestamps();
         });
@@ -41,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('election_votes');
+        Schema::dropIfExists('candidates');
     }
 };

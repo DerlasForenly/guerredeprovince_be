@@ -26,7 +26,7 @@ class StoreController extends Controller
         ]);
 
         ExecuteLawProjectJob::dispatch($law)
-            ->delay(now()->addSeconds(3));
+            ->delay(now()->addSeconds(60 * 60));
 
         return response()->json([
             'message' => 'OK',

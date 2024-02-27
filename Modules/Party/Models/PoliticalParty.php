@@ -6,6 +6,7 @@ use App\Models\Traits\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Modules\Country\Models\Candidate;
 use Modules\Party\Models\Relationships\PoliticalParty\Relationships;
 
 /**
@@ -39,4 +40,9 @@ class PoliticalParty extends Model
     protected $hidden = [
         'updated_at',
     ];
+
+    public function candidates(): MorphMany
+    {
+        return $this->morphMany(Candidate::class, 'candidable');
+    }
 }

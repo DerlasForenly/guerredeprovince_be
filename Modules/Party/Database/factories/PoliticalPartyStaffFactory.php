@@ -33,7 +33,8 @@ class PoliticalPartyStaffFactory extends Factory
     public function definition(): array
     {
         return [
-            'position_id' => Position::POLITICAL_PARTY_MEMBER_ID,
+            'position_id'   => Position::POLITICAL_PARTY_MEMBER_ID,
+            'in_government' => true,
         ];
     }
 }

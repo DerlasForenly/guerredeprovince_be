@@ -2,12 +2,14 @@
 
 namespace Modules\Country\Services;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Modules\Country\Models\Law;
 use Modules\Country\Models\LawType;
 use Modules\Country\Services\LawStrategies\ChangeEmblemStrategy;
 use Modules\Country\Services\LawStrategies\ChangeNameStrategy;
 use Modules\Country\Services\LawStrategies\StartPresidentElectionStrategy;
+use Modules\Status\Models\Status;
 
 class LawProjectExecutor
 {
@@ -36,11 +38,37 @@ class LawProjectExecutor
     /**
      * The Context delegates some work to the Strategy object instead of
      * implementing multiple versions of the algorithm on its own.
+     *
+     * @return void
      */
     public function execute(): void
     {
+        if (!$this->isLawAccepted() && $this->law->status_id === Status::IN_PROCESS_ID) {
+            Log::info('Law does not meet the requirements.', ['law_id' => $this->law->id]);
+            $this->law->status_id = Status::DECLINED_ID;
+            $this->law->save();
+        }
+
         Log::info('Start executing law project.', ['law_id' => $this->law->id]);
+        DB::beginTransaction();
+
         $this->strategy->execute($this->law);
+        $this->law->status_id = Status::ACCEPTED_ID;
+        $this->law->save();
+
+        DB::commit();
         Log::info('Finished executing law project.', ['law_id' => $this->law->id]);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isLawAccepted(): bool
+    {
+        $countAllVotes = $this->law->votes()->count();
+        $countAcceptVotes = $this->law->votes()->where('value', true)->count();
+        $countDeclineVotes = $this->law->votes()->where('value', false)->count();
+
+        return $countAllVotes >= 0 && $countAcceptVotes > $countDeclineVotes;
     }
 }

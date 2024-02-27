@@ -2,6 +2,7 @@
 
 namespace Modules\Status\Models;
 
+use App\Models\Traits\FIndByName;
 use App\Models\Traits\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Status extends Model
 {
-    use HasFactory;
+    use HasFactory,
+        FIndByName;
 
     const READY_ID = 1;
     const FINISHED_ID = 2;

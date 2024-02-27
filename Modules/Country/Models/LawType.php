@@ -26,4 +26,9 @@ class LawType extends Model
         'id',
         'name',
     ];
+
+    public function laws(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Law::class, 'law_type_id', 'id');
+    }
 }

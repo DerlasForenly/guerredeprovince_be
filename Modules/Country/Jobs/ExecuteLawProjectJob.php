@@ -10,6 +10,9 @@ use Illuminate\Queue\SerializesModels;
 use Modules\Country\Models\Law;
 use Modules\Country\Services\LawProjectExecutor;
 
+/**
+ *
+ */
 class ExecuteLawProjectJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -23,6 +26,9 @@ class ExecuteLawProjectJob implements ShouldQueue
     {
     }
 
+    /**
+     * @return void
+     */
     public function handle(): void
     {
         $executor = new LawProjectExecutor($this->law);

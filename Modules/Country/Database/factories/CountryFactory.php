@@ -37,6 +37,7 @@ class CountryFactory extends Factory
             'government_type_id' => GovernmentType::ABSOLUTE_MONARCHY_ID,
             'color'              => '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT),
             'border_color'       => '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT),
+            'parliament_size'    => 75,
         ];
     }
 

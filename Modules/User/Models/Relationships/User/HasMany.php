@@ -2,10 +2,12 @@
 
 namespace Modules\User\Models\Relationships\User;
 
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Modules\Action\Models\MoveAction;
 use Modules\Action\Models\WarAction;
 use Modules\Action\Models\WorkAction;
 use Modules\Business\Models\Business;
+use Modules\Country\Models\Candidate;
 use Modules\Newspaper\Models\NewspaperStaff;
 use Modules\Newspaper\Models\Rating;
 use Modules\Newspaper\Models\Subscription;
@@ -64,5 +66,10 @@ trait HasMany
     public function moveActions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(MoveAction::class);
+    }
+
+    public function candidates(): MorphMany
+    {
+        return $this->morphMany(Candidate::class, 'candidable');
     }
 }

@@ -14,17 +14,13 @@ class StartPresidentElectionStrategy implements LawStrategy
 {
     public function execute(Law $law): void
     {
-        DB::beginTransaction();
-
         $election = Election::create([
-            'type_id'    => ElectionType::PRESIDENT_ELECTION,
+            'type_id'    => ElectionType::where('name', ElectionType::PRESIDENT_ELECTION)->first()->id,
             'country_id' => $law->country_id,
             'status_id'  => Status::IN_PROCESS_ID,
         ]);
 
         FinishElectionJob::dispatch($election)
             ->delay(now()->addHours(2));
-
-        DB::commit();
     }
 }

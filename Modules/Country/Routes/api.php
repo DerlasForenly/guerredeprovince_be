@@ -3,8 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Country\Http\Controllers\AcceptRequestController;
 use Modules\Country\Http\Controllers\DeclineRequestController;
-use Modules\Country\Http\Controllers\IndexController;
-use Modules\Country\Http\Controllers\IndexElectionsController;
 use Modules\Country\Http\Controllers\IndexParliamentariansController;
 use Modules\Country\Http\Controllers\IndexRequestController;
 use Modules\Country\Http\Controllers\ShowController;
@@ -28,7 +26,7 @@ Route::group([
     /**
      * Get all countries
      */
-    Route::get('/', IndexController::class);
+    Route::get('/', \Modules\Country\Http\Controllers\IndexController::class);
 
     /**
      * Get specified country
@@ -39,11 +37,6 @@ Route::group([
      * Get list of parliamentarians
      */
     Route::get('/{country}/parliamentarians', IndexParliamentariansController::class);
-
-    /**
-     * Get list of active elections
-     */
-    Route::get('/{country}/elections', IndexElectionsController::class);
 
     Route::group([
         'prefix' => '/{country}/requests'
@@ -80,7 +73,7 @@ Route::group([
     /**
      * Get all laws
      */
-    Route::get('/', function () {});
+    Route::get('/', \Modules\Country\Http\Controllers\Law\IndexController::class);
 
     /**
      * Create new law
@@ -91,7 +84,17 @@ Route::group([
      * Get specified law
      */
     Route::get('/{law}', function () {});
+
+    /**
+     * Get specified law
+     */
+    Route::post('/{law}/vote', \Modules\Country\Http\Controllers\Law\VoteController::class);
 });
+
+/**
+ * Get list of active elections
+ */
+Route::get('/elections', \Modules\Country\Http\Controllers\Election\IndexController::class);
 
 /**
  * Get all law types

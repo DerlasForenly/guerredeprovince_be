@@ -9,6 +9,8 @@ use Modules\Business\Database\Seeders\SalaryTypeSeeder;
 use Modules\Corporation\Database\Seeders\CorporationSeeder;
 use Modules\Country\Database\Seeders\CountrySeeder;
 use Modules\Country\Database\Seeders\CountryStaffSeeder;
+use Modules\Country\Database\Seeders\ElectionsSeeder;
+use Modules\Country\Database\Seeders\ElectionTypesSeeder;
 use Modules\Country\Database\Seeders\GovernmentTypeSeeder;
 use Modules\Country\Database\Seeders\LawTypesSeeder;
 use Modules\Country\Database\Seeders\NationSeeder;
@@ -79,6 +81,8 @@ class DatabaseSeeder extends Seeder
             ArticleSeeder::class,
             CommentSeeder::class,
             LawTypesSeeder::class,
+            ElectionTypesSeeder::class,
+            ElectionsSeeder::class,
         ]);
     }
 }
