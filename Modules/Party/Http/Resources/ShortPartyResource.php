@@ -21,7 +21,7 @@ class ShortPartyResource extends JsonResource
             'name'    => $this->name,
             'tag'     => $this->tag,
             'emblem'  => $this->emblem,
-            'members' => $this->politicalPartyStaff()->count(),
+            'members' => $this->staff()->count(),
             'leader'  => [
                 'id'       => $this->leader?->user_id,
                 'nickname' => $this->leader?->user->nickname,

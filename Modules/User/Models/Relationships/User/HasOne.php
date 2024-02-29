@@ -14,7 +14,7 @@ use Modules\Status\Models\Status;
 
 trait HasOne
 {
-    public function country_staff(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function countryStaff(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(CountryStaff::class);
     }

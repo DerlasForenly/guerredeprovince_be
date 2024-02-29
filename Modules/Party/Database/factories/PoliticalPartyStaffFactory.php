@@ -12,7 +12,7 @@ use Modules\Position\Models\Position;
 /**
  * @method user(int $id)
  * @method position(int $id)
- * @method politicalParty(int $id)
+ * @method party(int $id)
  */
 class PoliticalPartyStaffFactory extends Factory
 {

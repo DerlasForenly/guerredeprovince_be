@@ -4,7 +4,6 @@ namespace Modules\Party\Models;
 
 use App\Models\Traits\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Party\Models\Relationships\PoliticalPartyStaff\Relationships;
 use Modules\User\Models\User;
 
@@ -16,7 +15,7 @@ use Modules\User\Models\User;
  * @property bool in_government
  *
  * @property User user
- * @property \Modules\Party\Models\PoliticalParty politicalParty
+ * @property \Modules\Party\Models\PoliticalParty party
  * @property \Modules\Position\Models\Position position
  */
 class PoliticalPartyStaff extends Model

@@ -11,6 +11,6 @@ class IndexStaffController extends Controller
 {
     public function __invoke(PoliticalParty $party): AnonymousResourceCollection
     {
-        return StaffResource::collection($party->politicalPartyStaff);
+        return StaffResource::collection($party->staff);
     }
 }

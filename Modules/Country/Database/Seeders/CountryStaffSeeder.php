@@ -20,11 +20,5 @@ class CountryStaffSeeder extends Seeder
             ->country(1)
             ->position(Position::COUNTRY_LEADER_ID)
             ->create();
-
-        CountryStaff::factory()
-            ->user(2)
-            ->country(1)
-            ->position(Position::MINISTER_OF_SOCIAL_ID)
-            ->create();
     }
 }

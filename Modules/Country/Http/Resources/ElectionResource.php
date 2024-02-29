@@ -2,6 +2,7 @@
 
 namespace Modules\Country\Http\Resources;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Country\Models\ElectionVote;
@@ -14,9 +15,10 @@ class ElectionResource extends JsonResource
     public function toArray(Request $request): array
     {
         $user = auth()->user();
+        $id   = $this->id;
 
         return [
-            'id'              => $this->id,
+            'id'              => $id,
             'country'         => [
                 'id'   => $this->country_id,
                 'name' => $this->country?->name,
@@ -30,7 +32,19 @@ class ElectionResource extends JsonResource
                 'name' => $this->type->id,
             ],
             'candidates'      => CandidateResource::collection($this->candidates()->get()),
-            'voted'           => (bool)ElectionVote::where('user_id', $user->id)->first(),
+            'voted'           =>
+                (bool)$this->whereHas(
+                    'candidates',
+                    function (Builder $query) use ($user, $id) {
+                        $query->where('election_id', $id)
+                            ->whereHas(
+                                'votes',
+                                function (Builder $subQuery) use ($user) {
+                                    $subQuery->where('user_id', $user->id);
+                                }
+                            );
+                    }
+                )->first(),
         ];
     }
 }

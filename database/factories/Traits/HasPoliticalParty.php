@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 trait HasPoliticalParty
 {
-    public function politicalParty(int $id): self
+    public function party(int $id): self
     {
         return $this->state(function (array $attributes) use ($id) {
             return [

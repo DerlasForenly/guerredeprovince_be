@@ -55,8 +55,8 @@ class MeResource extends JsonResource
             'political_view_id'      => null,
             'political_party'        => $this->politicalPartyStaff ? [
                 'id'   => $this->politicalPartyStaff->political_party_id,
-                'name' => $this->politicalPartyStaff->politicalParty->name,
-                'tag'  => $this->politicalPartyStaff->politicalParty->tag,
+                'name' => $this->politicalPartyStaff->party->name,
+                'tag'  => $this->politicalPartyStaff->party->tag,
             ] : null,
             'premium'                => false,
             'registration_region_id' => null,

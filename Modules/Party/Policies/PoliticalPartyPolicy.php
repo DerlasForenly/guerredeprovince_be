@@ -23,7 +23,7 @@ class PoliticalPartyPolicy
     public function leave(User $user): Response
     {
         return match (true) {
-            !$user->politicalPartyStaff => $this->deny('You are not in party'),
+            !$user->staff => $this->deny('You are not in party'),
             default => $this->allow(),
         };
     }
@@ -36,7 +36,7 @@ class PoliticalPartyPolicy
     public function create(User $user): Response
     {
         return match (true) {
-            (bool)$user->politicalPartyStaff => $this->deny('You are in the party already.'),
+            (bool)$user->staff => $this->deny('You are in the party already.'),
             default => $this->allow(),
         };
     }

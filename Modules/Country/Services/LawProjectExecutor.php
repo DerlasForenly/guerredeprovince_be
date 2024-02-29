@@ -9,15 +9,17 @@ use Modules\Country\Models\Law;
 use Modules\Country\Models\LawType;
 use Modules\Country\Services\LawStrategies\ChangeEmblemStrategy;
 use Modules\Country\Services\LawStrategies\ChangeNameStrategy;
+use Modules\Country\Services\LawStrategies\StartParliamentElectionStrategy;
 use Modules\Country\Services\LawStrategies\StartPresidentElectionStrategy;
 use Modules\Status\Models\Status;
 
 class LawProjectExecutor
 {
     const STRATEGIES = [
-        LawType::CHANGE_COUNTRY_EMBLEM    => ChangeEmblemStrategy::class,
-        LawType::CHANGE_COUNTRY_NAME      => ChangeNameStrategy::class,
-        LawType::START_PRESIDENT_ELECTION => StartPresidentElectionStrategy::class,
+        LawType::CHANGE_COUNTRY_EMBLEM     => ChangeEmblemStrategy::class,
+        LawType::CHANGE_COUNTRY_NAME       => ChangeNameStrategy::class,
+        LawType::START_PRESIDENT_ELECTION  => StartPresidentElectionStrategy::class,
+        LawType::START_PARLIAMENT_ELECTION => StartParliamentElectionStrategy::class,
     ];
 
     /**
@@ -81,8 +83,8 @@ class LawProjectExecutor
             return true;
         }
 
-        $countAllVotes = $this->law->votes()->count();
-        $countAcceptVotes = $this->law->votes()->where('value', true)->count();
+        $countAllVotes     = $this->law->votes()->count();
+        $countAcceptVotes  = $this->law->votes()->where('value', true)->count();
         $countDeclineVotes = $this->law->votes()->where('value', false)->count();
 
         return $countAllVotes > 0 && $countAcceptVotes > $countDeclineVotes;

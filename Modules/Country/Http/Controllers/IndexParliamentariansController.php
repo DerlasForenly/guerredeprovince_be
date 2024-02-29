@@ -12,21 +12,21 @@ class IndexParliamentariansController extends Controller
         $parliamentarians = [];
 
         $parties = $country
-            ->politicalParties()
-            ->whereHas('politicalPartyStaff', function ($query) {
+            ->parties()
+            ->whereHas('staff', function ($query) {
                 $query->where('in_government', true);
             })
-            ->with(['politicalPartyStaff' => function ($query) {
+            ->with(['staff' => function ($query) {
                 $query->where('in_government', true);
             }])
             ->get();
 
         foreach ($parties as $party) {
-            foreach ($party['politicalPartyStaff'] as $staff) {
+            foreach ($party['staff'] as $staff) {
                 $staff['color'] = $party['color'];
             }
 
-            $parliamentarians = array_merge($parliamentarians, $party['politicalPartyStaff']->toArray());
+            $parliamentarians = array_merge($parliamentarians, $party['staff']->toArray());
         }
 
         return $parliamentarians;

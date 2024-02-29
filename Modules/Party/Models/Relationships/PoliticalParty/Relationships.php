@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Modules\Country\Models\Candidate;
 use Modules\Country\Models\Country;
 use Modules\Party\Models\PoliticalPartyStaff;
 use Modules\Position\Models\Position;
@@ -13,7 +14,7 @@ use Modules\Request\Models\Request;
 
 trait Relationships
 {
-    public function politicalPartyStaff(): HasMany
+    public function staff(): HasMany
     {
         return $this->hasMany(PoliticalPartyStaff::class);
     }
@@ -36,5 +37,10 @@ trait Relationships
         return $this->hasOne(PoliticalPartyStaff::class)->ofMany([], function ($query) {
             $query->where('position_id', '=', Position::POLITICAL_PARTY_LEADER_ID);
         });
+    }
+
+    public function candidates(): MorphMany
+    {
+        return $this->morphMany(Candidate::class, 'candidable');
     }
 }

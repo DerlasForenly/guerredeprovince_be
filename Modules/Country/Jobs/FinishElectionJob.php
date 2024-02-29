@@ -8,7 +8,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Modules\Country\Models\Election;
-use Modules\Status\Models\Status;
+use Modules\Country\Services\ElectionFinishExecutor;
 
 class FinishElectionJob implements ShouldQueue
 {
@@ -25,11 +25,7 @@ class FinishElectionJob implements ShouldQueue
 
     public function handle(): void
     {
-        $this->election->status_id = Status::FINISHED_ID;
-        $this->election->save();
-
-        /**
-         * @TODO Calculate votes and create parliamentarians
-         */
+        $finishElection = new ElectionFinishExecutor($this->election);
+        $finishElection->execute();
     }
 }

@@ -4,7 +4,7 @@ namespace Modules\Country\Services\LawStrategies;
 
 use Modules\Country\Jobs\FinishElectionJob;
 use Modules\Country\Models\Election;
-use Modules\Country\Models\ElectionCandidate;
+use Modules\Country\Models\Candidate;
 use Modules\Country\Models\ElectionType;
 use Modules\Country\Models\Law;
 use Modules\Country\Services\LawStrategy;
@@ -22,7 +22,7 @@ class StartPresidentElectionStrategy implements LawStrategy
         ]);
 
         foreach ($law->country->politicalParties as $party) {
-            ElectionCandidate::create([
+            Candidate::create([
                 'election_id'     => $election->id,
                 'candidable_id'   => $party->leader->user_id,
                 'candidable_type' => User::class,
@@ -30,6 +30,6 @@ class StartPresidentElectionStrategy implements LawStrategy
         }
 
         FinishElectionJob::dispatch($election)
-            ->delay(now()->addHours(2));
+            ->delay(now()->addMinutes(60));
     }
 }

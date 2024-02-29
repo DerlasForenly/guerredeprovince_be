@@ -21,7 +21,7 @@ use Modules\Party\Models\Relationships\PoliticalParty\Relationships;
  *
  * @property MorphMany $requests
  * @property PoliticalPartyStaff $leader
- * @property \Modules\Party\Models\PoliticalPartyStaff[] $politicalPartyStaff
+ * @property \Modules\Party\Models\PoliticalPartyStaff[] $staff
  * @property \Modules\Country\Models\Country $country
  */
 class PoliticalParty extends Model
@@ -40,9 +40,4 @@ class PoliticalParty extends Model
     protected $hidden = [
         'updated_at',
     ];
-
-    public function candidates(): MorphMany
-    {
-        return $this->morphMany(Candidate::class, 'candidable');
-    }
 }

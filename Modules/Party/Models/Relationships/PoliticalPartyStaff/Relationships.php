@@ -3,9 +3,7 @@
 namespace Modules\Party\Models\Relationships\PoliticalPartyStaff;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Modules\Country\Models\Country;
 use Modules\Party\Models\PoliticalParty;
-use Modules\Party\Models\PoliticalPartyStaff;
 use Modules\Position\Models\Position;
 use Modules\User\Models\User;
 
@@ -14,7 +12,7 @@ trait Relationships
     /**
      * @return BelongsTo
      */
-    public function politicalParty(): BelongsTo
+    public function party(): BelongsTo
     {
         return $this->belongsTo(PoliticalParty::class, 'political_party_id', 'id');
     }

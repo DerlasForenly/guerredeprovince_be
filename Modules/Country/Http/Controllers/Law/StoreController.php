@@ -20,7 +20,7 @@ class StoreController extends Controller
         $user = auth()->userOrFail();
 
         $law = Law::create([
-            'country_id'  => $user->politicalPartyStaff->politicalParty->country_id,
+            'country_id'  => $user->politicalPartyStaff->party->country_id,
             'law_type_id' => $request->law_type_id,
             'status_id'   => Status::IN_PROCESS_ID,
             'meta'        => $request->meta,

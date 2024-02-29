@@ -34,7 +34,7 @@ class CountryResource extends JsonResource
                 'name' => $this->governmentType->name,
             ],
             'parliament_size'   => $this->parliament_size,
-            'political_parties' => $this->politicalParties()->get(['id', 'name']),
+            'political_parties' => $this->parties()->get(['id', 'name']),
         ];
     }
 }

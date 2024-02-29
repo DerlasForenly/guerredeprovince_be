@@ -27,7 +27,7 @@ use Modules\User\Models\User;
  *
  * @property \Modules\Country\Models\GovernmentType governmentType
  * @property \Modules\Country\Models\CountryStaff staff
- * @property \Modules\Party\Models\PoliticalParty[] politicalParties
+ * @property \Modules\Party\Models\PoliticalParty[] parties
  * @property \Modules\Country\Models\Election[] elections
  * @property \Modules\Country\Models\Law[] laws
  */
@@ -75,7 +75,7 @@ class Country extends Model
         return $this->belongsTo(GovernmentType::class);
     }
 
-    public function politicalParties(): HasMany
+    public function parties(): HasMany
     {
         return $this->hasMany(PoliticalParty::class, 'country_id', 'id');
     }

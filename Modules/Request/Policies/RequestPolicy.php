@@ -44,7 +44,7 @@ class RequestPolicy
     public function createRequest(User $user, Request $request): Response
     {
         return match (true) {
-            (bool) $user->politicalPartyStaff => $this->deny('You are in the party already.'),
+            (bool) $user->staff => $this->deny('You are in the party already.'),
             //(bool)$request->requestable->requests->where('user_id', $user->id)->first() => $this->deny('You already sent an request'),
             default => $this->allow(),
         };
