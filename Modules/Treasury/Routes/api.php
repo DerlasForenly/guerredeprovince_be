@@ -25,3 +25,4 @@ Route::get('/countries/{country}/treasury', CountryTreasuryController::class);
 Route::get('/trade-offers', \Modules\Treasury\Http\Controllers\IndexTradeOffersController::class);
 Route::post('/trade-offers', \Modules\Treasury\Http\Controllers\StoreTradeOfferController::class);
 Route::post('/trade-offers/{offer}', \Modules\Treasury\Http\Controllers\AcceptOfferController::class);
+Route::delete('/trade-offers/{offer}', \Modules\Treasury\Http\Controllers\DeleteTradeOfferController::class);

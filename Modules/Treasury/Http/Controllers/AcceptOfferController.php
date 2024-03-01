@@ -28,13 +28,13 @@ class AcceptOfferController extends Controller
 
         DB::beginTransaction();
         $transactionService->sendResources(
-            $offer->isBuying ? $userResourceTreasury : $offer,
-            $offer->isBuying ? $offer : $userResourceTreasury,
+            $offer->is_buying ? $userResourceTreasury : $offer,
+            $offer->is_buying ? $offer : $userResourceTreasury,
             $request->quantity
         );
         $transactionService->sendResources(
-            $offer->isBuying ? $offerOwnerMoneyTreasury : $userMoneyTreasury,
-            $offer->isBuying ? $userMoneyTreasury : $offerOwnerMoneyTreasury,
+            $offer->is_buying ? $offerOwnerMoneyTreasury : $userMoneyTreasury,
+            $offer->is_buying ? $userMoneyTreasury : $offerOwnerMoneyTreasury,
             $request->quantity * $offer->price
         );
         DB::commit();

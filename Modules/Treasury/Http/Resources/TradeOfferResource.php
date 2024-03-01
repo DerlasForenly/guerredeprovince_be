@@ -24,7 +24,7 @@ class TradeOfferResource extends JsonResource
             ],
             'quantity' => $this->quantity,
             'price'    => $this->price,
-            'isBuying' => $this->isBuying,
+            'is_buying' => $this->is_buying,
         ];
     }
 }

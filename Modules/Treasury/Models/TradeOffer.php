@@ -14,7 +14,7 @@ use Modules\User\Models\User;
  * @property int resource_id
  * @property int quantity
  * @property int price
- * @property boolean isBuying
+ * @property boolean is_buying
  *
  * @property \Modules\User\Models\User owner
  * @property \Modules\Resource\Models\Resource resourceType
@@ -26,7 +26,7 @@ class TradeOffer extends Treasury
         'resource_id',
         'quantity',
         'price',
-        'isBuying',
+        'is_buying',
         'size',
     ];
 

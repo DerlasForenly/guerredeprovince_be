@@ -14,35 +14,35 @@ class TradeOfferSeeder extends Seeder
         $user = User::where('nickname', 'Trader1')->first();
 
         TradeOffer::create([
-            'user_id' => 1,
+            'user_id'     => 1,
             'resource_id' => Resource::MONEY_ID,
-            'quantity' => 1000,
-            'price' => 1,
-            'isBuying' => false
+            'quantity'    => 1000,
+            'price'       => 1,
+            'is_buying'   => false,
         ]);
 
         TradeOffer::create([
-            'user_id' => $user->id,
+            'user_id'     => $user->id,
             'resource_id' => Resource::HELIUM_ID,
-            'quantity' => 1000,
-            'price' => 10,
-            'isBuying' => false
+            'quantity'    => 1000,
+            'price'       => 10,
+            'is_buying'   => false,
         ]);
 
         TradeOffer::create([
-            'user_id' => $user->id,
+            'user_id'     => $user->id,
             'resource_id' => Resource::WOOD_ID,
-            'quantity' => 1000,
-            'price' => 10,
-            'isBuying' => true,
+            'quantity'    => 1000,
+            'price'       => 10,
+            'is_buying'   => true,
         ]);
 
         TradeOffer::create([
-            'user_id' => $user->id,
+            'user_id'     => $user->id,
             'resource_id' => Resource::MONEY_ID,
-            'quantity' => 1000 * 10,
-            'price' => 1,
-            'isBuying' => true,
+            'quantity'    => 1000 * 10,
+            'price'       => 1,
+            'is_buying'   => true,
         ]);
     }
 }

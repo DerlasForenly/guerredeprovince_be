@@ -30,7 +30,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('quantity')->default(0);
             $table->unsignedBigInteger('price');
-            $table->boolean('isBuying');
+            $table->boolean('is_buying');
 
             $table->unsignedBigInteger('size')->default(100000000);
 
