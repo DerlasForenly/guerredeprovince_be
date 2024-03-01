@@ -24,12 +24,9 @@ class MeResource extends JsonResource
     {
         /**
          * @var Treasury $gold
-         */
-        $gold = $this->treasuries->where('resource_id', Resource::GOLD_ID)->first();
-
-        /**
          * @var Treasury $diamonds
          */
+        $money    = $this->treasuries->where('resource_id', Resource::MONEY_ID)->first();
         $diamonds = $this->treasuries->where('resource_id', Resource::DIAMONDS_ID)->first();
 
         return [
@@ -65,7 +62,7 @@ class MeResource extends JsonResource
                 'name' => $this->country->name,
             ],
             'role_id'                => null,
-            'gold'                   => $gold->quantity,
+            'money'                  => $money->quantity,
             'diamonds'               => $diamonds->quantity,
             'newspaper_id'           => $this->newspaperStaff?->newspaper_id,
             'job_business_id'        => $this->employee?->business_id,

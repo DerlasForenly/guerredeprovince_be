@@ -12,6 +12,7 @@ use Modules\Resource\Models\Resource;
  * @property int $id
  * @property int $resource_id
  * @property int $quantity
+ * @property int $size
  *
  * @property \Modules\Resource\Models\Resource $resource
  * @property \Modules\Resource\Models\Resource $resourceType

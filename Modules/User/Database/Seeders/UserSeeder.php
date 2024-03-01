@@ -42,6 +42,7 @@ class UserSeeder extends Seeder
             'AllHater',
             'AllExceptHumorLover',
             'HSPLover',
+            'Trader1',
         ];
 
         foreach ($recommendationTestingUsers as $user) {

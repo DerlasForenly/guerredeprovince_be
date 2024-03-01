@@ -2,6 +2,7 @@
 
 namespace Modules\Treasury\Services;
 
+use Modules\Resource\Models\Resource;
 use Modules\Treasury\Models\Treasury\Treasurable;
 use Modules\Treasury\Models\Treasury\Treasury;
 
@@ -34,6 +35,14 @@ class TransactionService
         $to->quantity += $quantity;
         $from->save();
         $to->save();
+    }
+
+    public function sendMoney(Treasurable $from, Treasurable $to, int $quantity): void
+    {
+        $fromTreasury = $from->treasuries()->where('resource_id', Resource::MONEY_ID)->first();
+        $toTreasury = $to->treasuries()->where('resource_id', Resource::MONEY_ID)->first();
+
+        $this->sendResources($fromTreasury, $toTreasury, $quantity);
     }
 
     /**

@@ -10,7 +10,9 @@ use Modules\Business\Models\Employee;
 use Modules\Country\Models\CountryStaff;
 use Modules\Newspaper\Models\NewspaperStaff;
 use Modules\Party\Models\PoliticalPartyStaff;
+use Modules\Resource\Models\Resource;
 use Modules\Status\Models\Status;
+use Modules\Treasury\Models\TradeOffer;
 
 trait HasOne
 {
@@ -26,12 +28,14 @@ trait HasOne
 
     public function inProcessWork(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(WorkAction::class)->where('status_id', Status::IN_PROCESS_ID);
+        return $this->hasOne(WorkAction::class)
+            ->where('status_id', Status::IN_PROCESS_ID);
     }
 
     public function inProcessWar(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(WarAction::class)->where('status_id', Status::IN_PROCESS_ID);
+        return $this->hasOne(WarAction::class)
+            ->where('status_id', Status::IN_PROCESS_ID);
     }
 
     public function army(): \Illuminate\Database\Eloquent\Relations\HasOne
@@ -52,5 +56,11 @@ trait HasOne
     public function newspaperStaff(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(NewspaperStaff::class, 'user_id');
+    }
+
+    public function tradeOfferMoneyTreasury()
+    {
+        return $this->hasOne(TradeOffer::class, 'user_id', 'id')
+            ->where('resource_id', Resource::MONEY_ID);
     }
 }

@@ -37,6 +37,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property PoliticalPartyStaff|null $politicalPartyStaff
  * @property NewspaperStaff|null $newspaperStaff
  * @property Treasury $treasuries
+ * @property Treasury $tradeOfferMoneyTreasury
  * @property $subscriptions
  * @property \Modules\Business\Models\Employee $employee
  * @property \Modules\Action\Models\Action $action

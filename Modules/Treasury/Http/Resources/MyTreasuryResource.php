@@ -23,6 +23,7 @@ class MyTreasuryResource extends JsonResource
             'resource_id' => $this->resource_id,
             'name'        => $this->resourceType->name,
             'quantity'    => $this->quantity,
+            'size'        => $this->size
         ];
     }
 }

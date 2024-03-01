@@ -3,11 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Party\Http\Controllers\DestroyController;
 use Modules\Party\Http\Controllers\IndexController;
+use Modules\Party\Http\Controllers\IndexRequestController;
 use Modules\Party\Http\Controllers\IndexStaffController;
 use Modules\Party\Http\Controllers\LeavePartyController;
 use Modules\Party\Http\Controllers\ShowController;
 use Modules\Party\Http\Controllers\StoreController;
-use Modules\Party\Http\Controllers\IndexRequestController;
 use Modules\Party\Models\PoliticalParty;
 
 /*
@@ -46,6 +46,11 @@ Route::group([
      * Get specified party
      */
     Route::get('/{party}', ShowController::class);
+
+    /**
+     * Get president election
+     */
+    //Route::get('/{party}/election', \Modules\Party\Http\Controllers\ShowPartyElection::class);
 
     /**
      * Leave political party

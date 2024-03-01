@@ -29,6 +29,7 @@ return new class extends Migration
                 ->onDelete('cascade');;
 
             $table->unsignedBigInteger('quantity')->default(0);
+            $table->unsignedBigInteger('size')->default(100000000);
 
             $table->timestamps();
         });

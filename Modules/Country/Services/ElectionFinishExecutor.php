@@ -4,6 +4,7 @@ namespace Modules\Country\Services;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Modules\Country\Jobs\FinishElectionJob;
 use Modules\Country\Models\Election;
 use Modules\Country\Models\ElectionType;
 use Modules\Country\Services\ElectionStrategies\ParliamentElectionStrategy;
@@ -43,6 +44,19 @@ class ElectionFinishExecutor
      */
     public function execute(): void
     {
+        $totalVotes = 0;
+        foreach ($this->election->candidates as $candidate) {
+            $totalVotes += $candidate->votes()->count();
+        }
+
+        if (!$totalVotes) {
+            Log::info('Election has 0 votes, so it starts again.', ['election_id' => $this->election->id]);
+            FinishElectionJob::dispatch($this->election)
+                ->delay(now()->addSeconds(15));
+
+            return;
+        }
+
         Log::info('Started applying election changes.', ['election_id' => $this->election->id]);
         DB::beginTransaction();
 

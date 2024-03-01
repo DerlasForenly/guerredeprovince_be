@@ -15,6 +15,11 @@ class FinishElectionJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
+     * Time when election is in progress
+     */
+    const TIME = 15;
+
+    /**
      * Create a new job instance.
      *
      * @param Election $election

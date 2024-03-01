@@ -22,3 +22,6 @@ Route::get('/businesses/{business}/treasury', BusinessTreasuryController::class)
 Route::get('/regions/{region}/treasury', RegionTreasuryController::class);
 Route::get('/countries/{country}/treasury', CountryTreasuryController::class);
 
+Route::get('/trade-offers', \Modules\Treasury\Http\Controllers\IndexTradeOffersController::class);
+Route::post('/trade-offers', \Modules\Treasury\Http\Controllers\StoreTradeOfferController::class);
+Route::post('/trade-offers/{offer}', \Modules\Treasury\Http\Controllers\AcceptOfferController::class);

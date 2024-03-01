@@ -34,6 +34,18 @@ Route::group([
     Route::get('/{country}', ShowController::class);
 
     /**
+     * Get president election
+     */
+    //Route::get('/president-election', \Modules\Country\Http\Controllers\Election\ShowPresidentElectionController
+    //::class);
+
+    /**
+     * Get parliament election
+     */
+    //Route::get('/parliament-election', \Modules\Country\Http\Controllers\Election\ShowParliamentElectionController
+    //::class);
+
+    /**
      * Get list of parliamentarians
      */
     Route::get('/{country}/parliamentarians', IndexParliamentariansController::class);

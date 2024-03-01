@@ -18,6 +18,7 @@ class BusinessTreasury extends Treasury
         'business_id',
         'resource_id',
         'quantity',
+        'size',
     ];
 
     /**
