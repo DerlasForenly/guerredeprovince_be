@@ -41,7 +41,7 @@ class RequestPolicy
      * @param PoliticalParty $party
      * @return Response
      */
-    public function createRequest(User $user, Request $request): Response
+    public function createRequest(User $user, PoliticalParty $party): Response
     {
         return match (true) {
             (bool) $user->staff => $this->deny('You are in the party already.'),

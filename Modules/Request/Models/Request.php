@@ -32,6 +32,7 @@ class Request extends Model
         'requestable_type',
         'requestable_id',
         'request_type_id',
+        'status_id'
     ];
 
     public function sender(): BelongsTo

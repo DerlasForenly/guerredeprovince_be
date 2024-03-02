@@ -47,19 +47,6 @@ services:
         networks:
             - gdp_network
 
-    ngrok:
-       container_name: gdp_ngrok
-       ports:
-           - "0.0.0.0:4040:4040"
-       image: wernight/ngrok
-       environment:
-           - NGROK_AUTH=2KimxVsCHvhbX8W0NRX7yEyX9TB_5REwMx9tGJZomrKvBBRNY
-           - NGROK_REGION=eu
-           - NGROK_PORT=nginx:80
-           - NGROK_HEADER=rewrite
-       networks:
-           - gdp_network
-
     redis:
         image: redis:latest
         container_name: gdp_redis

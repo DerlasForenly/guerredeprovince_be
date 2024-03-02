@@ -13,14 +13,8 @@ use Modules\Status\Models\Status;
 
 class IndexController extends Controller
 {
-    public function __invoke(ElectionFilter $filter)
+    public function __invoke(ElectionFilter $filter): AnonymousResourceCollection
     {
-        $election = Election::filter($filter)->first();
-
-        if ($election) {
-            return new ElectionResource($election);
-        }
-
-        return response(null, 200)->header('Content-Type', 'application/json');;
+        return ElectionResource::collection(Election::filter($filter)->get());
     }
 }

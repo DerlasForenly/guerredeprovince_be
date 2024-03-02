@@ -47,6 +47,6 @@ Route::group([
     /**
      * Create new join party request
      */
-    Route::post('/', StoreController::class)
-        ->can('createRequest', \Modules\Request\Models\Request::class);
+    Route::post('/parties/{party}', StoreController::class);
+        //->can('createRequest', \Modules\Request\Models\Request::class);
 });
