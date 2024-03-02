@@ -35,10 +35,10 @@ class MeResource extends JsonResource
             'avatar'                 => $this->avatar ?: 'avatars/default.jpg',
             'current_region'         => [
                 'id'      => $this->current_region_id,
-                'name'    => $this->currentRegion->name,
+                'name'    => $this->currentRegion?->name,
                 'country' => [
-                    'id'   => $this->currentRegion->country_id,
-                    'name' => $this->currentRegion->country?->name,
+                    'id'   => $this->currentRegion?->country_id,
+                    'name' => $this->currentRegion?->country?->name,
                 ],
             ],
             'email'                  => $this->email,
@@ -47,7 +47,7 @@ class MeResource extends JsonResource
             'last_activity'          => null,
             'nation'                 => [
                 'id'   => $this->nation_id,
-                'name' => $this->nation->name,
+                'name' => $this->nation?->name,
             ],
             'political_view_id'      => null,
             'political_party'        => $this->politicalPartyStaff ? [
@@ -59,7 +59,7 @@ class MeResource extends JsonResource
             'registration_region_id' => null,
             'citizenship'            => [
                 'id'   => $this->country_id,
-                'name' => $this->country->name,
+                'name' => $this->country?->name,
             ],
             'role_id'                => null,
             'money'                  => $money->quantity,
