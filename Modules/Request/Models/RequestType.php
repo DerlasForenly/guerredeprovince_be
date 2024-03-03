@@ -7,6 +7,10 @@ use App\Models\Traits\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Request\Database\factories\RequestTypeFactory;
 
+/**
+ * @property int id
+ * @property string name
+ */
 class RequestType extends Model
 {
     use HasFactory;
@@ -29,5 +33,10 @@ class RequestType extends Model
         self::GET_CITIZENSHIP_ID  => self::GET_CITIZENSHIP,
         self::GET_REGISTRATION_ID => self::GET_REGISTRATION,
         self::MAKE_FRIENDSHIP_ID  => self::MAKE_FRIENDSHIP,
+    ];
+
+    protected $fillable = [
+        'id',
+        'name',
     ];
 }

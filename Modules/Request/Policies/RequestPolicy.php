@@ -41,11 +41,11 @@ class RequestPolicy
      * @param PoliticalParty $party
      * @return Response
      */
-    public function createRequest(User $user, PoliticalParty $party): Response
+    public function createRequest(User $user): Response
     {
         return match (true) {
-            (bool) $user->staff => $this->deny('You are in the party already.'),
-            //(bool)$request->requestable->requests->where('user_id', $user->id)->first() => $this->deny('You already sent an request'),
+            (bool) $user->politicalPartyStaff => $this->deny('You are in the party already.'),
+            false => $this->deny('You already sent an request'),
             default => $this->allow(),
         };
     }

@@ -18,10 +18,11 @@ use Modules\User\Models\User;
  * @property int $status_id
  * @property int $requestable_id
  * @property string $requestable_type
- * @property int $request_type_id
+ * @property int $type_id
  * @property string $created_at
  *
  * @property User $user
+ * @property \Modules\Request\Models\RequestType $type
  */
 class Request extends Model
 {
@@ -31,7 +32,7 @@ class Request extends Model
         'user_id',
         'requestable_type',
         'requestable_id',
-        'request_type_id',
+        'type_id',
         'status_id'
     ];
 
@@ -47,7 +48,7 @@ class Request extends Model
 
     public function type(): BelongsTo
     {
-        return $this->belongsTo(RequestType::class);
+        return $this->belongsTo(RequestType::class, 'type_id', 'id');
     }
 
     public function requestable(): MorphTo

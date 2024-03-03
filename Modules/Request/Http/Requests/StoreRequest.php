@@ -4,6 +4,10 @@ namespace Modules\Request\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property int type_id
+ * @property int $requestable_id
+ */
 class StoreRequest extends FormRequest
 {
     /**
@@ -14,7 +18,8 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'request_type_id' => ['required', 'integer'],
+            'type_id'        => ['required', 'integer'],
+            'requestable_id' => ['required', 'integer'],
         ];
     }
 

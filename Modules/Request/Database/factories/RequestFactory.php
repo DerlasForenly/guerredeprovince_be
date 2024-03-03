@@ -43,7 +43,7 @@ class RequestFactory extends Factory
     {
         return $this->state(function (array $attributes) use ($id) {
             return [
-                'request_type_id' => $id
+                'type_id' => $id
             ];
         });
     }

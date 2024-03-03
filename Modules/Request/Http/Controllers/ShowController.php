@@ -14,6 +14,6 @@ class ShowController extends Controller
      */
     public function __invoke($id)
     {
-
+        return null;
     }
 }

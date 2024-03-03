@@ -28,6 +28,12 @@ Route::group([
     Route::get('/', IndexController::class);
 
     /**
+     * Create new join party request
+     */
+    Route::post('/', StoreController::class)
+        ->can('createRequest', \Modules\Request\Models\Request::class);
+
+    /**
      *
      */
     Route::get('/{requestModel}', ShowController::class);
@@ -43,10 +49,4 @@ Route::group([
      */
     Route::post('/{requestModel}/decline', DeclineRequestController::class)
         ->can('declineRequest', 'requestModel');
-
-    /**
-     * Create new join party request
-     */
-    Route::post('/parties/{party}', StoreController::class);
-        //->can('createRequest', \Modules\Request\Models\Request::class);
 });

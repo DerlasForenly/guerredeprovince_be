@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use Modules\Party\Models\PoliticalPartyStaff;
 use Modules\Position\Models\Position;
 use Modules\Request\Models\Request as RequestModel;
+use Modules\Request\Services\RequestAcceptExecutor;
 use Modules\Status\Models\Status;
 
 /**
@@ -21,18 +22,11 @@ class AcceptRequestController extends Controller
     public function __invoke(
         RequestModel $requestModel
     ): JsonResponse {
-        $member = PoliticalPartyStaff::create([
-            'user_id'            => $requestModel->user_id,
-            'political_party_id' => $requestModel->requestable_id,
-            'position_id'        => Position::POLITICAL_PARTY_MEMBER_ID,
-        ]);
-
-        $requestModel->status_id = Status::ACCEPTED_ID;
-        $requestModel->save();
+        $requestAcceptExecutor = new RequestAcceptExecutor($requestModel);
+        $requestAcceptExecutor->execute();
 
         return response()->json([
-            'message' => 'OK',
-            'member'  => $member,
+            'message' => 'OK'
         ], 201);
     }
 }

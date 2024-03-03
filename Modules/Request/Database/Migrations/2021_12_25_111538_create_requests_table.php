@@ -31,8 +31,8 @@ class CreateRequestsTable extends Migration
 
             $table->morphs('requestable');
 
-            $table->unsignedBigInteger('request_type_id');
-            $table->foreign('request_type_id')
+            $table->unsignedBigInteger('type_id');
+            $table->foreign('type_id')
                 ->references('id')
                 ->on('request_types')
                 ->onDelete('cascade');
